@@ -1,14 +1,31 @@
 import adapter from '@sveltejs/adapter-auto';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
+	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+	preprocess: [
+		preprocess({
+			postcss: true
+		})
+	],
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			$components: './src/components',
+			$lib: './src/lib',
+			$types: './src/types',
+			$styles: './src/styles'
+		}
+	},
+	vitePlugin: {
+		experimental: {
+			inspector: {
+				holdMode: true
+			}
+		}
 	}
 };
 

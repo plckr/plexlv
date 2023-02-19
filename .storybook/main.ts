@@ -21,7 +21,11 @@ const config: StorybookConfig = {
 		return mergeConfig(config, {
 			resolve: {
 				alias: {
-					$lib: path.resolve(process.cwd(), './src/lib')
+					$app: path.resolve(process.cwd(), './__mocks__/$app'),
+					$components: path.resolve(process.cwd(), './src/components'),
+					$lib: path.resolve(process.cwd(), './src/lib'),
+					$types: path.resolve(process.cwd(), './src/types'),
+					$styles: path.resolve(process.cwd(), './src/styles')
 				}
 			}
 		});
