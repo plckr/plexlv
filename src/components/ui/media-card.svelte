@@ -75,8 +75,7 @@
 		cursor: default;
 
 		& > * {
-			max-width: 100%;
-			min-width: 0;
+			display: block;
 
 			line-height: 24px;
 			text-overflow: ellipsis;
