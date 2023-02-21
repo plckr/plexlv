@@ -1,8 +1,13 @@
-<div class="bg">
-	<div />
-</div>
+<script lang="ts">
+	import '$styles/index.pcss';
+</script>
 
-<style>
+<!-- <div class="bg">
+	<div />
+</div> -->
+<slot />
+
+<style lang="postcss">
 	.bg {
 		position: fixed;
 		top: 0;
@@ -10,6 +15,10 @@
 		bottom: 0;
 		left: 0;
 
+		background-color: #3f4245;
+	}
+
+	:global(body) {
 		background-color: #3f4245;
 	}
 
