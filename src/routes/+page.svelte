@@ -1,9 +1,9 @@
 <script>
 	import { page } from '$app/stores';
+	import MediaCard from '$components/ui/media-card.svelte';
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<MediaCard title="007 - Alvo em Movimento" subtitle="1985" href="/" />
 
 <pre>
 {JSON.stringify($page.data.data, null, 2)}
