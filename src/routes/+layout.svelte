@@ -2,12 +2,18 @@
 	import '$styles/index.pcss';
 </script>
 
-<!-- <div class="bg">
+<div class="bg">
 	<div />
-</div> -->
-<slot />
+</div>
+<main>
+	<slot />
+</main>
 
 <style lang="postcss">
+	main {
+		position: relative;
+	}
+
 	.bg {
 		position: fixed;
 		top: 0;
