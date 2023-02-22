@@ -1,37 +1,61 @@
 <script lang="ts" context="module">
-	import home from './icons/home.svg?raw';
-	import discover from './icons/discover.svg?raw';
-	import movie from './icons/movie.svg?raw';
-	import music from './icons/music.svg?raw';
-	import photo from './icons/photo.svg?raw';
-	import tv from './icons/tv.svg?raw';
-	import tvshow from './icons/tvshow.svg?raw';
+  import activity from './icons/activity.svg?raw';
+  import chevronLeft from './icons/chevron-left.svg?raw';
+  import chevronRight from './icons/chevron-right.svg?raw';
+  import discover from './icons/discover.svg?raw';
+  import grid from './icons/grid.svg?raw';
+  import hamburger from './icons/hamburger.svg?raw';
+  import home from './icons/home.svg?raw';
+  import movie from './icons/movie.svg?raw';
+  import music from './icons/music.svg?raw';
+  import photo from './icons/photo.svg?raw';
+  import pin from './icons/pin.svg?raw';
+  import play from './icons/play.svg?raw';
+  import playerCast from './icons/player-cast.svg?raw';
+  import search from './icons/search.svg?raw';
+  import shuffle from './icons/shuffle.svg?raw';
+  import settings from './icons/settings.svg?raw';
+  import tv from './icons/tv.svg?raw';
+  import tvshow from './icons/tvshow.svg?raw';
+  import verticalDots from './icons/vertical-dots.svg?raw';
 
-	export const icons = {
-		home,
-		discover,
-		movie,
-		music,
-		photo,
-		tv,
-		tvshow
-	};
+  export const icons = {
+    activity,
+    'chevron-left': chevronLeft,
+    'chevron-right': chevronRight,
+    discover,
+    grid,
+    hamburger,
+    home,
+    movie,
+    music,
+    photo,
+    pin,
+    play,
+    'player-cast': playerCast,
+    search,
+    settings,
+    shuffle,
+    tv,
+    tvshow,
+    'vertical-dots': verticalDots
+  };
 
-	export type IconOptions = keyof typeof icons;
+  export type IconOptions = keyof typeof icons;
 
-	export const isIconVariant = (variant: string | undefined): variant is IconOptions => {
-		if (!variant) return false;
-		return Object.keys(icons).includes(variant);
-	};
+  export const isIconVariant = (variant: string | undefined): variant is IconOptions => {
+    if (!variant) return false;
+    return Object.keys(icons).includes(variant);
+  };
 </script>
 
 <script lang="ts">
-	let className: string | undefined = undefined;
-	export { className as class };
+  let className: string | undefined = undefined;
+  export { className as class };
 
-	export let icon: IconOptions;
+  export let icon: IconOptions;
 </script>
 
 <i data-icon={icon} class={className} aria-hidden="true" {...$$restProps}>
-	{@html icons[icon]}
+  {@html icons[icon]}
 </i>
