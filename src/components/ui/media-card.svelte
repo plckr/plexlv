@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Badge from './badge.svelte';
+
   let className = '';
   export { className as class };
   export let title: string;
@@ -14,9 +16,9 @@
       <img src="https://i.imgur.com/Slm02LL.png" />
     </a>
     {#if badge}
-      <div class="badge">
+      <Badge class="badge">
         {badge}
-      </div>
+      </Badge>
     {/if}
   </div>
   <div class="info">
@@ -35,6 +37,13 @@
 </article>
 
 <style lang="postcss">
+  article {
+    display: table;
+
+    width: fit-content;
+    max-width: 200px;
+  }
+
   .card {
     margin-bottom: 8px;
     background-color: rgba(0, 0, 0, 0.45);
@@ -44,7 +53,6 @@
 
     overflow: hidden;
     aspect-ratio: 1 / 1.5;
-    max-width: 200px;
 
     & a {
       display: block;
@@ -58,32 +66,17 @@
       object-fit: cover;
     }
 
-    & .badge {
-      @mixin text-semi;
-
+    & :global(.badge) {
       pointer-events: none;
       position: absolute;
       top: 4px;
       right: 4px;
-
-      border-radius: 4px;
-      line-height: 22px;
-      min-width: 28px;
-      padding: 0 6px;
-      text-align: center;
-
-      background-color: #e5a00d;
-      color: #1f2326;
     }
 
     @media --hover {
       &:hover {
         border-radius: 4px;
         box-shadow: 0 0 0 1px #e5a00d, 0 0 4px rgb(0 0 0 / 30%);
-
-        & + .info .title {
-          text-decoration: underline;
-        }
 
         &::before {
           content: '';
