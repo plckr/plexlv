@@ -4,6 +4,7 @@
 </script>
 
 <MediaCard title="007 - Alvo em Movimento" subtitle="1985" badge="39" href="/007" />
+<MediaCard title="007 - Alvo em Movimento" subtitle="1985" badge="39" href="/007" />
 
 <pre>
 {JSON.stringify($page.data.data, null, 2)}

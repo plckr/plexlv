@@ -38,9 +38,9 @@
 
 <style lang="postcss">
   article {
-    display: table;
+    display: inline-block;
 
-    width: fit-content;
+    min-width: 130px;
     max-width: 200px;
   }
 
