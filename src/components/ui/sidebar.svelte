@@ -48,7 +48,13 @@
     &:checked + .sidebar-wrapper {
       position: relative;
       width: var(--sidebar-width-open);
-      background-color: #1f2326;
+    }
+
+    @media --hover {
+      &:not(:checked) + .sidebar-wrapper:hover {
+        width: var(--sidebar-width-open);
+        background-color: #1f2326;
+      }
     }
   }
 
@@ -69,17 +75,10 @@
 
     overflow: hidden;
     z-index: 100;
-
-    @media --hover {
-      &:hover {
-        width: var(--sidebar-width-open);
-        background-color: #1f2326;
-      }
-    }
   }
 
   ul {
-    width: calc(var(--sidebar-width-open) - 10px);
+    width: var(--sidebar-width-open);
   }
 
   li {
@@ -133,10 +132,17 @@
 
     color: hsla(0, 0%, 100%, 0.7);
     transition: color 0.2s;
-  }
 
-  .icon {
-    width: 24px;
-    height: 24px;
+    & .icon {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+    }
+
+    & span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 </style>
