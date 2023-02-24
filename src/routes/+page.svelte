@@ -51,9 +51,11 @@
 
 <style lang="postcss">
   .root {
+    --container-padding: 8px;
+
     height: 100vh;
     max-height: 100vh;
-    padding: 8px;
+    padding: var(--container-padding);
 
     display: grid;
     grid-template-columns: minmax(52px, auto) 1fr;
@@ -76,5 +78,8 @@
 
     max-height: 100%;
     overflow: auto;
+
+    padding-inline: var(--container-padding);
+    margin-inline: calc(var(--container-padding) * -1);
   }
 </style>
