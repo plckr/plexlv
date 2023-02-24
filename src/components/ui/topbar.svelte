@@ -4,7 +4,7 @@
 </script>
 
 <aside>
-  <label for={sidebarCheckboxId}>
+  <label for={sidebarCheckboxId} class="hamburger-menu">
     <Icon icon="hamburger" />
   </label>
 
@@ -14,7 +14,6 @@
 <style lang="postcss">
   aside {
     position: relative;
-    padding: 12px;
 
     display: flex;
     align-items: center;
@@ -32,8 +31,17 @@
     }
   }
 
-  label {
+  .hamburger-menu {
+    padding: 12px;
+
+    color: hsla(0, 0%, 100%, 0.7);
+    transition: color 0.2s;
     cursor: pointer;
-    color: white;
+
+    @media --hover {
+      &:hover {
+        color: white;
+      }
+    }
   }
 </style>
