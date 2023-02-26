@@ -1,14 +1,48 @@
-<script lang="ts">
-  import Icon from './icon.svelte';
-  import type { IconOptions } from './icon.svelte';
-  import { sidebarCheckboxId } from '$lib/constants';
-
-  export let items: {
+<script lang="ts" context="module">
+  export type SidebarItem = {
     title: string;
     icon: IconOptions;
     href: string;
     active: boolean | undefined;
-  }[];
+  };
+
+  const getLibraryIcon = (type: string): IconOptions => {
+    switch (type) {
+      case 'movie':
+        return 'movie';
+      case 'show':
+        return 'tvshow';
+      case 'artist':
+        return 'music';
+      case 'photo':
+        return 'photo';
+      default:
+        return 'movie';
+    }
+  };
+</script>
+
+<script lang="ts">
+  import Icon from './icon.svelte';
+  import type { IconOptions } from './icon.svelte';
+  import { sidebarCheckboxId } from '$lib/constants';
+  import { libraries } from '$lib/stores';
+  import type { PlexLibrary } from '$lib/plex.server';
+
+  $: items = <SidebarItem[]>[
+    {
+      title: 'Início',
+      icon: 'home',
+      href: '/',
+      active: true
+    },
+    ...$libraries.map((library: PlexLibrary) => ({
+      title: library.title,
+      icon: getLibraryIcon(library.type),
+      active: false,
+      href: `/${library.key}`
+    }))
+  ];
 </script>
 
 <nav>
