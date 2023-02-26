@@ -16,6 +16,14 @@ export type PlexLibrary = {
   hidden: boolean;
 };
 
+// TODO
+export type PlexMovie = any;
+
+export type PlexLibraryData = {
+  size: number;
+  data: PlexMovie[];
+};
+
 class Plex {
   private static _instance: Plex;
   public static getInstance() {
@@ -45,7 +53,7 @@ class Plex {
     }
   }
 
-  public async getLibraries() {
+  public async getLibraries(): Promise<PlexLibrary[]> {
     const data = await this.get('library/sections');
 
     const libraries: PlexLibrary[] = data.elements[0].elements.map(
@@ -79,6 +87,17 @@ class Plex {
     );
 
     return libraries;
+  }
+
+  public async getLibraryData(libraryKey: number): Promise<PlexLibraryData> {
+    const data = await this.get(`library/sections/${libraryKey}/all`);
+
+    const library = data.elements[0];
+
+    return <PlexLibraryData>{
+      size: +library.attributes.size,
+      data: data.elements[0].elements.map(({ attributes: media }: any) => media)
+    };
   }
 }
 

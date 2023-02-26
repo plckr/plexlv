@@ -29,18 +29,21 @@
   import { libraries } from '$lib/stores';
   import type { PlexLibrary } from '$lib/plex.server';
   import { slugify } from '$lib/utils/string';
+  import { page } from '$app/stores';
+
+  $: currentKey = $page.params.key;
 
   $: items = <SidebarItem[]>[
     {
       title: 'Início',
       icon: 'home',
       href: '/',
-      active: true
+      active: !currentKey
     },
     ...$libraries.map((library: PlexLibrary) => ({
       title: library.title,
       icon: getLibraryIcon(library.type),
-      active: false,
+      active: currentKey === library.key.toString(),
       href: `/${library.key}/${slugify(library.title)}`
     }))
   ];

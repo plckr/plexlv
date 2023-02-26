@@ -18,6 +18,17 @@
 <style lang="postcss">
   main {
     position: relative;
+
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+
+    padding-inline: var(--container-padding);
+    margin-inline: calc(var(--container-padding) * -1);
+
+    & > :global(*) {
+      max-width: 100%;
+    }
   }
 
   .root {
