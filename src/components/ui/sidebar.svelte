@@ -28,6 +28,7 @@
   import { sidebarCheckboxId } from '$lib/constants';
   import { libraries } from '$lib/stores';
   import type { PlexLibrary } from '$lib/plex.server';
+  import { slugify } from '$lib/utils/string';
 
   $: items = <SidebarItem[]>[
     {
@@ -40,7 +41,7 @@
       title: library.title,
       icon: getLibraryIcon(library.type),
       active: false,
-      href: `/${library.key}`
+      href: `/${library.key}/${slugify(library.title)}`
     }))
   ];
 </script>

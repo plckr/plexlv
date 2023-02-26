@@ -2,14 +2,14 @@
   import MediaCard from '$components/ui/media-card.svelte';
 </script>
 
-<main>
+<div>
   {#each Array(30) as _}
     <MediaCard title="007 - Alvo em Movimento" subtitle="1985" badge="39" href="/007" />
   {/each}
-</main>
+</div>
 
 <style lang="postcss">
-  main {
+  div {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 30px;
