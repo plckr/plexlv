@@ -25,6 +25,7 @@ const config: StorybookConfig = {
           $app: path.resolve(process.cwd(), './__mocks__/$app'),
           $components: path.resolve(process.cwd(), './src/components'),
           $lib: path.resolve(process.cwd(), './src/lib'),
+          $params: path.resolve(process.cwd(), './src/params'),
           $types: path.resolve(process.cwd(), './src/types'),
           $styles: path.resolve(process.cwd(), './src/styles')
         }

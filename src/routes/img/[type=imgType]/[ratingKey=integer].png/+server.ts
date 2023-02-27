@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
 import { Plex } from '$lib/plex.server';
 import { error } from '@sveltejs/kit';
-import { isImgType, type ImgType } from '../../../../params/imgType';
+import { isImgType, type ImgType } from '$params/imgType';
 import type { RequestHandler } from './$types';
 
 const transcodeParams: Record<ImgType, any> = {
