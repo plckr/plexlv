@@ -22,7 +22,5 @@ export const load: PageServerLoad = async ({ params, parent, url }) => {
 
   const media = await Plex.getLibraryData(key);
 
-  console.log({ media: media.data[0] });
-
   return { media };
 };
