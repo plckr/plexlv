@@ -1,5 +1,29 @@
-<script>
+<script lang="ts" context="module">
+  const errorMessage: {
+    [key in number | 'default']: {
+      title: string;
+      description: string;
+      showAnchor?: boolean;
+    };
+  } = {
+    404: {
+      title: 'Não encontrado',
+      description: 'Não conseguimos encontrar a página que queres ver',
+      showAnchor: true
+    },
+    default: {
+      title: 'Algo correu mal',
+      description: 'Ocorreu um erro inesperado'
+    }
+  };
+</script>
+
+<script lang="ts">
+  import { page } from '$app/stores';
   import Icon from '$components/ui/icon.svelte';
+
+  $: code = $page.status;
+  $: error = errorMessage[code] || errorMessage.default;
 </script>
 
 <div class="root">
@@ -7,10 +31,12 @@
     <Icon icon="alert" />
   </div>
 
-  <p class="error">Não encontrado</p>
-  <p class="description">Não conseguimos encontrar a página que queres ver</p>
+  <p class="error">{error.title}</p>
+  <p class="description">{error.description}</p>
 
-  <a href="/">Ir para a página principal</a>
+  {#if error.showAnchor}
+    <a href="/">Ir para a página principal</a>
+  {/if}
 </div>
 
 <style lang="postcss">
