@@ -8,12 +8,19 @@
   export let href: string;
   export let description: string | undefined = undefined;
   export let badge: string | number | undefined = undefined;
+  export let image: { src: string; alt: string } | undefined = undefined;
+
+  let imageLoaded = false;
+  const onLoad = () => (imageLoaded = true);
 </script>
 
 <article class="media-card {className}">
   <div class="card">
     <a {href} {title}>
-      <img src="https://i.imgur.com/Slm02LL.png" />
+      {#if image}
+        {@const { src, alt } = image}
+        <img style:opacity={+imageLoaded} on:load={onLoad} loading="lazy" {src} {alt} {title} />
+      {/if}
     </a>
     {#if badge}
       <Badge class="badge">
@@ -64,6 +71,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      opacity: 1;
+      transition: opacity 0.2s;
     }
 
     & :global(.badge) {

@@ -3,11 +3,15 @@
   import MediaCard from '$components/ui/media-card.svelte';
 </script>
 
-{#each $page.data.media.data as media}
+{#each $page.data.media.data as media (media.ratingKey)}
   <MediaCard
     title={media.title}
     subtitle={media.year}
     badge="39"
     href="{$page.url.pathname}/{media.ratingKey}"
+    image={{
+      src: `/img/thumb/${media.ratingKey}.png`,
+      alt: ''
+    }}
   />
 {/each}

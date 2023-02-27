@@ -33,24 +33,58 @@ class Plex {
     return Plex._instance;
   }
 
-  private getUrl(endpoint: string | undefined = '') {
-    const urlParts = [removeTrailingSlash(PLEX_HOST), '/', endpoint, `?X-Plex-Token=${PLEX_TOKEN}`];
+  public getUrl(endpoint: string | undefined = '', params?: Record<string, string>) {
+    const urlParts = [
+      removeTrailingSlash(PLEX_HOST),
+      '/',
+      endpoint,
+      `?X-Plex-Token=${PLEX_TOKEN}&`,
+      new URLSearchParams(params).toString()
+    ];
 
     return urlParts.join('');
   }
 
-  public async get(endpoint?: string) {
-    const url = this.getUrl(endpoint);
+  public async getRaw(endpoint?: string, params?: Record<string, string>) {
+    const url = this.getUrl(endpoint, params);
 
     try {
       const request = await fetch(url);
-      const data = await request.text();
 
-      return xmlParse(data);
+      if (request.status >= 400) {
+        throw new Error(`${request.status}(${request.statusText})`);
+      }
+
+      return request;
     } catch (err) {
       console.error(`Error on Plex Request "${url}"`, err);
       throw err;
     }
+  }
+
+  public async getPhoto(
+    ratingKey: number,
+    type: 'thumb' | 'art' = 'thumb',
+    params?: Partial<
+      Record<
+        'width' | 'height' | 'blur' | 'minSize' | 'upscale' | 'opacity' | 'background' | 'format',
+        string
+      >
+    >
+  ) {
+    const request = await this.getRaw('photo/:/transcode', {
+      ...params,
+      url: this.getUrl(`library/metadata/${ratingKey}/${type}`)
+    });
+
+    return request.body;
+  }
+
+  public async get(endpoint?: string, params?: Record<string, string>) {
+    const request = await this.getRaw(endpoint, params);
+    const data = await request.text();
+
+    return xmlParse(data);
   }
 
   public async getLibraries(): Promise<PlexLibrary[]> {
