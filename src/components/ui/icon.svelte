@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
   import activity from './icons/activity.svg?raw';
+  import adjust from './icons/adjust.svg?raw';
+  import alert from './icons/alert.svg?raw';
   import chevronLeft from './icons/chevron-left.svg?raw';
   import chevronRight from './icons/chevron-right.svg?raw';
   import discover from './icons/discover.svg?raw';
@@ -22,6 +24,8 @@
 
   export const icons = {
     activity,
+    adjust,
+    alert,
     'chevron-left': chevronLeft,
     'chevron-right': chevronRight,
     discover,
