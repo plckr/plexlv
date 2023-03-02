@@ -19,7 +19,7 @@ const transcodeParams: Record<ImgType, any> = {
   },
   art: {
     width: '1280',
-    height: '847',
+    height: '1125',
     minSize: '1',
     upscale: '1',
     opacity: '10',
