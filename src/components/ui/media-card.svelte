@@ -1,3 +1,32 @@
+<script lang="ts" context="module">
+  const crossfade = (node: HTMLImageElement, src: string) => {
+    const handler = () => {
+      node.style.opacity = '1';
+
+      node.removeEventListener('load', handler);
+    };
+
+    node.style.opacity = '0';
+
+    node.src = src;
+    node.addEventListener('load', handler);
+
+    return {
+      update(newSrc: string) {
+        node.style.opacity = '0';
+
+        setTimeout(() => {
+          node.src = newSrc;
+          node.addEventListener('load', handler);
+        }, 200);
+      },
+      destroy() {
+        node.removeEventListener('load', handler);
+      }
+    };
+  };
+</script>
+
 <script lang="ts">
   import Badge from './badge.svelte';
 
@@ -9,9 +38,6 @@
   export let description: string | undefined = undefined;
   export let badge: string | number | undefined = undefined;
   export let image: { src: string; alt: string } | undefined = undefined;
-
-  let imageLoaded = false;
-  const onLoad = () => (imageLoaded = true);
 </script>
 
 <article class="media-card {className}">
@@ -19,7 +45,7 @@
     <a {href} {title}>
       {#if image}
         {@const { src, alt } = image}
-        <img style:opacity={+imageLoaded} on:load={onLoad} loading="lazy" {src} {alt} {title} />
+        <img src="/empty.gif" loading="lazy" {alt} {title} use:crossfade={src} />
       {/if}
     </a>
     {#if badge}
@@ -72,7 +98,6 @@
       height: 100%;
       object-fit: cover;
 
-      opacity: 1;
       transition: opacity 0.2s;
     }
 
