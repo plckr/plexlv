@@ -38,7 +38,7 @@
       title: 'Início',
       icon: 'home',
       href: '/',
-      active: !currentKey
+      active: $page.url.pathname === '/'
     },
     ...$libraries.map((library: PlexLibrary) => ({
       title: library.title,
