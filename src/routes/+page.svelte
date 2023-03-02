@@ -1,12 +1,4 @@
-<script lang="ts">
-  import MediaCard from '$components/ui/media-card.svelte';
-</script>
-
-<div>
-  {#each Array(30) as _}
-    <MediaCard title="007 - Alvo em Movimento" subtitle="1985" badge="39" href="/007" />
-  {/each}
-</div>
+<div>Home</div>
 
 <style lang="postcss">
   div {
