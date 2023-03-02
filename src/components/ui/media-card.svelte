@@ -1,33 +1,5 @@
-<script lang="ts" context="module">
-  const crossfade = (node: HTMLImageElement, src: string) => {
-    const handler = () => {
-      node.style.opacity = '1';
-
-      node.removeEventListener('load', handler);
-    };
-
-    node.style.opacity = '0';
-
-    node.src = src;
-    node.addEventListener('load', handler);
-
-    return {
-      update(newSrc: string) {
-        node.style.opacity = '0';
-
-        setTimeout(() => {
-          node.src = newSrc;
-          node.addEventListener('load', handler);
-        }, 200);
-      },
-      destroy() {
-        node.removeEventListener('load', handler);
-      }
-    };
-  };
-</script>
-
 <script lang="ts">
+  import { crossfade } from '$lib/actions';
   import Badge from './badge.svelte';
 
   let className = '';
