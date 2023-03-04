@@ -133,6 +133,58 @@ class Plex {
       data: data.elements[0].elements.map(({ attributes: media }: any) => media)
     };
   }
+
+  public async getMedia(ratingKey: number) {
+    const data = await this.get(`library/metadata/${ratingKey}`);
+
+    const mediaContainer = data.elements[0];
+
+    const result = {
+      ...mediaContainer.attributes,
+      video: mediaContainer.elements
+        .filter((el) => el.name === 'Video')
+        .map((video) => ({
+          ...video.attributes,
+          media: video.elements
+            ?.filter((el) => el.name === 'Media')
+            .map((media) => ({
+              ...media.attributes,
+              part: media.elements
+                ?.filter((el) => el.name === 'Part')
+                .map((part) => ({
+                  ...part.attributes,
+                  stream: part.elements
+                    ?.filter((el) => el.name === 'Stream')
+                    .map((stream) => ({
+                      ...stream.attributes
+                    }))
+                }))
+            })),
+          genre: video.elements
+            ?.filter((el) => el.name === 'Genre')
+            .map((genre) => genre.attributes),
+          director: video.elements
+            ?.filter((el) => el.name === 'Director')
+            .map((director) => director.attributes),
+          writer: video.elements
+            ?.filter((el) => el.name === 'Writer')
+            .map((writer) => writer.attributes),
+          producer: video.elements
+            ?.filter((el) => el.name === 'Producer')
+            .map((producer) => producer.attributes),
+          country: video.elements
+            ?.filter((el) => el.name === 'Country')
+            .map((country) => country.attributes),
+          guid: video.elements?.filter((el) => el.name === 'Guid').map((guid) => guid.attributes),
+          rating: video.elements
+            ?.filter((el) => el.name === 'Rating')
+            .map((rating) => rating.attributes),
+          role: video.elements?.filter((el) => el.name === 'Role').map((role) => role.attributes)
+        }))?.[0]
+    };
+
+    return result;
+  }
 }
 
 const instance = Plex.getInstance();
