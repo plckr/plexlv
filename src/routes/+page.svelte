@@ -1,3 +1,14 @@
+<script>
+  import { page } from '$app/stores';
+</script>
+
+<svelte:head>
+  <title>Home • Plexlv</title>
+
+  <meta name="og:url" content={$page.url.toString()} />
+  <meta name="og:title" content="Home • Plexlv" />
+</svelte:head>
+
 <div>Home</div>
 
 <style lang="postcss">
