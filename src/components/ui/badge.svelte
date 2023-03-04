@@ -17,10 +17,14 @@
   .badge {
     @mixin text-semi;
 
-    display: table;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 
     padding: 0 6px;
+
     min-width: 28px;
+    width: fit-content;
 
     line-height: 1.5;
     text-align: center;
@@ -35,10 +39,6 @@
   }
 
   .badge-secondary {
-    padding: 0 8px;
-
-    font-size: 16px;
-
     background-color: rgba(0, 0, 0, 0.15);
     color: hsla(0, 0%, 100%, 0.75);
   }
