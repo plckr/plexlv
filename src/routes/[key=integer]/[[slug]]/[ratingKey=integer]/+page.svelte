@@ -8,7 +8,7 @@
 
   $: media = $page.data.media;
 
-  $: video = media.video;
+  $: video = media.Video[0];
 
   $: duration = msToHourMinutes(video.duration);
   $: durationString =
@@ -46,8 +46,8 @@
       </div>
 
       <div class="rating">
-        {#if !!video.rating.length}
-          {@const rating = video.rating[0]}
+        {#if !!video?.Rating?.length}
+          {@const rating = video.Rating[0]}
           <span class="badge" />
           <Badge variant="secondary">
             <Icon icon="imdb" height="16px" />
@@ -63,21 +63,21 @@
 
       <div class="details">
         <div>
-          {#if !!video.director?.length}
+          {#if !!video.Director?.length}
             <h4>Realizado por</h4>
-            <p>{video.director.map((director) => director.tag).join(', ')}</p>
+            <p>{video.Director.map((director) => director.tag).join(', ')}</p>
           {/if}
-          {#if !!video.writer?.length}
+          {#if !!video.Writer?.length}
             <h4>Escrito por</h4>
-            <p>{video.writer.map((writer) => writer.tag).join(', ')}</p>
+            <p>{video.Writer.map((writer) => writer.tag).join(', ')}</p>
           {/if}
           {#if video.studio}
             <h4>Estúdio</h4>
             <p>{video.studio}</p>
           {/if}
-          {#if !!video.genre?.length}
+          {#if !!video.Genre?.length}
             <h4>Género</h4>
-            <p>{video.genre.map((genre) => genre.tag).join(', ')}</p>
+            <p>{video.Genre.map((genre) => genre.tag).join(', ')}</p>
           {/if}
         </div>
       </div>
