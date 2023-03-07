@@ -16,3 +16,7 @@ export const filterObjectKeys = <K extends PropertyKey>(
 
   return filtered;
 };
+
+export const isObject = <T extends object>(obj: unknown): obj is T => {
+  return typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
+};
