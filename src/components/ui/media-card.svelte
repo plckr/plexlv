@@ -12,7 +12,7 @@
   export let image: { src: string; alt: string } | undefined = undefined;
 </script>
 
-<article class="media-card {className}">
+<article class="media-card {className}" {...$$restProps}>
   <div class="card">
     <a {href} {title}>
       {#if image}

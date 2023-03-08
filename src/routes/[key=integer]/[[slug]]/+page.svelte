@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import Background from '$components/Background.svelte';
   import MediaCard from '$components/ui/media-card.svelte';
   import { libraries } from '$lib/stores';
 
@@ -31,6 +30,7 @@
             alt: ''
           }
         : undefined}
+      data-title-sort={media.titleSort || media.title}
     />
   {/each}
 </main>
