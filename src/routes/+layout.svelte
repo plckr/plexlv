@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import Background from '$components/Background.svelte';
   import Sidebar from '$components/ui/sidebar.svelte';
   import Topbar from '$components/ui/topbar.svelte';

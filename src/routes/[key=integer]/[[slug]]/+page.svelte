@@ -1,9 +1,12 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import Background from '$components/Background.svelte';
   import MediaCard from '$components/ui/media-card.svelte';
   import { libraries } from '$lib/stores';
 
   $: library = $libraries.find((lib) => lib.key === +$page.params.key);
+
+  $: items = [...($page.data.library?.Video || []), ...($page.data.library?.Directory || [])];
 </script>
 
 <svelte:head>
@@ -16,20 +19,20 @@
 </svelte:head>
 
 <main>
-  {#if $page.data?.media?.data}
-    {#each $page.data.media.data as media (media.ratingKey)}
-      <MediaCard
-        title={media.title}
-        subtitle={media.year}
-        badge="39"
-        href="{$page.url.pathname}/{media.ratingKey}"
-        image={{
-          src: `/img/thumb/${media.ratingKey}.png`,
-          alt: ''
-        }}
-      />
-    {/each}
-  {/if}
+  {#each items as media (media.ratingKey)}
+    <MediaCard
+      title={media.title}
+      subtitle={media.year?.toString() || ''}
+      badge={media.type === 'show' ? media.leafCount : undefined}
+      href="{$page.url.pathname}/{media.ratingKey}"
+      image={media.thumb
+        ? {
+            src: media.thumb,
+            alt: ''
+          }
+        : undefined}
+    />
+  {/each}
 </main>
 
 <style lang="postcss">

@@ -1,4 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { Library, Movie } from '$lib/zod-schemas/plex-api';
+
 // for information about these interfaces
 declare global {
   namespace App {
@@ -6,6 +9,8 @@ declare global {
     // interface Locals {}
     interface PageData {
       libraries: import('../.svelte-kit/types/src/routes/$types').LayoutData['libraries'];
+      library?: Library;
+      video?: Movie;
     }
     // interface Platform {}
   }

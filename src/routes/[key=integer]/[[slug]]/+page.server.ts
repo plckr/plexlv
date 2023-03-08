@@ -3,7 +3,7 @@ import { slugify } from '$lib/utils/string';
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params, parent, url }) => {
+export const load: PageServerLoad = async ({ params, parent }) => {
   const { libraries } = await parent();
 
   const key = +params.key;
@@ -20,7 +20,7 @@ export const load: PageServerLoad = async ({ params, parent, url }) => {
     throw redirect(301, `/${key}/${slugify(library.title)}`);
   }
 
-  const media = await Plex.getLibraryData(key);
+  const libraryData = await Plex.getLibraryData(key);
 
-  return { media };
+  return { library: libraryData };
 };

@@ -1,28 +1,8 @@
+import { BaseLibrariesSchema, LibrarySchema, MovieSchema } from './zod-schemas/plex-api';
 import { removeTrailingSlash } from './utils/string';
 import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
 import { xmlParse } from './utils/xml';
-
-export type PlexLibrary = {
-  key: number;
-  type: string;
-  title: string;
-  language: string;
-  agent: string;
-  scanner: string;
-  uuid: string;
-  updatedAt: string;
-  createdAt: string;
-  scannedAt: string;
-  hidden: boolean;
-};
-
-// TODO
-export type PlexMovie = any;
-
-export type PlexLibraryData = {
-  size: number;
-  data: PlexMovie[];
-};
+import { error } from '@sveltejs/kit';
 
 class Plex {
   private static _instance: Plex;
@@ -84,60 +64,29 @@ class Plex {
     const request = await this.getRaw(endpoint, params);
     const data = await request.text();
 
-    return xmlParse(data);
+    const parsed = xmlParse(data);
+    const container = parsed?.MediaContainer?.[0];
+
+    if (!container) {
+      throw error(500);
+    }
+
+    return container;
   }
 
-  public async getLibraries(): Promise<PlexLibrary[]> {
+  public async getLibraries() {
     const data = await this.get('library/sections');
-
-    const libraries: PlexLibrary[] = data.MediaContainer[0].Directory.map(
-      ({
-        key,
-        type,
-        title,
-        language,
-        agent,
-        scanner,
-        uuid,
-        updatedAt,
-        createdAt,
-        scannedAt,
-        hidden
-      }: any) => ({
-        key: +key,
-        type,
-        title,
-        language,
-        agent,
-        scanner,
-        uuid,
-        updatedAt,
-        createdAt,
-        scannedAt,
-        hidden: !!+hidden
-      })
-    );
-
-    return libraries;
+    return BaseLibrariesSchema.parse(data.Directory);
   }
 
-  public async getLibraryData(libraryKey: number): Promise<PlexLibraryData> {
+  public async getLibraryData(libraryKey: number) {
     const data = await this.get(`library/sections/${libraryKey}/all`);
-
-    const library = data.MediaContainer[0];
-
-    return <PlexLibraryData>{
-      size: +library.size,
-      data: library.Video.map(
-        ({ Media, Genre, Director, Writer, Country, Role, ...attributes }) => attributes
-      )
-    };
+    return LibrarySchema.parse(data);
   }
 
   public async getMedia(ratingKey: number) {
     const data = await this.get(`library/metadata/${ratingKey}`);
-
-    return data?.MediaContainer[0] || {};
+    return MovieSchema.parse(data.Video[0]);
   }
 }
 

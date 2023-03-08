@@ -52,6 +52,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"xml-js": "^1.6.11"
+		"xml-js": "^1.6.11",
+		"zod": "^3.21.4"
 	}
 }

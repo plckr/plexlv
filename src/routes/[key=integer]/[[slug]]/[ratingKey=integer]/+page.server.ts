@@ -6,13 +6,13 @@ export const load: PageServerLoad = async ({ params }) => {
   const { ratingKey } = params;
 
   try {
-    const media = await Plex.getMedia(+ratingKey);
+    const video = await Plex.getMedia(+ratingKey);
 
-    if (media?.librarySectionID !== params.key) {
+    if (video.librarySectionID !== +params.key) {
       throw new Error("Media isn't in specified library");
     }
 
-    return { media, art: `/img/art/${ratingKey}.png` };
+    return { video, art: `/img/art/${ratingKey}.png` };
   } catch {
     throw error(404);
   }

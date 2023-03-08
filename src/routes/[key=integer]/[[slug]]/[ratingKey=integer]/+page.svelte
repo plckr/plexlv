@@ -6,11 +6,9 @@
   import { msToHourMinutes } from '$lib/utils/date';
   import { slugify } from '$lib/utils/string';
 
-  $: media = $page.data.media;
+  $: video = $page.data.video;
 
-  $: video = media.Video[0];
-
-  $: duration = msToHourMinutes(video.duration);
+  $: duration = msToHourMinutes(video?.duration || 0);
   $: durationString =
     (duration[0] === 1 && duration[1] >= 30) || duration[0] > 1
       ? `${duration[0]} h ${duration[1]} min`
@@ -18,72 +16,76 @@
 </script>
 
 <svelte:head>
-  <title>{video.title} • Plexlv</title>
-  <meta name="description" content={video.summary} />
+  {#if video}
+    <title>{video.title} • Plexlv</title>
+    <meta name="description" content={video.summary} />
 
-  <meta name="og:url" content={$page.url.toString()} />
-  <meta name="og:title" content={video.title} />
-  <meta name="og:description" content={video.summary} />
-  <meta name="og:image" content={$page.data.art} />
+    <meta name="og:url" content={$page.url.toString()} />
+    <meta name="og:title" content={video.title} />
+    <meta name="og:description" content={video.summary} />
+    <meta name="og:image" content={$page.data.art} />
+  {/if}
 </svelte:head>
 
-<aside>
-  <a href="/{media.librarySectionID}/{slugify(media.librarySectionTitle)}">
-    {media.librarySectionTitle}
-  </a>
-</aside>
+{#if video}
+  <aside>
+    <a href="/{video.librarySectionID}/{slugify(video.librarySectionTitle)}">
+      {video.librarySectionTitle}
+    </a>
+  </aside>
 
-<article>
-  <main>
-    <img src="/empty.gif" alt="" use:crossfade={`/img/thumb/${$page.params.ratingKey}.png`} />
+  <article>
+    <main>
+      <img src="/empty.gif" alt="" use:crossfade={`/img/thumb/${$page.params.ratingKey}.png`} />
 
-    <div class="info">
-      <h1>{video.title}</h1>
+      <div class="info">
+        <h1>{video.title}</h1>
 
-      <div class="subtitle">
-        <span>{video.year}</span>
-        <span>{durationString}</span>
-      </div>
+        <div class="subtitle">
+          <span>{video.year}</span>
+          <span>{durationString}</span>
+        </div>
 
-      <div class="rating">
-        {#if !!video?.Rating?.length}
-          {@const rating = video.Rating[0]}
-          <span class="badge" />
-          <Badge variant="secondary">
-            <Icon icon="imdb" height="16px" />
-            {rating.value}
-          </Badge>
-        {/if}
-      </div>
-
-      <div class="summary">
-        <p>{video.summary}</p>
-        <button>Saber mais</button>
-      </div>
-
-      <div class="details">
-        <div>
-          {#if !!video.Director?.length}
-            <h4>Realizado por</h4>
-            <p>{video.Director.map((director) => director.tag).join(', ')}</p>
-          {/if}
-          {#if !!video.Writer?.length}
-            <h4>Escrito por</h4>
-            <p>{video.Writer.map((writer) => writer.tag).join(', ')}</p>
-          {/if}
-          {#if video.studio}
-            <h4>Estúdio</h4>
-            <p>{video.studio}</p>
-          {/if}
-          {#if !!video.Genre?.length}
-            <h4>Género</h4>
-            <p>{video.Genre.map((genre) => genre.tag).join(', ')}</p>
+        <div class="rating">
+          {#if !!video?.Rating?.length}
+            {@const rating = video.Rating[0]}
+            <span class="badge" />
+            <Badge variant="secondary">
+              <Icon icon="imdb" height="16px" />
+              {rating.value}
+            </Badge>
           {/if}
         </div>
+
+        <div class="summary">
+          <p>{video.summary}</p>
+          <button>Saber mais</button>
+        </div>
+
+        <div class="details">
+          <div>
+            {#if !!video.Director?.length}
+              <h4>Realizado por</h4>
+              <p>{video.Director.map((director) => director.tag).join(', ')}</p>
+            {/if}
+            {#if !!video.Writer?.length}
+              <h4>Escrito por</h4>
+              <p>{video.Writer.map((writer) => writer.tag).join(', ')}</p>
+            {/if}
+            {#if video.studio}
+              <h4>Estúdio</h4>
+              <p>{video.studio}</p>
+            {/if}
+            {#if !!video.Genre?.length}
+              <h4>Género</h4>
+              <p>{video.Genre.map((genre) => genre.tag).join(', ')}</p>
+            {/if}
+          </div>
+        </div>
       </div>
-    </div>
-  </main>
-</article>
+    </main>
+  </article>
+{/if}
 
 <style lang="postcss">
   aside {
