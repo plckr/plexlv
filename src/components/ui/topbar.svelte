@@ -4,8 +4,7 @@
 </script>
 
 <aside>
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <label class="hamburger-menu" for={sidebarCheckboxId} tabindex="0">
+  <label class="hamburger-menu" role="button" for={sidebarCheckboxId} tabindex="0">
     <Icon icon="hamburger" />
   </label>
 

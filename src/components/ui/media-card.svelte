@@ -27,7 +27,7 @@
     {/if}
   </div>
   <div class="info">
-    <a class="title" {href} {title}>
+    <a class="title" {href} {title} tabindex="-1">
       {title}
     </a>
     <p class="subtitle">
