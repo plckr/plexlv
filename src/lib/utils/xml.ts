@@ -1,8 +1,8 @@
-import { xml2js } from 'xml-js';
+import { xml2js, type ElementCompact } from 'xml-js';
 import { isArray } from './array';
 import { isObject } from './object';
 
-const flattenAttributes = (data: any): any => {
+const flattenAttributes = (data: ElementCompact): object => {
   if (isObject(data)) {
     for (const key in data) {
       if (key === '_attributes') {
@@ -20,13 +20,13 @@ const flattenAttributes = (data: any): any => {
     }
   }
   if (isArray(data)) {
-    return data.map((entry) => flattenAttributes(entry));
+    return data.map((entry) => flattenAttributes(entry as ElementCompact));
   }
   return data;
 };
 
 export const xmlParse = (xml: string) => {
-  const parsed = xml2js(xml, {
+  const parsed: ElementCompact = xml2js(xml, {
     trim: true,
     ignoreDeclaration: true,
     ignoreComment: true,

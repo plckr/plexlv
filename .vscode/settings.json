@@ -1,0 +1,5 @@
+{
+  "cssvar.files": ["**/tokens.pcss", "**/themes.pcss"],
+  "stylelint.validate": ["css", "postcss", "svelte"],
+  "eslint.validate": ["svelte"]
+}

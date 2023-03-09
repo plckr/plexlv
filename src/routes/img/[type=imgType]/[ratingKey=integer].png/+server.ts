@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit';
 import { isImgType, type ImgType } from '$params/imgType';
 import type { RequestHandler } from './$types';
 
-const transcodeParams: Record<ImgType, any> = {
+const transcodeParams: Record<ImgType, object> = {
   thumb: {
     width: '200',
     height: '300',
