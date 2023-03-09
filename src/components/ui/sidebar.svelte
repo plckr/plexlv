@@ -27,7 +27,6 @@
   import type { IconOptions } from './icon.svelte';
   import { sidebarCheckboxId } from '$lib/constants';
   import { libraries } from '$lib/stores';
-  import type { PlexLibrary } from '$lib/plex.server';
   import { slugify } from '$lib/utils/string';
   import { page } from '$app/stores';
 
@@ -40,7 +39,7 @@
       href: '/',
       active: $page.url.pathname === '/'
     },
-    ...$libraries.map((library: PlexLibrary) => ({
+    ...$libraries.map((library) => ({
       title: library.title,
       icon: getLibraryIcon(library.type),
       active: currentKey === library.key.toString(),
@@ -50,7 +49,7 @@
 </script>
 
 <nav>
-  <input type="checkbox" id={sidebarCheckboxId} />
+  <input type="checkbox" id={sidebarCheckboxId} tabindex="-1" />
 
   <div class="sidebar-wrapper">
     <ul>
