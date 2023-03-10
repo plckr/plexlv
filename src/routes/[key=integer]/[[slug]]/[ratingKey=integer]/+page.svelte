@@ -36,7 +36,7 @@
 
   <article>
     <main>
-      <img src="/empty.gif" alt="" use:crossfade={`/img/thumb/${$page.params.ratingKey}.png`} />
+      <img src="/empty.gif" alt="" use:crossfade={`/img/thumb-lg/${$page.params.ratingKey}.png`} />
 
       <div class="info">
         <h1>{video.title}</h1>
