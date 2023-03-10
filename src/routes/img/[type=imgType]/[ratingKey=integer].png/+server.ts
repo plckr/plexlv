@@ -1,47 +1,53 @@
 import { dev } from '$app/environment';
 import { Plex } from '$lib/plex.server';
 import { error } from '@sveltejs/kit';
-import { isImgType, type ImgType } from '$params/imgType';
 import type { RequestHandler } from './$types';
+import { z } from 'zod';
 
-const transcodeParams: Record<ImgType, object> = {
-  thumb: {
-    width: '200',
-    height: '300',
-    minSize: '1',
-    upscale: '1'
-  },
-  'thumb-lg': {
-    width: '250',
-    height: '375',
-    minSize: '1',
-    upscale: '1'
-  },
-  art: {
-    width: '1280',
-    height: '1125',
-    minSize: '1',
-    upscale: '1',
-    opacity: '10',
-    background: '343a3f'
-  }
+const defaultParams = {
+  minSize: '1',
+  upscale: '1'
 };
 
-export const GET: RequestHandler = async ({ params, request }) => {
-  const { ratingKey, type } = params;
+const ThumbParams = z.object({
+  type: z.literal('thumb'),
+  ratingKey: z.coerce.number(),
+  width: z.coerce.number().lte(500).default(400).transform(String),
+  height: z.coerce.number().lte(750).default(600).transform(String)
+});
 
-  if (!isImgType(type)) {
-    throw error(404);
-  }
+const ThumbLargeParams = z.object({
+  type: z.literal('thumb-lg').transform(() => 'thumb' as const),
+  ratingKey: z.coerce.number(),
+  width: z.coerce.number().default(500).transform(String),
+  height: z.coerce.number().default(750).transform(String)
+});
 
+const ArtParams = z.object({
+  type: z.literal('art'),
+  ratingKey: z.coerce.number(),
+  width: z.coerce.number().lte(1280).default(1280).transform(String),
+  height: z.coerce.number().lte(1125).default(1125).transform(String),
+  opacity: z.coerce.number().default(10).transform(String),
+  background: z.string().default('343a3f')
+});
+
+const ParamsSchema = z.discriminatedUnion('type', [ThumbParams, ThumbLargeParams, ArtParams]);
+
+export const GET: RequestHandler = async ({ params, request, url }) => {
   const supportsWebp = request.headers.get('Accept')?.includes('image/webp');
   const format = supportsWebp ? 'webp' : 'png';
   const contentType = supportsWebp ? 'image/webp' : 'image/png';
-  const thumbOrArt = type === 'art' ? 'art' : 'thumb';
 
   try {
-    const img = await Plex.getPhoto(+ratingKey, thumbOrArt, {
-      ...transcodeParams[type],
+    const { ratingKey, type, ...transcodeParams } = ParamsSchema.parse({
+      ...defaultParams,
+      ...params,
+      ...Object.fromEntries([...url.searchParams])
+    });
+
+    const img = await Plex.getPhoto(+ratingKey, type, {
+      ...transcodeParams,
       format
     });
 
