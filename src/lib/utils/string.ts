@@ -27,3 +27,18 @@ export const slugify = (str: string) => {
 
   return str;
 };
+
+export const getNameInitials = (str: string) => {
+  const parts = str.trim().split(' ');
+  const length = parts.length;
+
+  if (length === 1) {
+    return parts[0][0].toUpperCase();
+  }
+
+  if (length > 1) {
+    return (parts[0][0] + parts[length - 1][0]).toUpperCase();
+  }
+
+  return '';
+};
