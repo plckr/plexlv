@@ -80,6 +80,14 @@
       }
     }
 
+    & img {
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+
+      object-fit: cover;
+      object-position: center;
+    }
+
     & .initials {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu,
         Cantarell, Helvetica Neue, sans-serif;
