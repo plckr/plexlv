@@ -1,13 +1,20 @@
 <script lang="ts">
+  import Icon, { type IconOptions } from './icon.svelte';
+
   export let title: string;
   export let subtitle: string | undefined = undefined;
   export let text: string;
   export let href: string | undefined = undefined;
+  export let icon: IconOptions | undefined = undefined;
 </script>
 
 <article>
   <div class="top-info">
-    <div class="logo" />
+    {#if icon}
+      <div class="logo">
+        <Icon {icon} width="40px" height="40px" />
+      </div>
+    {/if}
     <div class="info">
       {#if href}
         <a {href} class="title" {title} rel="noopener noreferrer" target="_blank">{title}</a>
@@ -37,6 +44,11 @@
 
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
     border-radius: 4px;
+  }
+
+  .top-info {
+    display: flex;
+    gap: 8px;
   }
 
   .info {
