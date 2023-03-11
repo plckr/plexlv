@@ -16,7 +16,8 @@
   import play from './icons/play.svg?raw';
   import playerCast from './icons/player-cast.svg?raw';
   import plex from './icons/plex.svg?raw';
-  import RatingRottenTomatoes from './icons/rating-rotten-tomatoes.svg?raw';
+  import RatingRottenTomatoesFresh from './icons/rating-rotten-tomatoes-fresh.svg?raw';
+  import RatingRottenTomatoesRotten from './icons/rating-rotten-tomatoes-rotten.svg?raw';
   import search from './icons/search.svg?raw';
   import shuffle from './icons/shuffle.svg?raw';
   import settings from './icons/settings.svg?raw';
@@ -42,7 +43,8 @@
     play,
     'player-cast': playerCast,
     plex,
-    'rating-rotten-tomatoes': RatingRottenTomatoes,
+    'rating-rotten-tomatoes-fresh': RatingRottenTomatoesFresh,
+    'rating-rotten-tomatoes-rotten': RatingRottenTomatoesRotten,
     search,
     settings,
     shuffle,
