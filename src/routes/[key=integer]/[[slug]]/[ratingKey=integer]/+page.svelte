@@ -1,6 +1,8 @@
 <script>
   import { page } from '$app/stores';
   import Badge from '$components/ui/badge.svelte';
+  import CarouselSection from '$components/ui/carousel-section.svelte';
+  import CastCard from '$components/ui/cast-card.svelte';
   import Icon from '$components/ui/icon.svelte';
   import { crossfade } from '$lib/actions';
   import { msToHourMinutes } from '$lib/utils/date';
@@ -84,6 +86,23 @@
         </div>
       </div>
     </main>
+
+    {#if !!video.Role?.length}
+      <CarouselSection title="Elenco">
+        {#each video.Role as role}
+          <CastCard
+            title={role.tag}
+            subtitle={role.role}
+            image={role.thumb
+              ? {
+                  src: role.thumb,
+                  alt: role.tag
+                }
+              : undefined}
+          />
+        {/each}
+      </CarouselSection>
+    {/if}
   </article>
 {/if}
 
