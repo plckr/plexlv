@@ -27,7 +27,7 @@ const ArtParams = z.object({
   type: z.literal('art'),
   ratingKey: z.coerce.number(),
   width: z.coerce.number().lte(1280).default(1280).transform(String),
-  height: z.coerce.number().lte(1125).default(1125).transform(String),
+  height: z.coerce.number().lte(954).default(954).transform(String),
   opacity: z.coerce.number().default(10).transform(String),
   background: z.string().default('343a3f')
 });
