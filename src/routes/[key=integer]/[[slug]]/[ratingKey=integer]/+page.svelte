@@ -6,6 +6,7 @@
   import Icon from '$components/ui/icon.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import { crossfade } from '$lib/actions';
+  import { getRatingIcon } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
   import { slugify } from '$lib/utils/string';
 
@@ -113,6 +114,7 @@
             subtitle={review.tag}
             text={review.text}
             href={review.link}
+            icon={review.image ? getRatingIcon(review.image) : undefined}
           />
         {/each}
       </CarouselSection>
