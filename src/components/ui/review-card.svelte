@@ -1,0 +1,68 @@
+<script lang="ts">
+  export let title: string;
+  export let subtitle: string | undefined = undefined;
+  export let text: string;
+  export let href: string | undefined = undefined;
+</script>
+
+<article>
+  <div class="top-info">
+    <div class="logo" />
+    <div class="info">
+      {#if href}
+        <a {href} class="title" {title} rel="noopener noreferrer" target="_blank">{title}</a>
+      {:else}
+        <p class="title" {title}>{title}</p>
+      {/if}
+
+      <p class="subtitle">{subtitle}</p>
+    </div>
+  </div>
+  <p class="text">{text}</p>
+</article>
+
+<style lang="postcss">
+  article {
+    padding: 20px;
+
+    width: 350px;
+    height: 220px;
+
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+      Helvetica Neue, sans-serif;
+    font-size: 13px;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.45);
+
+    box-shadow: 0 0 4px rgb(0 0 0 / 30%);
+    border-radius: 4px;
+  }
+
+  .info {
+    cursor: default;
+
+    & > * {
+      line-height: 1.85;
+    }
+
+    & .subtitle {
+      color: hsla(0, 0%, 100%, 0.45);
+    }
+
+    @media --hover {
+      & a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .text {
+    margin-top: 8px;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    line-height: 1.7;
+  }
+</style>
