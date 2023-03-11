@@ -42,3 +42,7 @@ export const getNameInitials = (str: string) => {
 
   return '';
 };
+
+export const pixelToNumber = (pixel: string) => {
+  return parseInt(pixel.trim(), 10);
+};
