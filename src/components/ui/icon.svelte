@@ -16,6 +16,7 @@
   import play from './icons/play.svg?raw';
   import playerCast from './icons/player-cast.svg?raw';
   import plex from './icons/plex.svg?raw';
+  import RatingRottenTomatoes from './icons/rating-rotten-tomatoes.svg?raw';
   import search from './icons/search.svg?raw';
   import shuffle from './icons/shuffle.svg?raw';
   import settings from './icons/settings.svg?raw';
@@ -41,6 +42,7 @@
     play,
     'player-cast': playerCast,
     plex,
+    'rating-rotten-tomatoes': RatingRottenTomatoes,
     search,
     settings,
     shuffle,
