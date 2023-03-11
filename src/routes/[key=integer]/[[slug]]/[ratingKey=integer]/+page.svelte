@@ -4,6 +4,7 @@
   import CarouselSection from '$components/ui/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import Icon from '$components/ui/icon.svelte';
+  import ReviewCard from '$components/ui/review-card.svelte';
   import { crossfade } from '$lib/actions';
   import { msToHourMinutes } from '$lib/utils/date';
   import { slugify } from '$lib/utils/string';
@@ -89,7 +90,7 @@
 
     {#if !!video.Role?.length}
       <CarouselSection title="Elenco">
-        {#each video.Role as role}
+        {#each video.Role as role (role.id)}
           <CastCard
             title={role.tag}
             subtitle={role.role}
@@ -99,6 +100,19 @@
                   alt: role.tag
                 }
               : undefined}
+          />
+        {/each}
+      </CarouselSection>
+    {/if}
+
+    {#if !!video.Review?.length}
+      <CarouselSection title="Análises">
+        {#each video.Review as review (review.id)}
+          <ReviewCard
+            title={review.source}
+            subtitle={review.tag}
+            text={review.text}
+            href={review.link}
           />
         {/each}
       </CarouselSection>

@@ -85,7 +85,9 @@ class Plex {
   }
 
   public async getMedia(ratingKey: number) {
-    const data = await this.get(`library/metadata/${ratingKey}`);
+    const data = await this.get(`library/metadata/${ratingKey}`, {
+      includeReviews: '1'
+    });
     return MovieSchema.parse(data.Video[0]);
   }
 }

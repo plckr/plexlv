@@ -151,6 +151,17 @@ export const RoleSchema = z.object({
 });
 export type Role = z.infer<typeof RoleSchema>;
 
+export const ReviewSchema = z.object({
+  id: z.coerce.number(),
+  filter: z.string(),
+  tag: z.string(),
+  text: z.string(),
+  image: z.string().optional(),
+  link: z.string().optional(),
+  source: z.string()
+});
+export type Review = z.infer<typeof ReviewSchema>;
+
 export const MovieSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
@@ -185,7 +196,8 @@ export const MovieSchema = z.object({
   Country: z.array(CountrySchema).optional(),
   Guid: z.array(GuidSchema).optional(),
   Rating: z.array(RatingSchema).optional(),
-  Role: z.array(RoleSchema).optional()
+  Role: z.array(RoleSchema).optional(),
+  Review: z.array(ReviewSchema).optional()
 });
 export type Movie = z.infer<typeof MovieSchema>;
 
