@@ -5,10 +5,10 @@
 
 <aside>
   <label class="hamburger-menu" role="button" for={sidebarCheckboxId} tabindex="0">
-    <Icon icon="hamburger" height="100%" />
+    <Icon icon="hamburger" height="24px" width="24px" />
   </label>
 
-  <Icon icon="plex" />
+  <Icon icon="plex" height="24px" />
 </aside>
 
 <style lang="postcss">
