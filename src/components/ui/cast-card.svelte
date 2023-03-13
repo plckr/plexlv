@@ -17,7 +17,7 @@
 <article class="cast-card">
   <div class="thumb" tabindex="-1">
     {#if image?.src}
-      <img src={image.src} alt={image.alt} />
+      <img src={image.src} alt={image.alt} loading="lazy" />
     {:else}
       <div class="initials">{getNameInitials(title)}</div>
     {/if}
