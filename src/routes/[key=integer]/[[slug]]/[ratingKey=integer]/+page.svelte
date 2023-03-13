@@ -6,7 +6,7 @@
   import Icon from '$components/ui/icon.svelte';
   import MediaCard from '$components/ui/media-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
-  import { crossfade } from '$lib/actions';
+  import { crossfade, truncate } from '$lib/actions';
   import { getRatingIcon } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
   import { slugify } from '$lib/utils/string';
@@ -68,8 +68,15 @@
         </div>
 
         <div class="summary">
-          <p>{video.summary}</p>
-          <button>Saber mais</button>
+          <p
+            use:truncate={{
+              lines: 3,
+              expandTranslation: 'Sabe mais',
+              collapseTranslation: 'Ler menos'
+            }}
+          >
+            {video.summary}
+          </p>
         </div>
 
         <div class="details">
@@ -219,13 +226,17 @@
   .summary {
     max-width: 750px;
     margin-block: 40px;
+    line-height: 1.7;
 
     & p {
       color: #fafafa;
       font-size: 15px;
+
+      transition: max-height 0.2s ease-in-out;
+      overflow: hidden;
     }
 
-    & button {
+    & :global(button) {
       @mixin text-bold;
 
       color: hsla(0, 0%, 100%, 0.45);
