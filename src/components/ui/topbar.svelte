@@ -5,7 +5,7 @@
 
 <aside>
   <label class="hamburger-menu" role="button" for={sidebarCheckboxId} tabindex="0">
-    <Icon icon="hamburger" />
+    <Icon icon="hamburger" height="100%" />
   </label>
 
   <Icon icon="plex" />
@@ -18,8 +18,9 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    /* justify-content: space-between; */
     flex-grow: 1;
+
+    height: 48px;
 
     font-size: 13px;
     background: #00000099;
