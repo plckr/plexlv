@@ -41,7 +41,12 @@
 
   <article>
     <main>
-      <img src="/empty.gif" alt="" use:crossfade={`/img/thumb-lg/${$page.params.ratingKey}.png`} />
+      <img
+        class="poster"
+        src="/empty.gif"
+        alt=""
+        use:crossfade={`/img/thumb-lg/${$page.params.ratingKey}.png`}
+      />
 
       <div class="info">
         <h1>{video.title}</h1>
@@ -160,21 +165,29 @@
   }
 
   main {
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
     gap: 50px;
 
     padding-block: 40px;
   }
 
-  img {
+  .poster {
+    display: none;
+
+    position: relative;
+
+    width: 250px;
+    height: 375px;
+
     background-color: rgba(0, 0, 0, 0.45);
     border-radius: 4px;
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
-    position: relative;
-    width: 250px;
 
     transition: opacity 0.2s;
+
+    @media --lg {
+      display: block;
+    }
   }
 
   .info {

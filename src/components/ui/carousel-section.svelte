@@ -59,7 +59,11 @@
 
 <style lang="postcss">
   section {
-    --margin: 40px;
+    --margin: unset;
+
+    @media --lg {
+      --margin: 40px;
+    }
 
     margin-block: var(--margin);
   }
@@ -80,6 +84,7 @@
     justify-content: space-between;
     margin-bottom: 10px;
     min-height: 25px;
+
     padding-inline: var(--margin);
 
     & .navigate-arrows {
@@ -110,6 +115,9 @@
     position: relative;
     overflow-x: scroll;
     overflow-y: hidden;
+
+    margin: -8px;
+    padding: 8px;
 
     &::-webkit-scrollbar {
       display: none;
