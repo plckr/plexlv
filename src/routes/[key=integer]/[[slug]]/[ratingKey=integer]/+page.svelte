@@ -4,6 +4,7 @@
   import CarouselSection from '$components/ui/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import Icon from '$components/ui/icon.svelte';
+  import MediaCard from '$components/ui/media-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import { crossfade } from '$lib/actions';
   import { getRatingIcon } from '$lib/data';
@@ -119,6 +120,24 @@
         {/each}
       </CarouselSection>
     {/if}
+
+    {#each video?.Related?.Hub || [] as hub (hub.hubKey)}
+      <CarouselSection title={hub.title}>
+        {#each hub.Video || [] as media (media.ratingKey)}
+          <MediaCard
+            title={media.title}
+            subtitle={media.year?.toString() || ''}
+            href="{$page.url.pathname}/{media.ratingKey}"
+            image={media.thumb
+              ? {
+                  src: media.thumb,
+                  alt: ''
+                }
+              : undefined}
+          />
+        {/each}
+      </CarouselSection>
+    {/each}
   </article>
 {/if}
 

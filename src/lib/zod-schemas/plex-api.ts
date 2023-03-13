@@ -1,3 +1,4 @@
+import { transformFirstArray } from '$lib/utils/zod';
 import { z } from 'zod';
 
 const MediaThumb = z.string().transform((thumb) => `/img/thumb/${thumb.split('/')[3]}.png`);
@@ -162,13 +163,38 @@ export const ReviewSchema = z.object({
 });
 export type Review = z.infer<typeof ReviewSchema>;
 
-export const MovieSchema = z.object({
+const BaseMovieSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
-  guid: z.string(),
-  studio: z.string().optional(),
   type: z.literal('movie'),
   title: z.string(),
+  thumb: MediaThumb,
+  year: z.coerce.number(),
+  art: z.string().optional()
+});
+
+export const HubSchema = z.object({
+  hubKey: z.string(),
+  key: z.string(),
+  title: z.string(),
+  type: z.literal('movie'),
+  hubIdentifier: z.string(),
+  context: z.string(),
+  size: z.coerce.number(),
+  more: z.coerce.number(),
+  style: z.string().optional(),
+
+  Video: z.array(BaseMovieSchema).optional()
+});
+
+export const RelatedSchema = z.object({
+  Hub: z.array(HubSchema).optional()
+});
+export type Related = z.infer<typeof RelatedSchema>;
+
+export const MovieSchema = BaseMovieSchema.extend({
+  guid: z.string(),
+  studio: z.string().optional(),
   titleSort: z.string().optional(),
   librarySectionTitle: z.string(),
   librarySectionID: z.coerce.number(),
@@ -177,10 +203,7 @@ export const MovieSchema = z.object({
   contentRating: z.string().optional(),
   summary: z.string(),
   audienceRating: z.coerce.number().optional(),
-  year: z.coerce.number(),
   tagline: z.string().optional(),
-  thumb: MediaThumb,
-  art: z.string().optional(),
   duration: z.coerce.number(),
   originallyAvailableAt: z.string().optional(),
   addedAt: z.string(),
@@ -197,7 +220,8 @@ export const MovieSchema = z.object({
   Guid: z.array(GuidSchema).optional(),
   Rating: z.array(RatingSchema).optional(),
   Role: z.array(RoleSchema).optional(),
-  Review: z.array(ReviewSchema).optional()
+  Review: z.array(ReviewSchema).optional(),
+  Related: z.array(RelatedSchema).transform(transformFirstArray).optional()
 });
 export type Movie = z.infer<typeof MovieSchema>;
 
