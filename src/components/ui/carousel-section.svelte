@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Icon from './icon.svelte';
 
   export let title: string;
@@ -25,29 +26,34 @@
       behavior: 'smooth'
     });
   };
+
+  onMount(onScroll);
 </script>
 
 <section>
   <div class="title-row">
     <h2 title="Elenco">{title}</h2>
-    <div class="navigate-arrows">
-      <button
-        aria-label="Página Anterior"
-        title="Página Anterior"
-        disabled={scrollPosition <= 0}
-        on:click={backward}
-      >
-        <Icon icon="chevron-left" height="18px" width="18px" />
-      </button>
-      <button
-        aria-label="Página Seguinte"
-        title="Página Seguinte"
-        disabled={scrollAtEnd}
-        on:click={forward}
-      >
-        <Icon icon="chevron-right" height="18px" width="18px" />
-      </button>
-    </div>
+
+    {#if !(scrollPosition <= 0 && scrollAtEnd)}
+      <div class="navigate-arrows">
+        <button
+          aria-label="Página Anterior"
+          title="Página Anterior"
+          disabled={scrollPosition <= 0}
+          on:click={backward}
+        >
+          <Icon icon="chevron-left" height="18px" width="18px" />
+        </button>
+        <button
+          aria-label="Página Seguinte"
+          title="Página Seguinte"
+          disabled={scrollAtEnd}
+          on:click={forward}
+        >
+          <Icon icon="chevron-right" height="18px" width="18px" />
+        </button>
+      </div>
+    {/if}
   </div>
 
   <div class="carousel" bind:this={carouselEl} on:scroll={onScroll}>
