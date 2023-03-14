@@ -38,8 +38,9 @@
 
 <style lang="postcss">
   main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 30px;
   }
 </style>
