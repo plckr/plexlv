@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import MediaCard from '$components/ui/media-card.svelte';
+  import { getInternalUrl } from '$lib/data';
   import { libraries } from '$lib/stores';
 
   $: library = $libraries.find((lib) => lib.key === +$page.params.key);
@@ -23,7 +24,7 @@
       title={media.title}
       subtitle={media.year?.toString() || ''}
       badge={media.type === 'show' ? media.leafCount : undefined}
-      href="{$page.url.pathname}/{media.ratingKey}"
+      href={getInternalUrl('media', { key: media.ratingKey })}
       image={media.thumb
         ? {
             src: media.thumb,

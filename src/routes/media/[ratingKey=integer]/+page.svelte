@@ -7,9 +7,8 @@
   import MediaCard from '$components/ui/media-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import { crossfade, truncate } from '$lib/actions';
-  import { getRatingIcon } from '$lib/data';
+  import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
-  import { slugify } from '$lib/utils/string';
 
   $: video = $page.data.video;
 
@@ -34,7 +33,7 @@
 
 {#if video}
   <aside>
-    <a href="/{video.librarySectionID}/{slugify(video.librarySectionTitle)}">
+    <a href={getInternalUrl('library', { key: video.librarySectionID })}>
       {video.librarySectionTitle}
     </a>
   </aside>
@@ -45,7 +44,7 @@
         class="poster"
         src="/empty.gif"
         alt=""
-        use:crossfade={`/img/thumb-lg/${$page.params.ratingKey}.png`}
+        use:crossfade={getInternalUrl('image', { type: 'thumb-lg', key: $page.params.ratingKey })}
       />
 
       <div class="info">
@@ -139,7 +138,7 @@
           <MediaCard
             title={media.title}
             subtitle={media.year?.toString() || ''}
-            href="{$page.url.pathname}/{media.ratingKey}"
+            href={getInternalUrl('media', { key: media.ratingKey })}
             image={media.thumb
               ? {
                   src: media.thumb,

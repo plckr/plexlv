@@ -27,8 +27,8 @@
   import type { IconOptions } from './icon.svelte';
   import { sidebarCheckboxId } from '$lib/constants';
   import { libraries } from '$lib/stores';
-  import { slugify } from '$lib/utils/string';
   import { page } from '$app/stores';
+  import { getInternalUrl } from '$lib/data';
 
   $: currentKey = $page.params.key;
 
@@ -43,7 +43,7 @@
       title: library.title,
       icon: getLibraryIcon(library.type),
       active: currentKey === library.key.toString(),
-      href: `/${library.key}/${slugify(library.title)}`
+      href: getInternalUrl('library', { key: library.key })
     }))
   ];
 </script>

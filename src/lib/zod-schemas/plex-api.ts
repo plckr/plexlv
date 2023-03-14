@@ -1,7 +1,10 @@
+import { getInternalUrl } from '$lib/data';
 import { transformFirstArray } from '$lib/utils/zod';
 import { z } from 'zod';
 
-const MediaThumb = z.string().transform((thumb) => `/img/thumb/${thumb.split('/')[3]}.png`);
+const MediaThumb = z
+  .string()
+  .transform((thumb) => getInternalUrl('image', { type: 'thumb', key: thumb.split('/')[3] }));
 
 const StreamCommonSchema = z.object({
   id: z.coerce.number(),
