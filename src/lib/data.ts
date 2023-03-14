@@ -31,7 +31,5 @@ export const getInternalUrl: GetInternalUrl = (type, params) => {
       return `/media/${params.key}`;
     case 'image':
       return `/img/${params.type}/${params.key}.png`;
-    default:
-      return '';
   }
 };
