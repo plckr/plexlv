@@ -1,8 +1,7 @@
 <script lang="ts">
   import { sidebarCheckboxId } from '$lib/constants';
+  import { localState } from '$lib/stores';
   import Icon from './icon.svelte';
-
-  let cardWidth: number;
 </script>
 
 <aside>
@@ -13,13 +12,7 @@
   <Icon icon="plex" height="24px" />
 
   <div class="range">
-    <input
-      type="range"
-      min="1"
-      max="100"
-      bind:value={cardWidth}
-      on:change={() => document.body.style.setProperty('--scale-multiplier', `${cardWidth}`)}
-    />
+    <input type="range" min="1" max="100" bind:value={$localState.scaleMultiplier} />
     <Icon icon="grid" />
   </div>
 </aside>
