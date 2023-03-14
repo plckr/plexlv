@@ -43,10 +43,22 @@
 
 <style lang="postcss">
   article {
-    display: inline-block;
+    display: block;
+    --min-width: 130;
+    --max-width: 200;
 
-    min-width: 130px;
-    max-width: 200px;
+    min-width: calc(var(--min-width) * 1px);
+    width: calc(
+      (
+          ((var(--max-width) - var(--min-width)) * (var(--scale-multiplier, 50) / 100)) +
+            var(--min-width)
+        ) * 1px
+    );
+    max-width: calc(var(--max-width) * 1px);
+
+    @media --motion {
+      transition: width 0.2s;
+    }
   }
 
   .card {
@@ -70,7 +82,9 @@
       height: 100%;
       object-fit: cover;
 
-      transition: opacity 0.2s;
+      @media --motion {
+        transition: opacity 0.2s;
+      }
     }
 
     & :global(.badge) {
