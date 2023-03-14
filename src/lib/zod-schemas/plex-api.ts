@@ -92,7 +92,7 @@ export const MediaSchema = z.object({
   videoCodec: z.string(),
   videoResolution: z.string(),
   container: z.string(),
-  videoFrameRate: z.string(),
+  videoFrameRate: z.string().optional(),
   videoProfile: z.string().optional(),
   Part: z.array(PartSchema)
 });
