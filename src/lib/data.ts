@@ -7,6 +7,8 @@ export const getRatingIcon = (str: string): IconOptions | undefined => {
       return 'rating-rotten-tomatoes-fresh';
     case 'rottentomatoes://image.review.rotten':
       return 'rating-rotten-tomatoes-rotten';
+    case 'imdb://image.rating':
+      return 'imdb';
     default:
       return;
   }

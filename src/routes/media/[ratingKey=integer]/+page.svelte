@@ -58,11 +58,13 @@
         <div class="rating">
           {#if !!video?.Rating?.length}
             {@const rating = video.Rating[0]}
-            <span class="badge" />
-            <Badge variant="secondary">
-              <Icon icon="imdb" height="16px" />
-              {rating.value}
-            </Badge>
+            {@const icon = getRatingIcon(rating.image)}
+            {#if icon}
+              <Badge variant="secondary">
+                <Icon {icon} height="16px" />
+                {rating.value}
+              </Badge>
+            {/if}
           {/if}
         </div>
 
