@@ -20,19 +20,17 @@ type UrlTypeParams = {
     key: string | number;
   };
 };
+type UrlType = keyof UrlTypeParams;
+type GetInternalUrl = (...args: { [K in UrlType]: [K, UrlTypeParams[K]] }[UrlType]) => string;
 
-export const getInternalUrl = <T extends keyof UrlTypeParams>(
-  type: T,
-  params: UrlTypeParams[T]
-): string => {
+export const getInternalUrl: GetInternalUrl = (type, params) => {
   switch (type) {
     case 'library':
       return `/library/${params.key}`;
     case 'media':
       return `/media/${params.key}`;
     case 'image':
-      // TODO: if possible, find a way to remove the error without the `as`
-      return `/img/${(params as UrlTypeParams['image']).type}/${params.key}.png`;
+      return `/img/${params.type}/${params.key}.png`;
     default:
       return '';
   }
