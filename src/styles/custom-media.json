@@ -7,6 +7,7 @@
     "--xl": "(min-width: 1280px)",
     "--xxl": "(min-width: 1536px)",
 
-    "--hover": "(hover: hover)"
+    "--hover": "(hover: hover)",
+    "--motion": "(prefers-reduced-motion: no-preference)"
   }
 }

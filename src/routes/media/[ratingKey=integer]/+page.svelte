@@ -233,8 +233,11 @@
       color: #fafafa;
       font-size: 15px;
 
-      transition: max-height 0.2s ease-in-out;
       overflow: hidden;
+
+      @media --motion {
+        transition: max-height 0.2s ease-in-out;
+      }
     }
 
     & :global(button) {

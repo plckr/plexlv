@@ -55,6 +55,18 @@ input[type='range'] {
   cursor: pointer;
   height: 12px;
 
+  @media --hover {
+    &:hover {
+      &::-webkit-slider-thumb {
+        background: white;
+      }
+
+      &::-moz-range-thumb {
+        background: white;
+      }
+    }
+  }
+
   &::-webkit-slider-runnable-track {
     background: hsla(0, 0%, 100%, 0.2);
     height: 2px;
@@ -75,6 +87,10 @@ input[type='range'] {
     background-color: #ddd;
     border-radius: 50%;
     box-shadow: 0 0 2px rgb(0 0 0 / 35%);
+
+    @media --motion {
+      transition: background 0.2s;
+    }
   }
 
   &::-moz-range-thumb {
@@ -88,5 +104,9 @@ input[type='range'] {
     background-color: #ddd;
     border-radius: 50%;
     box-shadow: 0 0 2px rgb(0 0 0 / 35%);
+
+    @media --motion {
+      transition: background 0.2s;
+    }
   }
 }
