@@ -41,6 +41,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 30px;
+    gap: 8px;
+
+    @media --sm {
+      gap: 24px;
+    }
+
+    @media --lg {
+      gap: 30px;
+    }
   }
 </style>
