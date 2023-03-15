@@ -48,12 +48,7 @@
     --max-width: 200;
 
     min-width: calc(var(--min-width) * 1px);
-    width: calc(
-      (
-          ((var(--max-width) - var(--min-width)) * (var(--scale-multiplier, 50) / 100)) +
-            var(--min-width)
-        ) * 1px
-    );
+    @mixin scale-multiplier var(--min-width), var(--max-width);
     max-width: calc(var(--max-width) * 1px);
 
     @media --motion {
