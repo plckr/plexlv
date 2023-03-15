@@ -44,16 +44,8 @@
 <style lang="postcss">
   article {
     display: block;
-    --min-width: 130;
-    --max-width: 200;
 
-    min-width: calc(var(--min-width) * 1px);
-    @mixin scale-multiplier var(--min-width), var(--max-width);
-    max-width: calc(var(--max-width) * 1px);
-
-    @media --motion {
-      transition: width 0.2s;
-    }
+    @mixin scale-multiplier 130px, 200px, width;
   }
 
   .card {

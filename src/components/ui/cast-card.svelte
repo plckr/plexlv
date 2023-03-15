@@ -47,17 +47,18 @@
 
 <style lang="postcss">
   article {
-    --thumb-size: 178px;
+    @mixin scale-multiplier 130px, 200px, --size;
 
     padding: 2px;
-    width: var(--thumb-size);
+
+    width: var(--size);
   }
 
   .thumb {
     position: relative;
 
-    width: var(--thumb-size);
-    height: var(--thumb-size);
+    width: var(--size);
+    height: var(--size);
 
     border-radius: 50%;
 
@@ -81,25 +82,28 @@
     }
 
     & img {
-      width: var(--thumb-size);
-      height: var(--thumb-size);
+      width: var(--size);
+      height: var(--size);
 
       object-fit: cover;
       object-position: center;
     }
 
     & .initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu,
         Cantarell, Helvetica Neue, sans-serif;
 
-      width: 100%;
-      height: 100%;
+      width: var(--size);
+      height: var(--size);
 
       color: hsla(0, 0%, 100%, 0.15);
 
       text-align: center;
       font-size: 42px;
-      line-height: var(--thumb-size);
 
       user-select: none;
       cursor: default;

@@ -11,6 +11,6 @@
   white-space: nowrap;
 }
 
-@define-mixin scale-multiplier $min, $max {
-  width: calc(((($max - $min) * (var(--scale-multiplier, 50) / 100)) + $min) * 1px);
+@define-mixin scale-multiplier $min, $max, $property: width {
+  $(property): calc((($max - $min) * (var(--scale-multiplier, 50) / 100)) + $min);
 }
