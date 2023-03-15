@@ -46,3 +46,11 @@ export const getNameInitials = (str: string) => {
 export const pixelToNumber = (pixel: string) => {
   return parseInt(pixel.trim(), 10);
 };
+
+export const truncate = (str: string, characters: number): string => {
+  if (str.length > characters) {
+    return str.substring(0, characters - 3) + '...';
+  }
+
+  return str;
+};
