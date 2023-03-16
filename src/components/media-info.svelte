@@ -5,9 +5,9 @@
   import { crossfade, truncate } from '$lib/actions';
   import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
-  import type { Movie } from '$lib/zod-schemas/plex-api';
+  import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
-  export let media: Movie;
+  export let media: MediaEntity;
 
   $: duration = msToHourMinutes(media?.duration || 0);
   $: durationString =
@@ -29,11 +29,13 @@
 
     <div class="subtitle">
       <span>{media.year}</span>
-      <span>{durationString}</span>
+      {#if media.type === 'movie'}
+        <span>{durationString}</span>
+      {/if}
     </div>
 
     <div class="rating">
-      {#if !!media?.Rating?.length}
+      {#if media.type === 'movie' && !!media?.Rating?.length}
         {@const rating = media.Rating[0]}
         {@const icon = getRatingIcon(rating.image)}
         {#if icon}
@@ -59,11 +61,11 @@
 
     <div class="details">
       <div>
-        {#if !!media.Director?.length}
+        {#if media.type === 'movie' && !!media.Director?.length}
           <h4>Realizado por</h4>
           <p>{media.Director.map((director) => director.tag).join(', ')}</p>
         {/if}
-        {#if !!media.Writer?.length}
+        {#if media.type === 'movie' && !!media.Writer?.length}
           <h4>Escrito por</h4>
           <p>{media.Writer.map((writer) => writer.tag).join(', ')}</p>
         {/if}

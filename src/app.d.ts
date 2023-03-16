@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Library, Movie } from '$lib/zod-schemas/plex-api';
+import type { Library, MediaEntity } from '$lib/zod-schemas/plex-api';
 
 // for information about these interfaces
 declare global {
@@ -10,7 +10,7 @@ declare global {
     interface PageData {
       libraries: import('../.svelte-kit/types/src/routes/$types').LayoutData['libraries'];
       library?: Library;
-      video?: Movie;
+      media?: MediaEntity;
     }
     // interface Platform {}
   }

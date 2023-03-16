@@ -7,9 +7,9 @@ export const load: PageServerLoad = async ({ params }) => {
   const { ratingKey } = params;
 
   try {
-    const video = await Plex.getMedia(+ratingKey);
+    const media = await Plex.getMedia(+ratingKey);
 
-    return { video, art: getInternalUrl('image', { type: 'art', key: ratingKey }) };
+    return { media, art: getInternalUrl('image', { type: 'art', key: ratingKey }) };
   } catch {
     throw error(404);
   }

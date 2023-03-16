@@ -1,4 +1,5 @@
 <script lang="ts">
+  import BaseSection from '$components/base-section.svelte';
   import { onMount } from 'svelte';
   import Icon from './icon.svelte';
 
@@ -30,8 +31,8 @@
   onMount(onScroll);
 </script>
 
-<section>
-  <div class="title-row">
+<BaseSection>
+  <svelte:fragment slot="header">
     <h2 title="Elenco">{title}</h2>
 
     {#if !(scrollPosition <= 0 && scrollAtEnd)}
@@ -54,64 +55,34 @@
         </button>
       </div>
     {/if}
-  </div>
+  </svelte:fragment>
 
   <div class="carousel" bind:this={carouselEl} on:scroll={onScroll}>
     <div class="carousel-inner">
       <slot />
     </div>
   </div>
-</section>
+</BaseSection>
 
 <style lang="postcss">
-  section {
-    --margin: unset;
-
-    @media --lg {
-      --margin: 40px;
-    }
-
-    margin-block: var(--margin);
-  }
-
-  h2 {
-    @mixin text-bold;
-
-    font-size: clamp(1.125rem, 0.501vw + 0.937rem, 1.313rem);
-    line-height: clamp(1.5rem, 1.333vw + 0.999rem, 2rem);
-    display: inline-block;
-    white-space: nowrap;
-    color: white;
-  }
-
-  .title-row {
-    align-items: center;
+  .navigate-arrows {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    min-height: 25px;
+    gap: 15px;
 
-    padding-inline: var(--margin);
+    & button {
+      color: hsla(0, 0%, 100%, 0.7);
+      transition: color 0.2s;
+      padding: 6px;
 
-    & .navigate-arrows {
-      display: flex;
-      gap: 15px;
+      &:disabled {
+        color: hsla(0, 0%, 100%, 0.3);
+        opacity: 0.15;
+        cursor: not-allowed;
+      }
 
-      & button {
-        color: hsla(0, 0%, 100%, 0.7);
-        transition: color 0.2s;
-        padding: 6px;
-
-        &:disabled {
-          color: hsla(0, 0%, 100%, 0.3);
-          opacity: 0.15;
-          cursor: not-allowed;
-        }
-
-        @media --hover {
-          &:hover:not(:disabled) {
-            color: white;
-          }
+      @media --hover {
+        &:hover:not(:disabled) {
+          color: white;
         }
       }
     }

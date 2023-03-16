@@ -1,14 +1,16 @@
 <script>
   import { page } from '$app/stores';
+  import MediaInfo from '$components/media-info.svelte';
+  import SeasonsSection from '$components/seasons-section.svelte';
   import CarouselSection from '$components/ui/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import MediaCard from '$components/ui/media-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { truncate } from '$lib/utils/string';
-  import MediaInfo from './media-info.svelte';
+  import { DirectorSchema } from '$lib/zod-schemas/plex-api';
 
-  $: media = $page.data.video;
+  $: media = $page.data.media;
 </script>
 
 <svelte:head>
@@ -33,6 +35,10 @@
   <article>
     <MediaInfo {media} />
 
+    {#if media.type === 'show' && !!media.Children?.Directory}
+      <SeasonsSection children={media.Children} />
+    {/if}
+
     {#if !!media.Role?.length}
       <CarouselSection title="Elenco">
         {#each media.Role as role (role.id)}
@@ -50,7 +56,7 @@
       </CarouselSection>
     {/if}
 
-    {#if !!media.Review?.length}
+    {#if media.type === 'movie' && !!media.Review?.length}
       <CarouselSection title="Análises">
         {#each media.Review as review (review.id)}
           <ReviewCard
@@ -64,23 +70,25 @@
       </CarouselSection>
     {/if}
 
-    {#each media?.Related?.Hub || [] as hub (hub.hubKey)}
-      <CarouselSection title={hub.title}>
-        {#each hub.Video || [] as media (media.ratingKey)}
-          <MediaCard
-            title={media.title}
-            subtitle={media.year?.toString() || ''}
-            href={getInternalUrl('media', { key: media.ratingKey })}
-            image={media.thumb
-              ? {
-                  src: media.thumb,
-                  alt: ''
-                }
-              : undefined}
-          />
-        {/each}
-      </CarouselSection>
-    {/each}
+    {#if media.type === 'movie'}
+      {#each media?.Related?.Hub || [] as hub (hub.hubKey)}
+        <CarouselSection title={hub.title}>
+          {#each hub.Video || [] as media (media.ratingKey)}
+            <MediaCard
+              title={media.title}
+              subtitle={media.year?.toString() || ''}
+              href={getInternalUrl('media', { key: media.ratingKey })}
+              image={media.thumb
+                ? {
+                    src: media.thumb,
+                    alt: ''
+                  }
+                : undefined}
+            />
+          {/each}
+        </CarouselSection>
+      {/each}
+    {/if}
   </article>
 {/if}
 
