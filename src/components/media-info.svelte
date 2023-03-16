@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { page } from '$app/stores';
   import Badge from '$components/ui/badge.svelte';
   import Icon from '$components/ui/icon.svelte';
   import { crossfade, truncate } from '$lib/actions';
-  import { getInternalUrl, getRatingIcon } from '$lib/data';
+  import { getRatingIcon } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
   export let media: MediaEntity;
 
-  $: duration = msToHourMinutes(media?.duration || 0);
+  // TODO: refactor the below code
+  $: duration = media.type !== 'season' ? msToHourMinutes(media?.duration || 0) : [];
   $: durationString =
     (duration[0] === 1 && duration[1] >= 30) || duration[0] > 1
       ? `${duration[0]} h ${duration[1]} min`
@@ -17,18 +17,24 @@
 </script>
 
 <main>
-  <img
-    class="poster"
-    src="/empty.gif"
-    alt=""
-    use:crossfade={getInternalUrl('image', { type: 'thumb-lg', key: $page.params.ratingKey })}
-  />
+  {#if media.thumb}
+    <img class="poster" src="/empty.gif" alt="" use:crossfade={media.thumb} />
+  {/if}
 
   <div class="info">
-    <h1>{media.title}</h1>
+    {#if media.type !== 'season'}
+      <h1>{media.title}</h1>
+    {:else}
+      <h1>{media.parentTitle}</h1>
+    {/if}
 
     <div class="subtitle">
-      <span>{media.year}</span>
+      {#if media.type !== 'season'}
+        <span>{media.year}</span>
+      {:else}
+        <span>{media.title}</span>
+      {/if}
+
       {#if media.type === 'movie'}
         <span>{durationString}</span>
       {/if}
@@ -61,19 +67,19 @@
 
     <div class="details">
       <div>
-        {#if media.type === 'movie' && !!media.Director?.length}
+        {#if 'Director' in media && !!media.Director?.length}
           <h4>Realizado por</h4>
           <p>{media.Director.map((director) => director.tag).join(', ')}</p>
         {/if}
-        {#if media.type === 'movie' && !!media.Writer?.length}
+        {#if 'Writer' in media && !!media.Writer?.length}
           <h4>Escrito por</h4>
           <p>{media.Writer.map((writer) => writer.tag).join(', ')}</p>
         {/if}
-        {#if media.studio}
+        {#if 'studio' in media}
           <h4>Estúdio</h4>
           <p>{media.studio}</p>
         {/if}
-        {#if !!media.Genre?.length}
+        {#if 'Genre' in media && !!media.Genre?.length}
           <h4>Género</h4>
           <p>{media.Genre.map((genre) => genre.tag).join(', ')}</p>
         {/if}

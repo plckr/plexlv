@@ -22,24 +22,28 @@ export const MediaArt = z
   .string()
   .transform((thumb) => getInternalUrl('image', { type: 'art', key: thumb.split('/')[3] }));
 
-export const BaseMovieSchema = z.object({
+export const CommonMediaSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
-  type: z.literal('movie'),
   title: z.string(),
   thumb: MediaThumb.optional(),
-  year: z.coerce.number(),
+  year: z.coerce.number().optional(),
   art: MediaArt.optional()
+});
+
+export const BaseMovieSchema = CommonMediaSchema.extend({
+  type: z.literal('movie')
 });
 
 // Video
 export const MovieSchema = BaseMovieSchema.extend({
-  guid: z.string(),
-  studio: z.string().optional(),
-  titleSort: z.string().optional(),
   librarySectionTitle: z.string(),
   librarySectionID: z.coerce.number(),
   librarySectionKey: z.string(),
+
+  guid: z.string(),
+  studio: z.string().optional(),
+  titleSort: z.string().optional(),
   originalTitle: z.string().optional(),
   contentRating: z.string().optional(),
   summary: z.string(),
@@ -67,33 +71,31 @@ export const MovieSchema = BaseMovieSchema.extend({
 export type Movie = z.infer<typeof MovieSchema>;
 
 // Directory
-export const ShowSchema = z.object({
+export const BaseShowSchema = CommonMediaSchema.extend({
+  type: z.literal('show')
+});
+
+export const ShowSchema = BaseShowSchema.extend({
   librarySectionTitle: z.string(),
   librarySectionID: z.coerce.number(),
   librarySectionKey: z.string(),
 
-  ratingKey: z.coerce.number(),
-  key: z.string(),
+  index: z.coerce.number(),
   guid: z.string(),
-  studio: z.string(),
-  type: z.literal('show'),
-  title: z.string(),
+  studio: z.string().optional(),
   titleSort: z.string().optional(),
   originalTitle: z.string().optional(),
+  contentRating: z.string().optional(),
   summary: z.string(),
-  index: z.string(),
-  audienceRating: z.string(),
-  year: z.string().optional(),
-  thumb: MediaThumb.optional(),
-  art: MediaArt.optional(),
-  duration: z.string(),
+  audienceRating: z.coerce.number().optional(),
+  audienceRatingImage: z.string().optional(),
+  duration: z.coerce.number(),
+  leafCount: z.coerce.number(),
+  viewedLeafCount: z.coerce.number(),
+  childCount: z.coerce.number(),
   originallyAvailableAt: z.string(),
-  leafCount: z.string(),
-  viewedLeafCount: z.string(),
-  childCount: z.string(),
   addedAt: z.string(),
   updatedAt: z.string(),
-  audienceRatingImage: z.string(),
 
   Genre: z.array(GenreSchema).optional(),
   Country: z.array(CountrySchema).optional(),
@@ -102,5 +104,38 @@ export const ShowSchema = z.object({
 });
 export type Show = z.infer<typeof ShowSchema>;
 
-export const MediaEntitySchema = z.discriminatedUnion('type', [MovieSchema, ShowSchema]);
+export const BaseSeasonSchema = CommonMediaSchema.extend({
+  type: z.literal('season')
+});
+
+export const SeasonSchema = BaseSeasonSchema.extend({
+  librarySectionTitle: z.string(),
+  librarySectionID: z.coerce.number(),
+  librarySectionKey: z.string(),
+
+  parentRatingKey: z.coerce.number(),
+  parentKey: z.string(),
+  guid: z.string(),
+  parentGuid: z.string(),
+  parentStudio: z.string().optional(),
+  parentTitle: z.string(),
+  titleSort: z.string().optional(),
+  originalTitle: z.string().optional(),
+  summary: z.string(),
+  index: z.coerce.number(),
+  parentIndex: z.coerce.number(),
+  parentThumb: MediaThumb.optional(),
+  parentTheme: z.string().optional(),
+  leafCount: z.coerce.number(),
+  viewedLeafCount: z.coerce.number(),
+  addedAt: z.string(),
+  updatedAt: z.string()
+});
+export type Season = z.infer<typeof SeasonSchema>;
+
+export const MediaEntitySchema = z.discriminatedUnion('type', [
+  MovieSchema,
+  ShowSchema,
+  SeasonSchema
+]);
 export type MediaEntity = z.infer<typeof MediaEntitySchema>;
