@@ -1,4 +1,3 @@
-import { getInternalUrl } from '$lib/data';
 import { transformFirstArray } from '$lib/utils/zod';
 import { z } from 'zod';
 import { ChildrenSchema } from './children';
@@ -14,21 +13,13 @@ import { ReviewSchema } from './review';
 import { RoleSchema } from './role';
 import { WriterSchema } from './writer';
 
-export const MediaThumb = z
-  .string()
-  .transform((thumb) => getInternalUrl('image', { type: 'thumb', key: thumb.split('/')[3] }));
-
-export const MediaArt = z
-  .string()
-  .transform((thumb) => getInternalUrl('image', { type: 'art', key: thumb.split('/')[3] }));
-
 export const CommonMediaSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
   title: z.string(),
-  thumb: MediaThumb.optional(),
+  thumb: z.string().optional(),
   year: z.coerce.number().optional(),
-  art: MediaArt.optional()
+  art: z.string().optional()
 });
 
 export const BaseMovieSchema = CommonMediaSchema.extend({
@@ -124,7 +115,7 @@ export const SeasonSchema = BaseSeasonSchema.extend({
   summary: z.string(),
   index: z.coerce.number(),
   parentIndex: z.coerce.number(),
-  parentThumb: MediaThumb.optional(),
+  parentThumb: z.string().optional(),
   parentTheme: z.string().optional(),
   leafCount: z.coerce.number(),
   viewedLeafCount: z.coerce.number(),

@@ -27,7 +27,7 @@
       href={getInternalUrl('media', { key: media.ratingKey })}
       image={media.thumb
         ? {
-            src: media.thumb,
+            src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
             alt: ''
           }
         : undefined}

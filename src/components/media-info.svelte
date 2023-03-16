@@ -2,7 +2,7 @@
   import Badge from '$components/ui/badge.svelte';
   import Icon from '$components/ui/icon.svelte';
   import { crossfade, truncate } from '$lib/actions';
-  import { getRatingIcon } from '$lib/data';
+  import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
@@ -18,7 +18,15 @@
 
 <main>
   {#if media.thumb}
-    <img class="poster" src="/empty.gif" alt="" use:crossfade={media.thumb} />
+    <img
+      class="poster"
+      src="/empty.gif"
+      alt=""
+      use:crossfade={getInternalUrl('image', {
+        type: 'thumb-lg',
+        thumb: media.thumb
+      })}
+    />
   {/if}
 
   <div class="info">

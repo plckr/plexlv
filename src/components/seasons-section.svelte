@@ -20,7 +20,7 @@
           href={getInternalUrl('media', { key: season.ratingKey })}
           image={season.thumb
             ? {
-                src: season.thumb,
+                src: getInternalUrl('image', { type: 'thumb', thumb: season.thumb }),
                 alt: ''
               }
             : undefined}

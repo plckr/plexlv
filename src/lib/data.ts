@@ -21,8 +21,14 @@ type UrlTypeParams = {
   media: { key: string | number };
   image: {
     type: ImgType;
-    key: string | number;
-  };
+  } & (
+    | {
+        key: string | number;
+      }
+    | {
+        thumb: string;
+      }
+  );
 };
 type UrlType = keyof UrlTypeParams;
 type GetInternalUrl = (...args: { [K in UrlType]: [K, UrlTypeParams[K]] }[UrlType]) => string;
@@ -33,7 +39,12 @@ export const getInternalUrl: GetInternalUrl = (type, params) => {
       return `/library/${params.key}`;
     case 'media':
       return `/media/${params.key}`;
-    case 'image':
+    case 'image': {
+      if ('thumb' in params) {
+        return `/img/${params.type}/${params.thumb.split('/')[3]}.png`;
+      }
+
       return `/img/${params.type}/${params.key}.png`;
+    }
   }
 };
