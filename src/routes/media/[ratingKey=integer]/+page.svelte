@@ -34,11 +34,11 @@
   <article>
     <MediaInfo {media} />
 
-    {#if media.type === 'show' && !!media.Children?.Directory}
+    {#if 'Children' in media && !!media.Children?.Directory}
       <SeasonsSection children={media.Children} />
     {/if}
 
-    {#if !!media.Role?.length}
+    {#if 'Role' in media && !!media.Role?.length}
       <CarouselSection title="Elenco">
         {#each media.Role as role (role.id)}
           <CastCard
@@ -55,7 +55,7 @@
       </CarouselSection>
     {/if}
 
-    {#if media.type === 'movie' && !!media.Review?.length}
+    {#if 'Review' in media && !!media.Review?.length}
       <CarouselSection title="Análises">
         {#each media.Review as review (review.id)}
           <ReviewCard
@@ -69,7 +69,7 @@
       </CarouselSection>
     {/if}
 
-    {#if media.type === 'movie'}
+    {#if 'Related' in media}
       {#each media?.Related?.Hub || [] as hub (hub.hubKey)}
         <CarouselSection title={hub.title}>
           {#each hub.Video || [] as media (media.ratingKey)}
