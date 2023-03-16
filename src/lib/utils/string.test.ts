@@ -18,4 +18,8 @@ describe('truncate', () => {
     expect(truncate(str(len * 2), len)).toMatch(/\.\.\.$/);
     expect(truncate(str(len), len)).toMatch(str(len));
   });
+
+  it('empty', () => {
+    expect(truncate('', len)).toBe('');
+  });
 });
