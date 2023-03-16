@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MovieSchema, ShowSchema } from './media-entity';
+import { MediaArt, MediaThumb, MovieSchema, ShowSchema } from './media-entity';
 
 export const BaseLibrarySchema = z.object({
   key: z.coerce.number(),
@@ -22,14 +22,14 @@ export type BaseLibraries = z.infer<typeof BaseLibrariesSchema>;
 export const LibrarySchema = z.object({
   size: z.coerce.number(),
   allowSync: z.string(),
-  art: z.string(),
+  art: MediaArt,
   identifier: z.string(),
   librarySectionID: z.string(),
   librarySectionTitle: z.string(),
   librarySectionUUID: z.string(),
   mediaTagPrefix: z.string(),
   mediaTagVersion: z.string(),
-  thumb: z.string(),
+  thumb: MediaThumb,
   title1: z.string(),
   title2: z.string(),
   viewGroup: z.union([z.literal('movie'), z.literal('show')]),

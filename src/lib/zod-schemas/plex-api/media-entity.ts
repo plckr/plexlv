@@ -18,14 +18,18 @@ export const MediaThumb = z
   .string()
   .transform((thumb) => getInternalUrl('image', { type: 'thumb', key: thumb.split('/')[3] }));
 
+export const MediaArt = z
+  .string()
+  .transform((thumb) => getInternalUrl('image', { type: 'art', key: thumb.split('/')[3] }));
+
 export const BaseMovieSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
   type: z.literal('movie'),
   title: z.string(),
-  thumb: MediaThumb,
+  thumb: MediaThumb.optional(),
   year: z.coerce.number(),
-  art: z.string().optional()
+  art: MediaArt.optional()
 });
 
 // Video
@@ -81,7 +85,7 @@ export const ShowSchema = z.object({
   audienceRating: z.string(),
   year: z.string().optional(),
   thumb: MediaThumb.optional(),
-  art: z.string().optional(),
+  art: MediaArt.optional(),
   duration: z.string(),
   originallyAvailableAt: z.string(),
   leafCount: z.string(),
