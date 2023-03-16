@@ -2,13 +2,12 @@
   import { page } from '$app/stores';
   import MediaInfo from '$components/media-info.svelte';
   import SeasonsSection from '$components/seasons-section.svelte';
-  import CarouselSection from '$components/ui/carousel-section.svelte';
+  import CarouselSection from '$components/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import MediaCard from '$components/ui/media-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { truncate } from '$lib/utils/string';
-  import { DirectorSchema } from '$lib/zod-schemas/plex-api';
 
   $: media = $page.data.media;
 </script>
