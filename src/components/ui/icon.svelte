@@ -24,6 +24,7 @@
   import settings from './icons/settings.svg?raw';
   import tmdb from './icons/tmdb.svg?raw';
   import tv from './icons/tv.svg?raw';
+  import tvdb from './icons/tvdb.svg?raw';
   import tvshow from './icons/tvshow.svg?raw';
   import verticalDots from './icons/vertical-dots.svg?raw';
 
@@ -53,6 +54,7 @@
     shuffle,
     tmdb,
     tv,
+    tvdb,
     tvshow,
     'vertical-dots': verticalDots
   };

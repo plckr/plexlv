@@ -4,6 +4,7 @@ import type { ImgType } from '$params/imgType';
 export const getRatingIcon = (str: string): IconOptions | undefined => {
   if (str.startsWith('imdb://')) return 'imdb';
   if (str.startsWith('themoviedb://')) return 'tmdb';
+  if (str.startsWith('thetvdb://')) return 'tvdb';
 
   switch (str) {
     case 'rottentomatoes://image.review.fresh':
@@ -25,7 +26,7 @@ export const getAudienceRating = (
   if (!icon) return;
 
   // TODO: maybe could be more polished the number check
-  if (icon === 'tmdb' && !isNaN(+rating)) {
+  if ((icon === 'tmdb' || icon === 'tvdb') && !isNaN(+rating)) {
     return {
       icon,
       rating: `${+rating * 10}%`
