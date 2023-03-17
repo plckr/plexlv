@@ -14,10 +14,10 @@
 
 {#await $page.data.lazy.recentlyAdded}
   Loading...
-{:then recentlyAdded}
-  {#each recentlyAdded as ra}
-    <CarouselSection title={ra.title}>
-      {#each ra.Video as media (media.ratingKey)}
+{:then array}
+  {#each array as recentlyAdded}
+    <CarouselSection title={recentlyAdded.title}>
+      {#each recentlyAdded.Video as media (media.ratingKey)}
         <MediaCard
           title={media.title}
           subtitle={media.year}
