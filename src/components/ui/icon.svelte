@@ -22,6 +22,7 @@
   import search from './icons/search.svg?raw';
   import shuffle from './icons/shuffle.svg?raw';
   import settings from './icons/settings.svg?raw';
+  import tmdb from './icons/tmdb.svg?raw';
   import tv from './icons/tv.svg?raw';
   import tvshow from './icons/tvshow.svg?raw';
   import verticalDots from './icons/vertical-dots.svg?raw';
@@ -50,6 +51,7 @@
     search,
     settings,
     shuffle,
+    tmdb,
     tv,
     tvshow,
     'vertical-dots': verticalDots

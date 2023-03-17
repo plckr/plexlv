@@ -3,6 +3,7 @@ import type { ImgType } from '$params/imgType';
 
 export const getRatingIcon = (str: string): IconOptions | undefined => {
   if (str.startsWith('imdb://')) return 'imdb';
+  if (str.startsWith('themoviedb://')) return 'tmdb';
 
   switch (str) {
     case 'rottentomatoes://image.review.fresh':
