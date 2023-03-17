@@ -1,4 +1,9 @@
-import { BaseLibrariesSchema, LibrarySchema, MediaEntitySchema } from './zod-schemas/plex-api';
+import {
+  BaseLibrariesSchema,
+  LibrarySchema,
+  MediaEntitySchema,
+  RelatedSchema
+} from './zod-schemas/plex-api';
 import { removeTrailingSlash } from './utils/string';
 import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
 import { xmlParse } from './utils/xml';
@@ -87,11 +92,19 @@ class Plex {
   public async getMedia(ratingKey: number) {
     const data = await this.get(`library/metadata/${ratingKey}`, {
       includeReviews: '1',
-      includeRelated: '1',
       includeChildren: '1'
     });
 
     return MediaEntitySchema.parse([...(data?.Video || []), ...(data?.Directory || [])][0]);
+  }
+
+  public async getRelated(ratingKey: number) {
+    const data = await this.get(`library/metadata/${ratingKey}/related`, {
+      'X-Plex-Container-Start': '0',
+      'X-Plex-Container-Size': '24'
+    });
+
+    return RelatedSchema.parse(data);
   }
 }
 

@@ -1,16 +1,25 @@
 import { z } from 'zod';
-import { BaseMovieSchema } from './media-entity';
+import { BaseMovieSchema, BaseShowSchema } from './media-entity';
 
-export const HubSchema = z.object({
+const BaseHubSchema = z.object({
   hubKey: z.string(),
   key: z.string(),
   title: z.string(),
-  type: z.literal('movie'),
   hubIdentifier: z.string(),
   context: z.string(),
   size: z.coerce.number(),
   more: z.coerce.number(),
-  style: z.string().optional(),
+  style: z.string().optional()
+});
 
+const MovieHubSchema = BaseHubSchema.extend({
+  type: z.literal('movie'),
   Video: z.array(BaseMovieSchema).optional()
 });
+
+const ShowHubSchema = BaseHubSchema.extend({
+  type: z.literal('show'),
+  Directory: z.array(BaseShowSchema).optional()
+});
+
+export const HubSchema = z.discriminatedUnion('type', [MovieHubSchema, ShowHubSchema]);

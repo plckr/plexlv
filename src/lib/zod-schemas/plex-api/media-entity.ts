@@ -63,7 +63,9 @@ export type Movie = z.infer<typeof MovieSchema>;
 
 // Directory
 export const BaseShowSchema = CommonMediaSchema.extend({
-  type: z.literal('show')
+  type: z.literal('show'),
+  leafCount: z.coerce.number(),
+  childCount: z.coerce.number()
 });
 
 export const ShowSchema = BaseShowSchema.extend({
@@ -81,9 +83,7 @@ export const ShowSchema = BaseShowSchema.extend({
   audienceRating: z.string().optional(),
   audienceRatingImage: z.string().optional(),
   duration: z.coerce.number(),
-  leafCount: z.coerce.number(),
   viewedLeafCount: z.coerce.number(),
-  childCount: z.coerce.number(),
   originallyAvailableAt: z.string(),
   addedAt: z.string(),
   updatedAt: z.string(),
@@ -96,7 +96,8 @@ export const ShowSchema = BaseShowSchema.extend({
 export type Show = z.infer<typeof ShowSchema>;
 
 export const BaseSeasonSchema = CommonMediaSchema.extend({
-  type: z.literal('season')
+  type: z.literal('season'),
+  leafCount: z.coerce.number()
 });
 
 export const SeasonSchema = BaseSeasonSchema.extend({
@@ -117,7 +118,6 @@ export const SeasonSchema = BaseSeasonSchema.extend({
   parentIndex: z.coerce.number(),
   parentThumb: z.string().optional(),
   parentTheme: z.string().optional(),
-  leafCount: z.coerce.number(),
   viewedLeafCount: z.coerce.number(),
   addedAt: z.string(),
   updatedAt: z.string()

@@ -69,10 +69,10 @@
       </CarouselSection>
     {/if}
 
-    {#if 'Related' in media}
-      {#each media?.Related?.Hub || [] as hub (hub.hubKey)}
+    {#await $page.data.lazy?.related then related}
+      {#each related.Hub as hub (hub.hubKey)}
         <CarouselSection title={hub.title}>
-          {#each hub.Video || [] as media (media.ratingKey)}
+          {#each [...(hub.Video || []), ...(hub.Directory || [])] as media (media.ratingKey)}
             <MediaCard
               title={media.title}
               subtitle={media.year?.toString() || ''}
@@ -87,7 +87,7 @@
           {/each}
         </CarouselSection>
       {/each}
-    {/if}
+    {/await}
   </article>
 {/if}
 
