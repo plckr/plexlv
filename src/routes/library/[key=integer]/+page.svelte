@@ -40,7 +40,6 @@
   main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 8px;
 
     @media --sm {
