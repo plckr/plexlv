@@ -177,9 +177,7 @@
     }
 
     & span {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      @mixin text-nowrap;
     }
   }
 </style>

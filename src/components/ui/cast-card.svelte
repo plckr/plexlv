@@ -119,14 +119,13 @@
     overflow: hidden;
 
     & > * {
+      @mixin text-nowrap;
+
       padding: 0 4px;
       font-size: 13px;
       line-height: 24px;
 
       max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     & .title {
