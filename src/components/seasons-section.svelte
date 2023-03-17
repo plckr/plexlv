@@ -15,7 +15,7 @@
       {#each children?.Directory as season}
         <MediaCard
           title={season.title}
-          badge={season.leafCount - season.viewedLeafCount}
+          badge={season.leafCount}
           subtitle="{season.leafCount} episódios"
           href={getInternalUrl('media', { key: season.ratingKey })}
           image={season.thumb
