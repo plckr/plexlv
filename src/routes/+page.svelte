@@ -12,25 +12,29 @@
   <meta name="og:title" content="Home • Plexlv" />
 </svelte:head>
 
-{#await $page.data.lazy.recentlyAdded}
+{#await $page.data.lazy?.recentlyAdded}
   Loading...
-{:then array}
-  {#each array as recentlyAdded}
-    <CarouselSection title={recentlyAdded.title}>
-      {#each recentlyAdded.Video as media (media.ratingKey)}
-        <MediaCard
-          title={media.title}
-          subtitle={media.year}
-          image={media.thumb
-            ? {
-                src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
-                alt: ''
-              }
-            : undefined}
-          href={getInternalUrl('media', { key: media.ratingKey })}
-        />
-      {/each}
-    </CarouselSection>
+{:then recentlyAdded}
+  <!-- <pre>{JSON.stringify(array, null, 2)}</pre> -->
+  {#each recentlyAdded || [] as hub}
+    {#if 'MediaEntity' in hub && hub.MediaEntity}
+      <CarouselSection title={hub.title}>
+        {#each hub.MediaEntity as media (media.ratingKey)}
+          {@const thumb = media.type === 'episode' ? media.grandparentThumb : media.thumb}
+          <MediaCard
+            title={media.title}
+            subtitle={media.year?.toString() || ''}
+            image={thumb
+              ? {
+                  src: getInternalUrl('image', { type: 'thumb', thumb }),
+                  alt: ''
+                }
+              : undefined}
+            href={getInternalUrl('media', { key: media.ratingKey })}
+          />
+        {/each}
+      </CarouselSection>
+    {/if}
   {/each}
 {/await}
 

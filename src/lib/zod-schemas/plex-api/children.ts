@@ -3,7 +3,7 @@ import { SeasonSchema } from './media-entity';
 
 export const ChildrenSchema = z.object({
   size: z.coerce.number(),
-  Directory: z
+  MediaEntity: z
     .array(
       z.lazy(() =>
         SeasonSchema.pick({

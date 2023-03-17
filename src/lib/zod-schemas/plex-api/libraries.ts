@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MovieSchema, ShowSchema } from './media-entity';
+import { BaseShowSchema, BaseMovieSchema } from './media-entity';
 
 export const BaseLibrarySchema = z.object({
   key: z.coerce.number(),
@@ -34,32 +34,6 @@ export const LibrarySchema = z.object({
   title2: z.string(),
   viewGroup: z.union([z.literal('movie'), z.literal('show')]),
   viewMode: z.string(),
-  Video: z
-    .array(
-      MovieSchema.pick({
-        type: true,
-        ratingKey: true,
-        title: true,
-        titleSort: true,
-        year: true,
-        thumb: true,
-        art: true
-      })
-    )
-    .optional(),
-  Directory: z
-    .array(
-      ShowSchema.pick({
-        type: true,
-        ratingKey: true,
-        title: true,
-        titleSort: true,
-        year: true,
-        thumb: true,
-        art: true,
-        leafCount: true
-      })
-    )
-    .optional()
+  MediaEntity: z.array(z.discriminatedUnion('type', [BaseMovieSchema, BaseShowSchema])).optional()
 });
 export type Library = z.infer<typeof LibrarySchema>;

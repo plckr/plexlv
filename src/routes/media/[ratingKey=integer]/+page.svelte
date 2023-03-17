@@ -34,7 +34,7 @@
   <article>
     <MediaInfo {media} />
 
-    {#if 'Children' in media && !!media.Children?.Directory}
+    {#if 'Children' in media && !!media.Children?.MediaEntity}
       <SeasonsSection children={media.Children} />
     {/if}
 
@@ -70,23 +70,27 @@
     {/if}
 
     {#await $page.data.lazy?.related then related}
-      {#each related.Hub as hub (hub.hubKey)}
-        <CarouselSection title={hub.title}>
-          {#each [...(hub.Video || []), ...(hub.Directory || [])] as media (media.ratingKey)}
-            <MediaCard
-              title={media.title}
-              subtitle={media.year?.toString() || ''}
-              href={getInternalUrl('media', { key: media.ratingKey })}
-              image={media.thumb
-                ? {
-                    src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
-                    alt: ''
-                  }
-                : undefined}
-            />
-          {/each}
-        </CarouselSection>
-      {/each}
+      {#if related && 'Hub' in related && related.Hub}
+        {#each related.Hub as hub (hub.hubKey)}
+          {#if 'MediaEntity' in hub && hub.MediaEntity}
+            <CarouselSection title={hub.title}>
+              {#each hub.MediaEntity as media (media.ratingKey)}
+                <MediaCard
+                  title={media.title}
+                  subtitle={media.year?.toString() || ''}
+                  href={getInternalUrl('media', { key: media.ratingKey })}
+                  image={media.thumb
+                    ? {
+                        src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
+                        alt: ''
+                      }
+                    : undefined}
+                />
+              {/each}
+            </CarouselSection>
+          {/if}
+        {/each}
+      {/if}
     {/await}
   </article>
 {/if}

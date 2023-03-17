@@ -7,12 +7,12 @@
   export let children: Children;
 </script>
 
-{#if !!children?.Directory}
+{#if !!children?.MediaEntity}
   <BaseSection>
     <h2 slot="header">Temporadas</h2>
 
     <div class="inner">
-      {#each children?.Directory as season}
+      {#each children?.MediaEntity as season}
         <MediaCard
           title={season.title}
           badge={season.leafCount}

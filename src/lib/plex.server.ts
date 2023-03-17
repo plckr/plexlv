@@ -82,7 +82,7 @@ class Plex {
 
   public async getLibraries() {
     const data = await this.get('library/sections');
-    return BaseLibrariesSchema.parse(data.Directory);
+    return BaseLibrariesSchema.parse(data.MediaEntity);
   }
 
   public async getLibraryData(libraryKey: number) {
@@ -96,7 +96,7 @@ class Plex {
       includeChildren: '1'
     });
 
-    return MediaEntitySchema.parse([...(data?.Video || []), ...(data?.Directory || [])][0]);
+    return MediaEntitySchema.parse(data.MediaEntity[0]);
   }
 
   public async getRelated(ratingKey: number) {

@@ -5,8 +5,6 @@
   import { libraries } from '$lib/stores';
 
   $: library = $libraries.find((lib) => lib.key === +$page.params.key);
-
-  $: items = [...($page.data.library?.Video || []), ...($page.data.library?.Directory || [])];
 </script>
 
 <svelte:head>
@@ -19,7 +17,7 @@
 </svelte:head>
 
 <main>
-  {#each items as media (media.ratingKey)}
+  {#each $page.data.library?.MediaEntity || [] as media (media.ratingKey)}
     <MediaCard
       title={media.title}
       subtitle={media.year?.toString() || ''}
@@ -31,7 +29,6 @@
             alt: ''
           }
         : undefined}
-      data-title-sort={media.titleSort || media.title}
     />
   {/each}
 </main>

@@ -31,7 +31,16 @@ export const xmlParse = (xml: string) => {
     ignoreDeclaration: true,
     ignoreComment: true,
     compact: true,
-    alwaysArray: true
+    alwaysArray: true,
+
+    // Merge Directory and Video together
+    elementNameFn: (val) => {
+      if (val === 'Directory' || val === 'Video') {
+        return 'MediaEntity';
+      }
+
+      return val;
+    }
   });
 
   return flattenAttributes(parsed);

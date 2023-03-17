@@ -13,6 +13,12 @@ import { ReviewSchema } from './review';
 import { RoleSchema } from './role';
 import { WriterSchema } from './writer';
 
+const CommonLibrarySectionKeys = z.object({
+  librarySectionTitle: z.string(),
+  librarySectionID: z.coerce.number(),
+  librarySectionKey: z.string()
+});
+
 export const CommonMediaSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
@@ -27,11 +33,7 @@ export const BaseMovieSchema = CommonMediaSchema.extend({
 });
 
 // Video
-export const MovieSchema = BaseMovieSchema.extend({
-  librarySectionTitle: z.string(),
-  librarySectionID: z.coerce.number(),
-  librarySectionKey: z.string(),
-
+export const MovieSchema = BaseMovieSchema.merge(CommonLibrarySectionKeys).extend({
   guid: z.string(),
   studio: z.string().optional(),
   titleSort: z.string().optional(),
@@ -61,6 +63,47 @@ export const MovieSchema = BaseMovieSchema.extend({
 });
 export type Movie = z.infer<typeof MovieSchema>;
 
+export const BaseEpisodeSchema = CommonMediaSchema.extend({
+  type: z.literal('episode'),
+
+  parentThumb: z.string().optional(),
+  grandparentThumb: z.string().optional(),
+  grandparentArt: z.string().optional(),
+  grandparentTheme: z.string().optional()
+});
+
+export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).extend({
+  parentKey: z.string(),
+  grandparentKey: z.string(),
+
+  parentRatingKey: z.coerce.number(),
+  grandparentRatingKey: z.coerce.number(),
+
+  guid: z.string(),
+  parentGuid: z.string(),
+  grandparentGuid: z.string(),
+
+  grandparentTitle: z.string(),
+  parentTitle: z.string(),
+  originalTitle: z.string().optional(),
+
+  parentYear: z.coerce.number().optional(),
+  summary: z.string(),
+  contentRating: z.string().optional(),
+  duration: z.coerce.number(),
+
+  // Episode number
+  index: z.coerce.number(),
+  parentIndex: z.coerce.number(),
+
+  audienceRating: z.string().optional(),
+  audienceRatingImage: z.string().optional(),
+
+  originallyAvailableAt: z.string(),
+  addedAt: z.string(),
+  updatedAt: z.string()
+});
+
 // Directory
 export const BaseShowSchema = CommonMediaSchema.extend({
   type: z.literal('show'),
@@ -68,11 +111,7 @@ export const BaseShowSchema = CommonMediaSchema.extend({
   childCount: z.coerce.number()
 });
 
-export const ShowSchema = BaseShowSchema.extend({
-  librarySectionTitle: z.string(),
-  librarySectionID: z.coerce.number(),
-  librarySectionKey: z.string(),
-
+export const ShowSchema = BaseShowSchema.merge(CommonLibrarySectionKeys).extend({
   index: z.coerce.number(),
   guid: z.string(),
   studio: z.string().optional(),
@@ -100,11 +139,7 @@ export const BaseSeasonSchema = CommonMediaSchema.extend({
   leafCount: z.coerce.number()
 });
 
-export const SeasonSchema = BaseSeasonSchema.extend({
-  librarySectionTitle: z.string(),
-  librarySectionID: z.coerce.number(),
-  librarySectionKey: z.string(),
-
+export const SeasonSchema = BaseSeasonSchema.merge(CommonLibrarySectionKeys).extend({
   parentRatingKey: z.coerce.number(),
   parentKey: z.string(),
   guid: z.string(),
@@ -127,6 +162,7 @@ export type Season = z.infer<typeof SeasonSchema>;
 export const MediaEntitySchema = z.discriminatedUnion('type', [
   MovieSchema,
   ShowSchema,
-  SeasonSchema
+  SeasonSchema,
+  EpisodeSchema
 ]);
 export type MediaEntity = z.infer<typeof MediaEntitySchema>;
