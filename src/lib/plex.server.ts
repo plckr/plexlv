@@ -1,5 +1,6 @@
 import {
   BaseLibrariesSchema,
+  HubSchema,
   LibrarySchema,
   MediaEntitySchema,
   RelatedSchema
@@ -105,6 +106,15 @@ class Plex {
     });
 
     return RelatedSchema.parse(data);
+  }
+
+  public async getRecentlyAdded(libraryKey: number) {
+    const data = await this.get('hubs/promoted', {
+      contentDirectoryID: libraryKey.toString(),
+      excludeContinueWatching: '1'
+    });
+
+    return HubSchema.parse(data.Hub[0]);
   }
 }
 

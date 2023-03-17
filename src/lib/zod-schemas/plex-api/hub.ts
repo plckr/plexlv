@@ -22,4 +22,14 @@ const ShowHubSchema = BaseHubSchema.extend({
   Directory: z.array(BaseShowSchema).optional()
 });
 
-export const HubSchema = z.discriminatedUnion('type', [MovieHubSchema, ShowHubSchema]);
+const MixedHubSchema = BaseHubSchema.extend({
+  type: z.literal('mixed'),
+  Video: z.array(BaseMovieSchema).optional(),
+  Directory: z.array(BaseShowSchema).optional()
+});
+
+export const HubSchema = z.discriminatedUnion('type', [
+  MovieHubSchema,
+  ShowHubSchema,
+  MixedHubSchema
+]);

@@ -1,5 +1,8 @@
 <script>
   import { page } from '$app/stores';
+  import CarouselSection from '$components/carousel-section.svelte';
+  import MediaCard from '$components/ui/media-card.svelte';
+  import { getInternalUrl } from '$lib/data';
 </script>
 
 <svelte:head>
@@ -9,7 +12,27 @@
   <meta name="og:title" content="Home • Plexlv" />
 </svelte:head>
 
-<div>Home</div>
+{#await $page.data.lazy.recentlyAdded}
+  Loading...
+{:then recentlyAdded}
+  {#each recentlyAdded as ra}
+    <CarouselSection title={ra.title}>
+      {#each ra.Video as media (media.ratingKey)}
+        <MediaCard
+          title={media.title}
+          subtitle={media.year}
+          image={media.thumb
+            ? {
+                src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
+                alt: ''
+              }
+            : undefined}
+          href={getInternalUrl('media', { key: media.ratingKey })}
+        />
+      {/each}
+    </CarouselSection>
+  {/each}
+{/await}
 
 <style lang="postcss">
   div {
