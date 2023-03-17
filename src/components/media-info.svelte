@@ -55,7 +55,7 @@
         </Badge>
       {/if}
 
-      {#if (media.type === 'movie' || media.type === 'show') && media.audienceRating && media.audienceRatingImage}
+      {#if (media.type === 'movie' || media.type === 'show' || media.type === 'episode') && media.audienceRating && media.audienceRatingImage}
         {@const audienceRating = getAudienceRating(media.audienceRating, media.audienceRatingImage)}
         {#if audienceRating}
           <Badge variant="secondary">
