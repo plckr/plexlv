@@ -17,6 +17,27 @@ export const getRatingIcon = (str: string): IconOptions | undefined => {
   }
 };
 
+export const getAudienceRating = (
+  rating: string,
+  image: string
+): { icon: IconOptions; rating: string } | undefined => {
+  const icon = getRatingIcon(image);
+  if (!icon) return;
+
+  // TODO: maybe could be more polished the number check
+  if (icon === 'tmdb' && !isNaN(+rating)) {
+    return {
+      icon,
+      rating: `${+rating * 10}%`
+    };
+  }
+
+  return {
+    icon,
+    rating: rating.toString()
+  };
+};
+
 type UrlTypeParams = {
   library: { key: string | number };
   media: { key: string | number };
