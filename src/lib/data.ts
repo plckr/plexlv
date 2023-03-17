@@ -38,6 +38,11 @@ export const getAudienceRating = (
   };
 };
 
+export const getContentRating = (rating: string) => {
+  // Tries to remove country before rating
+  return rating.replace(/^[a-z]{2}[/]/, '');
+};
+
 type UrlTypeParams = {
   library: { key: string | number };
   media: { key: string | number };

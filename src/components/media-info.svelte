@@ -2,7 +2,7 @@
   import Badge from '$components/ui/badge.svelte';
   import Icon from '$components/ui/icon.svelte';
   import { crossfade, truncate } from '$lib/actions';
-  import { getAudienceRating, getInternalUrl } from '$lib/data';
+  import { getAudienceRating, getContentRating, getInternalUrl } from '$lib/data';
   import { msToHourMinutes } from '$lib/utils/date';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
@@ -49,6 +49,12 @@
     </div>
 
     <div class="rating">
+      {#if 'contentRating' in media && media.contentRating}
+        <Badge variant="secondary">
+          {getContentRating(media.contentRating)}
+        </Badge>
+      {/if}
+
       {#if (media.type === 'movie' || media.type === 'show') && media.audienceRating && media.audienceRatingImage}
         {@const audienceRating = getAudienceRating(media.audienceRating, media.audienceRatingImage)}
         {#if audienceRating}
@@ -149,6 +155,11 @@
     color: white;
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .rating {
+    display: flex;
+    gap: 0.5rem;
   }
 
   .summary {
