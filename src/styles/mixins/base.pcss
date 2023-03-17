@@ -14,3 +14,16 @@
 @define-mixin scale-multiplier $min, $max, $property: width {
   $(property): calc((($max - $min) * (var(--scale-multiplier, 50) / 100)) + $min);
 }
+
+@define-mixin text-nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@define-mixin text-line-clamp $amount: 3 {
+  display: -webkit-box;
+  -webkit-line-clamp: $amount;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
