@@ -24,6 +24,18 @@ type RootTranslation = {
 	 */
 	home: string
 	/**
+	 * M​a​i​n​ ​m​e​n​u
+	 */
+	mainMenu: string
+	/**
+	 * E​x​p​a​n​d
+	 */
+	expand: string
+	/**
+	 * C​o​l​l​a​p​s​e
+	 */
+	collapse: string
+	/**
 	 * D​i​r​e​c​t​e​d​ ​b​y
 	 */
 	directedBy: string
@@ -70,6 +82,18 @@ export type TranslationFunctions = {
 	 * Home
 	 */
 	home: () => LocalizedString
+	/**
+	 * Main menu
+	 */
+	mainMenu: () => LocalizedString
+	/**
+	 * Expand
+	 */
+	expand: () => LocalizedString
+	/**
+	 * Collapse
+	 */
+	collapse: () => LocalizedString
 	/**
 	 * Directed by
 	 */

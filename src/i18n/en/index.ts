@@ -3,6 +3,9 @@ import type { BaseTranslation } from '../i18n-types';
 const en = {
   language: 'English',
   home: 'Home',
+  mainMenu: 'Main menu',
+  expand: 'Expand',
+  collapse: 'Collapse',
   directedBy: 'Directed by',
   writtenBy: 'Written by',
   studio: 'Studio',

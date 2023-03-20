@@ -1,12 +1,19 @@
 <script lang="ts">
   import LanguageSwitcher from '$components/language-switcher.svelte';
+  import LL from '$i18n/i18n-svelte';
   import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
   import { localState } from '$lib/stores';
   import Icon from './icon.svelte';
 </script>
 
 <aside>
-  <label class="hamburger-menu" role="button" for={SIDEBAR_CHECKBOX_ID} tabindex="0">
+  <label
+    class="hamburger-menu"
+    role="button"
+    aria-label={$LL.mainMenu()}
+    for={SIDEBAR_CHECKBOX_ID}
+    tabindex="0"
+  >
     <Icon icon="hamburger" height="24px" width="24px" />
   </label>
 
@@ -16,7 +23,13 @@
   </div>
 
   <div class="range">
-    <input type="range" min="1" max="100" bind:value={$localState.scaleMultiplier} />
+    <input
+      type="range"
+      min="1"
+      max="100"
+      bind:value={$localState.scaleMultiplier}
+      aria-hidden="true"
+    />
     <Icon icon="grid" />
   </div>
 </aside>

@@ -50,7 +50,7 @@
 </script>
 
 <nav>
-  <input type="checkbox" id={SIDEBAR_CHECKBOX_ID} tabindex="-1" />
+  <input type="checkbox" id={SIDEBAR_CHECKBOX_ID} tabindex="-1" aria-hidden="true" />
 
   <div class="sidebar-wrapper">
     <ul>
