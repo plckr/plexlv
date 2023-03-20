@@ -9,6 +9,7 @@ import { removeTrailingSlash } from './utils/string';
 import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
 import { xmlParse } from './utils/xml';
 import { error } from '@sveltejs/kit';
+import type { Locales } from '$i18n/i18n-types';
 
 class Plex {
   private static _instance: Plex;
@@ -80,38 +81,45 @@ class Plex {
     return container;
   }
 
-  public async getLibraries() {
-    const data = await this.get('library/sections');
+  public async getLibraries(lang: Locales) {
+    const data = await this.get('library/sections', {
+      'X-Plex-Language': lang
+    });
     return BaseLibrariesSchema.parse(data.MediaEntity);
   }
 
-  public async getLibraryData(libraryKey: number) {
-    const data = await this.get(`library/sections/${libraryKey}/all`);
+  public async getLibraryData(libraryKey: number, lang: Locales) {
+    const data = await this.get(`library/sections/${libraryKey}/all`, {
+      'X-Plex-Language': lang
+    });
     return LibrarySchema.parse(data);
   }
 
-  public async getMedia(ratingKey: number) {
+  public async getMedia(ratingKey: number, lang: Locales) {
     const data = await this.get(`library/metadata/${ratingKey}`, {
       includeReviews: '1',
-      includeChildren: '1'
+      includeChildren: '1',
+      'X-Plex-Language': lang
     });
 
     return MediaEntitySchema.parse(data.MediaEntity[0]);
   }
 
-  public async getRelated(ratingKey: number) {
+  public async getRelated(ratingKey: number, lang: Locales) {
     const data = await this.get(`library/metadata/${ratingKey}/related`, {
       'X-Plex-Container-Start': '0',
-      'X-Plex-Container-Size': '24'
+      'X-Plex-Container-Size': '24',
+      'X-Plex-Language': lang
     });
 
     return RelatedSchema.parse(data);
   }
 
-  public async getRecentlyAdded(libraryKey: number) {
+  public async getRecentlyAdded(libraryKey: number, lang: Locales) {
     const data = await this.get('hubs/promoted', {
       contentDirectoryID: libraryKey.toString(),
-      excludeContinueWatching: '1'
+      excludeContinueWatching: '1',
+      'X-Plex-Language': lang
     });
 
     return HubSchema.parse(data.Hub[0]);
