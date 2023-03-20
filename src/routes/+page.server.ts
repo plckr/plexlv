@@ -2,13 +2,15 @@ import { Plex } from '$lib/plex.server';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ parent, url }) => {
+export const load: PageServerLoad = async ({ parent, url, locals }) => {
   const { libraries } = await parent();
 
   try {
     return {
       lazy: {
-        recentlyAdded: Promise.all(libraries.map((lib) => Plex.getRecentlyAdded(lib.key)))
+        recentlyAdded: Promise.all(
+          libraries.map((lib) => Plex.getRecentlyAdded(lib.key, locals.lang))
+        )
       }
     };
   } catch (err) {
