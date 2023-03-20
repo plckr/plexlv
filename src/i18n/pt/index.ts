@@ -14,7 +14,8 @@ const pt = {
   reviews: 'Análises',
   learnMore: 'Sabe mais',
   readLess: 'Ler menos',
-  seasons: 'Temporadas'
+  seasons: 'Temporadas',
+  noOfEpisodes: '{noOfEpisodes} episódio{{s}}'
 } satisfies Translation;
 
 export default pt;

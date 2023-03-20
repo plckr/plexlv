@@ -17,7 +17,9 @@
         <MediaCard
           title={season.title}
           badge={season.leafCount}
-          subtitle="{season.leafCount} episódios"
+          subtitle={$LL.noOfEpisodes({
+            noOfEpisodes: season.leafCount
+          })}
           href={getInternalUrl('media', { key: season.ratingKey })}
           image={season.thumb
             ? {
