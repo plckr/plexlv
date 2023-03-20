@@ -1,5 +1,5 @@
 import acceptLanguage from 'accept-language';
-import { locales } from '$i18n/i18n-util';
+import { baseLocale, locales } from '$i18n/i18n-util';
 import { LANG_COOKIE_KEY, LANG_SEARCH_PARAM_KEY } from '$lib/constants';
 import { getValidLocale, isValidLocale } from '$lib/data';
 import { redirect, type Handle } from '@sveltejs/kit';
@@ -22,7 +22,8 @@ export const lang = (async ({ event, resolve }) => {
     throw redirect(302, url);
   }
 
-  acceptLanguage.languages(locales);
+  // baseLocale at first index serves as fallback language
+  acceptLanguage.languages([baseLocale, ...locales]);
   const lang = getValidLocale([
     event.cookies.get(LANG_COOKIE_KEY),
     acceptLanguage.get(event.request.headers.get('accept-language'))
