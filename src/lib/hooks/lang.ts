@@ -16,7 +16,8 @@ export const lang = (async ({ event, resolve }) => {
 
     event.url.searchParams.delete(LANG_SEARCH_PARAM_KEY);
 
-    const url = `${event.url.pathname}?${event.url.searchParams.toString()}`;
+    const searchParams = event.url.searchParams.toString();
+    const url = `${event.url.pathname}${searchParams ? `?${searchParams}` : ''}`;
 
     throw redirect(302, url);
   }

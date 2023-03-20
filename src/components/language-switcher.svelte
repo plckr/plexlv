@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { locales } from '$i18n/i18n-util';
   import Select from './ui/select.svelte';
@@ -7,9 +6,8 @@
   const onchange = (evt: Event) => {
     if (evt.target instanceof HTMLSelectElement) {
       $page.url.searchParams.set('lang', evt.target.value);
-      goto(`?${$page.url.searchParams.toString()}`, {
-        invalidateAll: true
-      });
+      // Hard reload to apply html lang property
+      window.location.href = `${$page.url.pathname}?${$page.url.searchParams.toString()}`;
     }
   };
 </script>
