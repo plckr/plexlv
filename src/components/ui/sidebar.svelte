@@ -29,12 +29,13 @@
   import { libraries } from '$lib/stores';
   import { page } from '$app/stores';
   import { getInternalUrl } from '$lib/data';
+  import LL from '$i18n/i18n-svelte';
 
   $: currentKey = $page.params.key;
 
   $: items = <SidebarItem[]>[
     {
-      title: 'Início',
+      title: $LL.home(),
       icon: 'home',
       href: '/',
       active: $page.url.pathname === '/'

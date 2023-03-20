@@ -18,7 +18,8 @@ const config = {
       $lib: './src/lib',
       $params: './src/params',
       $types: './src/types',
-      $styles: './src/styles'
+      $styles: './src/styles',
+      $i18n: './src/i18n'
     }
   },
   vitePlugin: {

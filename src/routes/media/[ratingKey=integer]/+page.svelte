@@ -8,6 +8,7 @@
   import ReviewCard from '$components/ui/review-card.svelte';
   import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { truncate } from '$lib/utils/string';
+  import LL from '$i18n/i18n-svelte';
 
   $: media = $page.data.media;
 </script>
@@ -39,7 +40,7 @@
     {/if}
 
     {#if 'Role' in media && !!media.Role?.length}
-      <CarouselSection title="Elenco">
+      <CarouselSection title={$LL.cast()}>
         {#each media.Role as role (role.id)}
           <CastCard
             title={role.tag}
@@ -56,7 +57,7 @@
     {/if}
 
     {#if 'Review' in media && !!media.Review?.length}
-      <CarouselSection title="Análises">
+      <CarouselSection title={$LL.reviews()}>
         {#each media.Review as review (review.id)}
           <ReviewCard
             title={review.source}

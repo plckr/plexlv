@@ -15,7 +15,6 @@
 {#await $page.data.lazy?.recentlyAdded}
   Loading...
 {:then recentlyAdded}
-  <!-- <pre>{JSON.stringify(array, null, 2)}</pre> -->
   {#each recentlyAdded || [] as hub}
     {#if 'MediaEntity' in hub && hub.MediaEntity}
       <CarouselSection title={hub.title}>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import LL from '$i18n/i18n-svelte';
   import { getInternalUrl } from '$lib/data';
   import type { Children } from '$lib/zod-schemas/plex-api/children';
   import BaseSection from './base-section.svelte';
@@ -9,7 +10,7 @@
 
 {#if !!children?.MediaEntity}
   <BaseSection>
-    <h2 slot="header">Temporadas</h2>
+    <h2 slot="header">{$LL.seasons()}</h2>
 
     <div class="inner">
       {#each children?.MediaEntity as season}

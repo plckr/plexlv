@@ -3,6 +3,7 @@
   import Icon from '$components/ui/icon.svelte';
   import { crossfade, truncate } from '$lib/actions';
   import { getAudienceRating, getContentRating, getInternalUrl } from '$lib/data';
+  import LL from '$i18n/i18n-svelte';
   import { msToHourMinutes } from '$lib/utils/date';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
@@ -70,8 +71,8 @@
       <p
         use:truncate={{
           lines: 3,
-          expandTranslation: 'Sabe mais',
-          collapseTranslation: 'Ler menos'
+          expandTranslation: $LL.learnMore(),
+          collapseTranslation: $LL.readLess()
         }}
       >
         {media.summary}
@@ -81,19 +82,19 @@
     <div class="details">
       <div>
         {#if 'Director' in media && !!media.Director?.length}
-          <h4>Realizado por</h4>
+          <h4>{$LL.directedBy()}</h4>
           <p>{media.Director.map((director) => director.tag).join(', ')}</p>
         {/if}
         {#if 'Writer' in media && !!media.Writer?.length}
-          <h4>Escrito por</h4>
+          <h4>{$LL.writtenBy()}</h4>
           <p>{media.Writer.map((writer) => writer.tag).join(', ')}</p>
         {/if}
         {#if 'studio' in media}
-          <h4>Estúdio</h4>
+          <h4>{$LL.studio()}</h4>
           <p>{media.studio}</p>
         {/if}
         {#if 'Genre' in media && !!media.Genre?.length}
-          <h4>Género</h4>
+          <h4>{$LL.genre()}</h4>
           <p>{media.Genre.map((genre) => genre.tag).join(', ')}</p>
         {/if}
       </div>
