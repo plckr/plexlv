@@ -25,7 +25,7 @@
 <script lang="ts">
   import Icon from './icon.svelte';
   import type { IconOptions } from './icon.svelte';
-  import { sidebarCheckboxId } from '$lib/constants';
+  import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
   import { libraries } from '$lib/stores';
   import { page } from '$app/stores';
   import { getInternalUrl } from '$lib/data';
@@ -50,7 +50,7 @@
 </script>
 
 <nav>
-  <input type="checkbox" id={sidebarCheckboxId} tabindex="-1" />
+  <input type="checkbox" id={SIDEBAR_CHECKBOX_ID} tabindex="-1" />
 
   <div class="sidebar-wrapper">
     <ul>

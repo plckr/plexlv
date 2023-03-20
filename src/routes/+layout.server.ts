@@ -3,7 +3,7 @@ import { Plex } from '$lib/plex.server';
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async () => {
+export const load: LayoutServerLoad = async ({ url, locals }) => {
   const libraries = (await Plex.getLibraries())
     // Allow only movies and tvshows
     .filter((lib) => ['movie', 'show'].includes(lib.type))
@@ -18,5 +18,5 @@ export const load: LayoutServerLoad = async () => {
     throw error(404, 'Not found');
   }
 
-  return { libraries };
+  return { lang: locals.lang, libraries };
 };

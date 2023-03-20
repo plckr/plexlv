@@ -1,5 +1,8 @@
 import type { IconOptions } from '$components/ui/icon.svelte';
+import type { Locales } from '$i18n/i18n-types';
+import { baseLocale, locales } from '$i18n/i18n-util';
 import type { ImgType } from '$params/imgType';
+import { isArray } from './utils/array';
 
 export const getRatingIcon = (str: string): IconOptions | undefined => {
   if (str.startsWith('imdb://')) return 'imdb';
@@ -75,4 +78,21 @@ export const getInternalUrl: GetInternalUrl = (type, params) => {
       return `/img/${params.type}/${params.key}.png`;
     }
   }
+};
+
+export const isValidLocale = (lang: unknown): lang is Locales => {
+  return locales.some((loc) => loc === lang);
+};
+
+export const getValidLocale = <L extends string | null | undefined>(
+  lang: L | L[],
+  fallback?: Locales
+): Locales => {
+  if (isArray(lang)) {
+    const language = lang.find((lang) => isValidLocale(lang)) as Locales | undefined;
+
+    return language || fallback || baseLocale;
+  }
+
+  return isValidLocale(lang) ? lang : fallback || baseLocale;
 };

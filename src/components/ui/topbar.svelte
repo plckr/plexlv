@@ -1,15 +1,19 @@
 <script lang="ts">
-  import { sidebarCheckboxId } from '$lib/constants';
+  import LanguageSwitcher from '$components/language-switcher.svelte';
+  import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
   import { localState } from '$lib/stores';
   import Icon from './icon.svelte';
 </script>
 
 <aside>
-  <label class="hamburger-menu" role="button" for={sidebarCheckboxId} tabindex="0">
+  <label class="hamburger-menu" role="button" for={SIDEBAR_CHECKBOX_ID} tabindex="0">
     <Icon icon="hamburger" height="24px" width="24px" />
   </label>
 
-  <Icon icon="plex" height="24px" />
+  <div style="display: flex; gap: 8px;">
+    <LanguageSwitcher />
+    <Icon icon="plex" height="24px" />
+  </div>
 
   <div class="range">
     <input type="range" min="1" max="100" bind:value={$localState.scaleMultiplier} />

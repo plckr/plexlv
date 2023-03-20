@@ -1,3 +1,6 @@
-export const sidebarCheckboxId = 'sidebar-state';
+export const LANG_COOKIE_KEY = 'lang';
+export const LANG_SEARCH_PARAM_KEY = 'lang';
 
-export const localStorageStateKey = 'state';
+export const LOCAL_STORAGE_STATE_KEY = 'state';
+
+export const SIDEBAR_CHECKBOX_ID = 'sidebar-state';
