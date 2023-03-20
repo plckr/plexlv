@@ -1,5 +1,5 @@
 import acceptLanguage from 'accept-language';
-import { baseLocale, detectLocale, locales } from '$i18n/i18n-util';
+import { locales } from '$i18n/i18n-util';
 import { LANG_COOKIE_KEY, LANG_SEARCH_PARAM_KEY } from '$lib/constants';
 import { getValidLocale, isValidLocale } from '$lib/data';
 import { redirect, type Handle } from '@sveltejs/kit';
