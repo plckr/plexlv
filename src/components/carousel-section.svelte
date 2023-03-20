@@ -33,7 +33,7 @@
 
 <BaseSection>
   <svelte:fragment slot="header">
-    <h2 title="Elenco">{title}</h2>
+    <h2 {title}>{title}</h2>
 
     {#if !(scrollPosition <= 0 && scrollAtEnd)}
       <div class="navigate-arrows">
