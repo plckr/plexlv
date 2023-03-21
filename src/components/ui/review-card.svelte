@@ -32,8 +32,12 @@
   article {
     padding: 20px;
 
-    width: 350px;
+    width: 250px;
     height: 220px;
+
+    @media --md {
+      width: 350px;
+    }
 
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell,
       Helvetica Neue, sans-serif;

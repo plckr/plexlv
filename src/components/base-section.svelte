@@ -8,13 +8,13 @@
 
 <style lang="postcss">
   section {
-    --margin: unset;
+    --gap: 20px;
 
-    @media --lg {
-      --margin: 40px;
+    @media --md {
+      --gap: 40px;
     }
 
-    margin-block: var(--margin);
+    margin-block: var(--gap);
   }
 
   .title-row {
@@ -23,8 +23,6 @@
     justify-content: space-between;
     margin-bottom: 20px;
     min-height: 25px;
-
-    padding-inline: var(--margin);
 
     & :global(h2) {
       @mixin text-bold;

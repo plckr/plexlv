@@ -24,7 +24,6 @@
     display: flex;
     flex-wrap: wrap;
 
-    padding-inline: var(--margin);
-    gap: var(--margin);
+    gap: var(--gap);
   }
 </style>

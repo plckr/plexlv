@@ -107,13 +107,5 @@
 
     display: flex;
     gap: 40px;
-
-    & > :global(:first-child) {
-      margin-left: var(--margin);
-    }
-
-    & > :global(:last-child) {
-      margin-right: var(--margin);
-    }
   }
 </style>
