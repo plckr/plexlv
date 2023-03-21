@@ -12,6 +12,7 @@
   import movie from './icons/movie.svg?raw';
   import music from './icons/music.svg?raw';
   import photo from './icons/photo.svg?raw';
+  import picture from './icons/picture.svg?raw';
   import pin from './icons/pin.svg?raw';
   import play from './icons/play.svg?raw';
   import playerCast from './icons/player-cast.svg?raw';
@@ -42,6 +43,7 @@
     movie,
     music,
     photo,
+    picture,
     pin,
     play,
     'player-cast': playerCast,
