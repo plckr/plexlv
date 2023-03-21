@@ -15,7 +15,8 @@ const en = {
   learnMore: 'Learn more',
   readLess: 'Read less',
   seasons: 'Seasons',
-  noOfEpisodes: '{noOfEpisodes:number} episode{{s}}'
+  noOfEpisodes: '{noOfEpisodes:number} episode{{s}}',
+  episodeNo: 'Episode {index:number}'
 } satisfies BaseTranslation;
 
 export default en;

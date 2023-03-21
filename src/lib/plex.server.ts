@@ -1,5 +1,6 @@
 import {
   BaseLibrariesSchema,
+  BaseMediaEntitySchema,
   HubSchema,
   LibrarySchema,
   MediaEntitySchema,
@@ -123,6 +124,14 @@ class Plex {
     });
 
     return HubSchema.parse(data.Hub[0]);
+  }
+
+  public async getChildren(ratingKey: number, lang: Locales) {
+    const data = await this.get(`library/metadata/${ratingKey}/children`, {
+      'X-Plex-Language': lang
+    });
+
+    return BaseMediaEntitySchema.array().parse(data.MediaEntity);
   }
 }
 

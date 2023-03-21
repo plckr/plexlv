@@ -15,7 +15,8 @@ const de = {
   learnMore: 'Weiterlesen',
   readLess: 'Weniger anzeigen',
   seasons: 'Staffeln',
-  noOfEpisodes: '{noOfEpisodes} Folge{{n}}'
+  noOfEpisodes: '{noOfEpisodes} Folge{{n}}',
+  episodeNo: 'Folge {index}'
 } satisfies Translation;
 
 export default de;

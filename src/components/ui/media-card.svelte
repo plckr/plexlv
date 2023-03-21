@@ -10,9 +10,10 @@
   export let description: string | undefined = undefined;
   export let badge: string | number | undefined = undefined;
   export let image: { src: string; alt: string } | undefined = undefined;
+  export let wide = false;
 </script>
 
-<article class="media-card {className}" {...$$restProps}>
+<article class:wide class={className} {...$$restProps}>
   <div class="card">
     <a {href} {title}>
       {#if image}
@@ -46,6 +47,14 @@
     display: block;
 
     @mixin scale-multiplier 130px, 200px, width;
+
+    &.wide {
+      @mixin scale-multiplier 290px, 430px, width;
+
+      & .card {
+        aspect-ratio: 1.8 / 1;
+      }
+    }
   }
 
   .card {

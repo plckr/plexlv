@@ -15,7 +15,8 @@ const pt = {
   learnMore: 'Sabe mais',
   readLess: 'Ler menos',
   seasons: 'Temporadas',
-  noOfEpisodes: '{noOfEpisodes} episódio{{s}}'
+  noOfEpisodes: '{noOfEpisodes} episódio{{s}}',
+  episodeNo: 'Episódio {index}'
 } satisfies Translation;
 
 export default pt;

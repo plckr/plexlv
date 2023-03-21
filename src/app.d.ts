@@ -1,3 +1,4 @@
+import { BaseMediaEntity } from './lib/zod-schemas/plex-api/media-entity';
 // See https://kit.svelte.dev/docs/types#app
 
 import type { Locales } from '$i18n/i18n-types';
@@ -16,6 +17,7 @@ declare global {
       library?: Library;
       media?: MediaEntity;
       lazy?: {
+        children?: BaseMediaEntity[];
         recentlyAdded?: Hub[];
         related?: Related;
       };

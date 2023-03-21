@@ -71,9 +71,13 @@ export const BaseEpisodeSchema = CommonBaseMediaSchema.extend({
   grandparentArt: z.string().optional(),
   grandparentTheme: z.string().optional(),
 
+  // Episode number
+  index: z.coerce.number(),
+
   grandparentTitle: z.string(),
   parentTitle: z.string()
 });
+export type BaseEpisode = z.infer<typeof BaseEpisodeSchema>;
 
 export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).extend({
   parentKey: z.string(),
@@ -93,8 +97,6 @@ export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).e
   contentRating: z.string().optional(),
   duration: z.coerce.number(),
 
-  // Episode number
-  index: z.coerce.number(),
   parentIndex: z.coerce.number(),
 
   audienceRating: z.string().optional(),

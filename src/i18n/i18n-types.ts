@@ -76,6 +76,11 @@ type RootTranslation = {
 	 * @param {number} noOfEpisodes
 	 */
 	noOfEpisodes: RequiredParams<'noOfEpisodes'>
+	/**
+	 * E​p​i​s​o​d​e​ ​{​i​n​d​e​x​}
+	 * @param {number} index
+	 */
+	episodeNo: RequiredParams<'index'>
 }
 
 export type TranslationFunctions = {
@@ -139,6 +144,10 @@ export type TranslationFunctions = {
 	 * {noOfEpisodes} episode{{s}}
 	 */
 	noOfEpisodes: (arg: { noOfEpisodes: number }) => LocalizedString
+	/**
+	 * Episode {index}
+	 */
+	episodeNo: (arg: { index: number }) => LocalizedString
 }
 
 export type Formatters = {}

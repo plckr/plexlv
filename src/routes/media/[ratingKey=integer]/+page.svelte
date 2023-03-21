@@ -9,6 +9,7 @@
   import { truncate } from '$lib/utils/string';
   import LL from '$i18n/i18n-svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
+  import EpisodesSection from '$components/episodes-section.svelte';
 
   $: media = $page.data.media;
 </script>
@@ -34,6 +35,16 @@
 
   <article>
     <MediaInfo {media} />
+
+    {#if media.type === 'season'}
+      {#await $page.data.lazy?.children}
+        Loading...
+      {:then episodes}
+        {#if episodes}
+          <EpisodesSection media={episodes} />
+        {/if}
+      {/await}
+    {/if}
 
     {#if 'Children' in media && !!media.Children?.MediaEntity}
       <SeasonsSection children={media.Children} />

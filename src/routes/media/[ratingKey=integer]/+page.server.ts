@@ -14,6 +14,7 @@ export const load: PageServerLoad = async ({ params, url, locals }) => {
       media,
       art,
       lazy: {
+        children: media.type === 'season' ? Plex.getChildren(+ratingKey, locals.lang) : undefined,
         related: Plex.getRelated(+ratingKey, locals.lang)
       }
     };
