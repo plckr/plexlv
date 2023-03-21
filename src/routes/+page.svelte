@@ -2,13 +2,14 @@
   import { page } from '$app/stores';
   import CarouselSection from '$components/carousel-section.svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
+  import LL from '$i18n/i18n-svelte';
 </script>
 
 <svelte:head>
-  <title>Home • Plexlv</title>
+  <title>{$LL.home()} • Plexlv</title>
 
   <meta name="og:url" content={$page.url.toString()} />
-  <meta name="og:title" content="Home • Plexlv" />
+  <meta name="og:title" content="{$LL.home()} • Plexlv" />
 </svelte:head>
 
 {#await $page.data.lazy?.recentlyAdded}
