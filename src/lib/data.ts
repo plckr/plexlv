@@ -3,6 +3,7 @@ import type { Locales } from '$i18n/i18n-types';
 import { baseLocale, locales } from '$i18n/i18n-util';
 import type { ImgType } from '$params/imgType';
 import { isArray } from './utils/array';
+import { msToHourMinutes } from './utils/date';
 
 export const getRatingIcon = (str: string): IconOptions | undefined => {
   if (str.startsWith('imdb://')) return 'imdb';
@@ -95,4 +96,12 @@ export const getValidLocale = <L extends string | null | undefined>(
   }
 
   return isValidLocale(lang) ? lang : fallback || baseLocale;
+};
+
+export const getFormattedDuration = (duration: number) => {
+  const durationArray = msToHourMinutes(duration);
+
+  return (durationArray[0] === 1 && durationArray[1] >= 30) || durationArray[0] > 1
+    ? `${durationArray[0]} h ${durationArray[1]} min`
+    : `${durationArray[2]} min`;
 };

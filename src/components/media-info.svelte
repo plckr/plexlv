@@ -2,19 +2,16 @@
   import Badge from '$components/ui/badge.svelte';
   import Icon from '$components/ui/icon.svelte';
   import { crossfade, truncate } from '$lib/actions';
-  import { getAudienceRating, getContentRating, getInternalUrl } from '$lib/data';
+  import {
+    getAudienceRating,
+    getContentRating,
+    getFormattedDuration,
+    getInternalUrl
+  } from '$lib/data';
   import LL from '$i18n/i18n-svelte';
-  import { msToHourMinutes } from '$lib/utils/date';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
   export let media: MediaEntity;
-
-  // TODO: refactor the below code
-  $: duration = media.type !== 'season' ? msToHourMinutes(media?.duration || 0) : [];
-  $: durationString =
-    (duration[0] === 1 && duration[1] >= 30) || duration[0] > 1
-      ? `${duration[0]} h ${duration[1]} min`
-      : `${duration[2]} min`;
 </script>
 
 <main>
@@ -45,7 +42,7 @@
       {/if}
 
       {#if media.type === 'movie'}
-        <span>{durationString}</span>
+        <span>{getFormattedDuration(media.duration)}</span>
       {/if}
     </div>
 
