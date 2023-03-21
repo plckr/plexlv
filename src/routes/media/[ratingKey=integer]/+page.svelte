@@ -5,22 +5,23 @@
   import CarouselSection from '$components/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
-  import { getInternalUrl, getRatingIcon } from '$lib/data';
+  import { getInternalUrl, getRatingIcon, getSeoTitle } from '$lib/data';
   import { truncate } from '$lib/utils/string';
   import LL from '$i18n/i18n-svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
   import EpisodesSection from '$components/episodes-section.svelte';
 
   $: media = $page.data.media;
+  $: seoTitle = media ? getSeoTitle(media) : undefined;
 </script>
 
 <svelte:head>
   {#if media}
-    <title>{media.title} • Plexlv</title>
+    <title>{seoTitle}</title>
     <meta name="description" content={truncate(media.summary, 170)} />
 
+    <meta name="og:title" content={seoTitle} />
     <meta name="og:url" content={$page.url.toString()} />
-    <meta name="og:title" content={media.title} />
     <meta name="og:description" content={media.summary} />
     <meta name="og:image" content={$page.data.art} />
   {/if}

@@ -2,9 +2,10 @@ import type { IconOptions } from '$components/ui/icon.svelte';
 import type { Locales } from '$i18n/i18n-types';
 import { baseLocale, locales } from '$i18n/i18n-util';
 import type { ImgType } from '$params/imgType';
+import { SEO_TITLE_SEPARATOR, SEO_TITLE_SUFFIX } from './constants';
 import { isArray } from './utils/array';
 import { msToHourMinutes } from './utils/date';
-import type { MediaEntity, Stream } from './zod-schemas/plex-api';
+import type { BaseLibrary, MediaEntity, Stream } from './zod-schemas/plex-api';
 
 export const getRatingIcon = (str: string): IconOptions | undefined => {
   if (str.startsWith('imdb://')) return 'imdb';
@@ -121,4 +122,24 @@ export const getStreamTitles = (
   }
 
   return undefined;
+};
+
+export const getSeoTitle = (input: MediaEntity | BaseLibrary | string) => {
+  const suffix = `${SEO_TITLE_SEPARATOR} ${SEO_TITLE_SUFFIX}`;
+  if (typeof input === 'string') {
+    return `${input} ${suffix}`;
+  }
+
+  // is media-entity
+  if ('ratingKey' in input) {
+    if (input.type === 'season') {
+      return `${input.title} - ${input.parentTitle} ${suffix}`;
+    } else if (input.type === 'episode') {
+      return `${input.title} - ${input.grandparentTitle} ${suffix}`;
+    } else if (input.type === 'movie' || input.type === 'show') {
+      return `${input.title} ${suffix}`;
+    }
+  }
+
+  return `${input.title} ${suffix}`;
 };

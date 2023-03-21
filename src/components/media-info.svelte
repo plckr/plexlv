@@ -37,13 +37,16 @@
       <h1>{media.title}</h1>
     {:else if media.type === 'season'}
       <h1>
-        <a href={getInternalUrl('media', { key: media.parentRatingKey })}>
+        <a href={getInternalUrl('media', { key: media.parentRatingKey })} title={media.parentTitle}>
           {media.parentTitle}
         </a>
       </h1>
     {:else if media.type === 'episode'}
       <h1>
-        <a href={getInternalUrl('media', { key: media.grandparentRatingKey })}>
+        <a
+          href={getInternalUrl('media', { key: media.grandparentRatingKey })}
+          title={media.grandparentTitle}
+        >
           {media.grandparentTitle}
         </a>
       </h1>
@@ -55,9 +58,10 @@
       {:else if media.type === 'season'}
         <h2>{media.title}</h2>
       {:else if media.type === 'episode'}
+        {@const title = $LL.seasonNo({ index: media.parentIndex })}
         <h2>
-          <a href={getInternalUrl('media', { key: media.parentRatingKey })}>
-            {$LL.seasonNo({ index: media.parentIndex })}
+          <a href={getInternalUrl('media', { key: media.parentRatingKey })} {title}>
+            {title}
           </a>
         </h2>
       {/if}

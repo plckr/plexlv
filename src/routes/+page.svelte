@@ -3,13 +3,16 @@
   import CarouselSection from '$components/carousel-section.svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
   import LL from '$i18n/i18n-svelte';
+  import { getSeoTitle } from '$lib/data';
+
+  $: seoTitle = getSeoTitle($LL.home());
 </script>
 
 <svelte:head>
-  <title>{$LL.home()} • Plexlv</title>
+  <title>{seoTitle}</title>
 
   <meta name="og:url" content={$page.url.toString()} />
-  <meta name="og:title" content="{$LL.home()} • Plexlv" />
+  <meta name="og:title" content={seoTitle} />
 </svelte:head>
 
 {#await $page.data.lazy?.recentlyAdded}

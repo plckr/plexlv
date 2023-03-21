@@ -3,7 +3,7 @@ import { BaseShowSchema, BaseMovieSchema } from './media-entity';
 
 export const BaseLibrarySchema = z.object({
   key: z.coerce.number(),
-  type: z.string(),
+  type: z.union([z.literal('movie'), z.literal('show'), z.literal('photo'), z.literal('artist')]),
   title: z.string(),
   language: z.string(),
   agent: z.string(),
