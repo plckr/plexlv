@@ -32,7 +32,20 @@ const ArtParams = z.object({
   background: z.string().default('343a3f')
 });
 
-const ParamsSchema = z.discriminatedUnion('type', [ThumbParams, ThumbLargeParams, ArtParams]);
+// Open graph
+const OgParams = z.object({
+  type: z.literal('og').transform(() => 'art' as const),
+  ratingKey: z.coerce.number(),
+  width: z.coerce.number().lte(1200).default(1200).transform(String),
+  height: z.coerce.number().lte(680).default(680).transform(String)
+});
+
+const ParamsSchema = z.discriminatedUnion('type', [
+  ThumbParams,
+  ThumbLargeParams,
+  ArtParams,
+  OgParams
+]);
 
 export const GET: RequestHandler = async ({ params, request, url }) => {
   const supportsWebp = request.headers.get('Accept')?.includes('image/webp');

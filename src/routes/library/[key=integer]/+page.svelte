@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import MediaEntityCard from '$components/media-entity-card.svelte';
-  import { getSeoTitle } from '$lib/data';
+  import { getOgUrl, getSeoTitle } from '$lib/data';
   import { libraries } from '$lib/stores';
 
   $: library = $libraries.find((lib) => lib.key === +$page.params.key);
@@ -14,6 +14,7 @@
 
     <meta name="og:title" content={seoTitle} />
     <meta name="og:url" content={$page.url.toString()} />
+    <meta name="og:image" content={getOgUrl()} />
   {/if}
 </svelte:head>
 

@@ -1,6 +1,6 @@
 import type { ParamMatcher } from '@sveltejs/kit';
 
-const types = ['thumb', 'thumb-lg', 'art'] as const;
+const types = ['thumb', 'thumb-lg', 'art', 'og'] as const;
 export type ImgType = (typeof types)[number];
 
 export const isImgType = (param: string): param is ImgType => {

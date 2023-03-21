@@ -83,6 +83,18 @@ export const getInternalUrl: GetInternalUrl = (type, params) => {
   }
 };
 
+export const getOgUrl = (art?: string) => {
+  if (art) {
+    return getInternalUrl('image', {
+      type: 'og',
+      thumb: art
+    });
+  }
+
+  // default
+  return '/og.png';
+};
+
 export const isValidLocale = (lang: unknown): lang is Locales => {
   return locales.some((loc) => loc === lang);
 };

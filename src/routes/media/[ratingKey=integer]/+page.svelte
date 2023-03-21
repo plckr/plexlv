@@ -5,7 +5,7 @@
   import CarouselSection from '$components/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
-  import { getInternalUrl, getRatingIcon, getSeoTitle } from '$lib/data';
+  import { getInternalUrl, getOgUrl, getRatingIcon, getSeoTitle } from '$lib/data';
   import { truncate } from '$lib/utils/string';
   import LL from '$i18n/i18n-svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
@@ -23,7 +23,7 @@
     <meta name="og:title" content={seoTitle} />
     <meta name="og:url" content={$page.url.toString()} />
     <meta name="og:description" content={media.summary} />
-    <meta name="og:image" content={$page.data.art} />
+    <meta name="og:image" content={getOgUrl(media.art)} />
   {/if}
 </svelte:head>
 
