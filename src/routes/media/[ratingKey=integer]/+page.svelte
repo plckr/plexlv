@@ -4,11 +4,11 @@
   import SeasonsSection from '$components/seasons-section.svelte';
   import CarouselSection from '$components/carousel-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
-  import MediaCard from '$components/ui/media-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import { getInternalUrl, getRatingIcon } from '$lib/data';
   import { truncate } from '$lib/utils/string';
   import LL from '$i18n/i18n-svelte';
+  import MediaEntityCard from '$components/media-entity-card.svelte';
 
   $: media = $page.data.media;
 </script>
@@ -76,17 +76,7 @@
           {#if 'MediaEntity' in hub && hub.MediaEntity}
             <CarouselSection title={hub.title}>
               {#each hub.MediaEntity as media (media.ratingKey)}
-                <MediaCard
-                  title={media.title}
-                  subtitle={media.year?.toString() || ''}
-                  href={getInternalUrl('media', { key: media.ratingKey })}
-                  image={media.thumb
-                    ? {
-                        src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
-                        alt: ''
-                      }
-                    : undefined}
-                />
+                <MediaEntityCard {media} />
               {/each}
             </CarouselSection>
           {/if}

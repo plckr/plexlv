@@ -1,8 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import CarouselSection from '$components/carousel-section.svelte';
-  import MediaCard from '$components/ui/media-card.svelte';
-  import { getInternalUrl } from '$lib/data';
+  import MediaEntityCard from '$components/media-entity-card.svelte';
 </script>
 
 <svelte:head>
@@ -19,18 +18,7 @@
     {#if 'MediaEntity' in hub && hub.MediaEntity}
       <CarouselSection title={hub.title}>
         {#each hub.MediaEntity as media (media.ratingKey)}
-          {@const thumb = media.type === 'episode' ? media.grandparentThumb : media.thumb}
-          <MediaCard
-            title={media.title}
-            subtitle={media.year?.toString() || ''}
-            image={thumb
-              ? {
-                  src: getInternalUrl('image', { type: 'thumb', thumb }),
-                  alt: ''
-                }
-              : undefined}
-            href={getInternalUrl('media', { key: media.ratingKey })}
-          />
+          <MediaEntityCard {media} />
         {/each}
       </CarouselSection>
     {/if}

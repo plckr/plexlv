@@ -1,20 +1,8 @@
 import { z } from 'zod';
-import { SeasonSchema } from './media-entity';
+import { BaseSeasonSchema } from './media-entity';
 
 export const ChildrenSchema = z.object({
   size: z.coerce.number(),
-  MediaEntity: z
-    .array(
-      z.lazy(() =>
-        SeasonSchema.pick({
-          ratingKey: true,
-          title: true,
-          leafCount: true,
-          viewedLeafCount: true,
-          thumb: true
-        })
-      )
-    )
-    .optional()
+  MediaEntity: z.array(z.lazy(() => BaseSeasonSchema)).optional()
 });
 export type Children = z.infer<typeof ChildrenSchema>;

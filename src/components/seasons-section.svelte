@@ -1,9 +1,8 @@
 <script lang="ts">
   import LL from '$i18n/i18n-svelte';
-  import { getInternalUrl } from '$lib/data';
   import type { Children } from '$lib/zod-schemas/plex-api/children';
   import BaseSection from './base-section.svelte';
-  import MediaCard from './ui/media-card.svelte';
+  import MediaEntityCard from './media-entity-card.svelte';
 
   export let children: Children;
 </script>
@@ -14,20 +13,7 @@
 
     <div class="inner">
       {#each children?.MediaEntity as season}
-        <MediaCard
-          title={season.title}
-          badge={season.leafCount}
-          subtitle={$LL.noOfEpisodes({
-            noOfEpisodes: season.leafCount
-          })}
-          href={getInternalUrl('media', { key: season.ratingKey })}
-          image={season.thumb
-            ? {
-                src: getInternalUrl('image', { type: 'thumb', thumb: season.thumb }),
-                alt: ''
-              }
-            : undefined}
-        />
+        <MediaEntityCard media={season} />
       {/each}
     </div>
   </BaseSection>

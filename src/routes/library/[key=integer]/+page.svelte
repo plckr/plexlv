@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import MediaCard from '$components/ui/media-card.svelte';
-  import { getInternalUrl } from '$lib/data';
+  import MediaEntityCard from '$components/media-entity-card.svelte';
   import { libraries } from '$lib/stores';
 
   $: library = $libraries.find((lib) => lib.key === +$page.params.key);
@@ -18,18 +17,7 @@
 
 <main>
   {#each $page.data.library?.MediaEntity || [] as media (media.ratingKey)}
-    <MediaCard
-      title={media.title}
-      subtitle={media.year?.toString() || ''}
-      badge={media.type === 'show' ? media.leafCount : undefined}
-      href={getInternalUrl('media', { key: media.ratingKey })}
-      image={media.thumb
-        ? {
-            src: getInternalUrl('image', { type: 'thumb', thumb: media.thumb }),
-            alt: ''
-          }
-        : undefined}
-    />
+    <MediaEntityCard {media} />
   {/each}
 </main>
 

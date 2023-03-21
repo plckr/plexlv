@@ -14,12 +14,12 @@ import { RoleSchema } from './role';
 import { WriterSchema } from './writer';
 
 const CommonLibrarySectionKeys = z.object({
-  librarySectionTitle: z.string(),
   librarySectionID: z.coerce.number(),
-  librarySectionKey: z.string()
+  librarySectionKey: z.string(),
+  librarySectionTitle: z.string()
 });
 
-export const CommonMediaSchema = z.object({
+const CommonBaseMediaSchema = z.object({
   ratingKey: z.coerce.number(),
   key: z.string(),
   title: z.string(),
@@ -28,7 +28,7 @@ export const CommonMediaSchema = z.object({
   art: z.string().optional()
 });
 
-export const BaseMovieSchema = CommonMediaSchema.extend({
+export const BaseMovieSchema = CommonBaseMediaSchema.extend({
   type: z.literal('movie')
 });
 
@@ -63,13 +63,16 @@ export const MovieSchema = BaseMovieSchema.merge(CommonLibrarySectionKeys).exten
 });
 export type Movie = z.infer<typeof MovieSchema>;
 
-export const BaseEpisodeSchema = CommonMediaSchema.extend({
+export const BaseEpisodeSchema = CommonBaseMediaSchema.extend({
   type: z.literal('episode'),
 
   parentThumb: z.string().optional(),
   grandparentThumb: z.string().optional(),
   grandparentArt: z.string().optional(),
-  grandparentTheme: z.string().optional()
+  grandparentTheme: z.string().optional(),
+
+  grandparentTitle: z.string(),
+  parentTitle: z.string()
 });
 
 export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).extend({
@@ -83,8 +86,6 @@ export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).e
   parentGuid: z.string(),
   grandparentGuid: z.string(),
 
-  grandparentTitle: z.string(),
-  parentTitle: z.string(),
   originalTitle: z.string().optional(),
 
   parentYear: z.coerce.number().optional(),
@@ -105,7 +106,7 @@ export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).e
 });
 
 // Directory
-export const BaseShowSchema = CommonMediaSchema.extend({
+export const BaseShowSchema = CommonBaseMediaSchema.extend({
   type: z.literal('show'),
   leafCount: z.coerce.number(),
   childCount: z.coerce.number()
@@ -134,7 +135,7 @@ export const ShowSchema = BaseShowSchema.merge(CommonLibrarySectionKeys).extend(
 });
 export type Show = z.infer<typeof ShowSchema>;
 
-export const BaseSeasonSchema = CommonMediaSchema.extend({
+export const BaseSeasonSchema = CommonBaseMediaSchema.extend({
   type: z.literal('season'),
   leafCount: z.coerce.number()
 });
@@ -166,3 +167,11 @@ export const MediaEntitySchema = z.discriminatedUnion('type', [
   EpisodeSchema
 ]);
 export type MediaEntity = z.infer<typeof MediaEntitySchema>;
+
+export const BaseMediaEntitySchema = z.discriminatedUnion('type', [
+  BaseMovieSchema,
+  BaseShowSchema,
+  BaseSeasonSchema,
+  BaseEpisodeSchema
+]);
+export type BaseMediaEntity = z.infer<typeof BaseMediaEntitySchema>;
