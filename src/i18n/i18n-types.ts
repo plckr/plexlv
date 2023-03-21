@@ -95,6 +95,18 @@ type RootTranslation = {
 	 * R​e​l​e​a​s​e​d
 	 */
 	released: string
+	/**
+	 * V​i​d​e​o
+	 */
+	video: string
+	/**
+	 * A​u​d​i​o
+	 */
+	audio: string
+	/**
+	 * S​u​b​t​i​t​l​e​s
+	 */
+	subtitles: string
 }
 
 export type TranslationFunctions = {
@@ -174,6 +186,18 @@ export type TranslationFunctions = {
 	 * Released
 	 */
 	released: () => LocalizedString
+	/**
+	 * Video
+	 */
+	video: () => LocalizedString
+	/**
+	 * Audio
+	 */
+	audio: () => LocalizedString
+	/**
+	 * Subtitles
+	 */
+	subtitles: () => LocalizedString
 }
 
 export type Formatters = {}

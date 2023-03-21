@@ -20,7 +20,7 @@ const StreamCommonSchema = z.object({
 
 // Video
 export const StreamType1Schema = StreamCommonSchema.extend({
-  streamType: z.literal('1'),
+  streamType: z.literal('1').transform(() => 'video' as const),
 
   bitDepth: z.coerce.number(),
   chromaLocation: z.string().optional(),
@@ -39,7 +39,7 @@ export const StreamType1Schema = StreamCommonSchema.extend({
 
 // Audio
 export const StreamType2Schema = StreamCommonSchema.extend({
-  streamType: z.literal('2'),
+  streamType: z.literal('2').transform(() => 'audio' as const),
 
   channels: z.coerce.number(),
   audioChannelLayout: z.string().optional(),
@@ -48,7 +48,7 @@ export const StreamType2Schema = StreamCommonSchema.extend({
 
 // Subtitle
 export const StreamType3Schema = StreamCommonSchema.extend({
-  streamType: z.literal('3')
+  streamType: z.literal('3').transform(() => 'subtitle' as const)
 });
 
 export const StreamSchema = z.discriminatedUnion('streamType', [

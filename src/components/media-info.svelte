@@ -6,13 +6,16 @@
     getAudienceRating,
     getContentRating,
     getFormattedDuration,
-    getInternalUrl
+    getInternalUrl,
+    getStreamTitles
   } from '$lib/data';
   import LL from '$i18n/i18n-svelte';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
   import { formatDate } from '$lib/utils/date';
 
   export let media: MediaEntity;
+
+  $: streams = getStreamTitles(media);
 </script>
 
 <main>
@@ -127,6 +130,25 @@
           <p>{formatDate(new Date(media.originallyAvailableAt))}</p>
         {/if}
       </div>
+
+      {#if streams}
+        <div>
+          {#if streams.video}
+            <h4>{$LL.video()}</h4>
+            <p>{streams.video}</p>
+          {/if}
+
+          {#if streams.audio}
+            <h4>{$LL.audio()}</h4>
+            <p>{streams.audio}</p>
+          {/if}
+
+          {#if streams.subtitle}
+            <h4>{$LL.subtitles()}</h4>
+            <p>{streams.subtitle}</p>
+          {/if}
+        </div>
+      {/if}
     </section>
   </div>
 </main>

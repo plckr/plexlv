@@ -46,7 +46,7 @@ export const MovieSchema = BaseMovieSchema.merge(CommonLibrarySectionKeys).exten
   duration: z.coerce.number(),
   originallyAvailableAt: z.string().optional(),
   addedAt: z.string(),
-  updatedAt: z.string(),
+  updatedAt: z.string().optional(),
   chapterSource: z.string().optional(),
 
   Media: z.array(MediaSchema),
@@ -104,7 +104,7 @@ export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).e
 
   originallyAvailableAt: z.string(),
   addedAt: z.string(),
-  updatedAt: z.string(),
+  updatedAt: z.string().optional(),
 
   Media: z.array(MediaSchema),
   Director: z.array(DirectorSchema).optional(),
@@ -133,7 +133,7 @@ export const ShowSchema = BaseShowSchema.merge(CommonLibrarySectionKeys).extend(
   viewedLeafCount: z.coerce.number(),
   originallyAvailableAt: z.string(),
   addedAt: z.string(),
-  updatedAt: z.string(),
+  updatedAt: z.string().optional(),
 
   Genre: z.array(GenreSchema).optional(),
   Country: z.array(CountrySchema).optional(),
@@ -163,7 +163,7 @@ export const SeasonSchema = BaseSeasonSchema.merge(CommonLibrarySectionKeys).ext
   parentTheme: z.string().optional(),
   viewedLeafCount: z.coerce.number(),
   addedAt: z.string(),
-  updatedAt: z.string()
+  updatedAt: z.string().optional()
 });
 export type Season = z.infer<typeof SeasonSchema>;
 

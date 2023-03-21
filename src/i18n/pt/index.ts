@@ -19,7 +19,10 @@ const pt = {
   seasonNo: 'Temporada {index}',
   noOfEpisodes: '{noOfEpisodes} episódio{{s}}',
   episodeNo: 'Episódio {index}',
-  released: 'Lançado'
+  released: 'Lançado',
+  video: 'Video',
+  audio: 'Áudio',
+  subtitles: 'Legendas'
 } satisfies Translation;
 
 export default pt;

@@ -4,6 +4,7 @@ import { baseLocale, locales } from '$i18n/i18n-util';
 import type { ImgType } from '$params/imgType';
 import { isArray } from './utils/array';
 import { msToHourMinutes } from './utils/date';
+import type { MediaEntity, Stream } from './zod-schemas/plex-api';
 
 export const getRatingIcon = (str: string): IconOptions | undefined => {
   if (str.startsWith('imdb://')) return 'imdb';
@@ -104,4 +105,20 @@ export const getFormattedDuration = (duration: number) => {
   return (durationArray[0] === 1 && durationArray[1] >= 30) || durationArray[0] > 1
     ? `${durationArray[0]} h ${durationArray[1]} min`
     : `${durationArray[2]} min`;
+};
+
+export const getStreamTitles = (
+  media: MediaEntity
+): Record<Stream['streamType'], string | undefined> | undefined => {
+  if ('Media' in media && !!media.Media?.length) {
+    const streams = media.Media[0].Part[0].Stream;
+
+    return {
+      video: streams.find((stream) => stream.streamType === 'video')?.displayTitle,
+      audio: streams.find((stream) => stream.streamType === 'audio')?.displayTitle,
+      subtitle: streams.find((stream) => stream.streamType === 'subtitle')?.displayTitle
+    };
+  }
+
+  return undefined;
 };

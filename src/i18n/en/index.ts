@@ -19,7 +19,10 @@ const en = {
   seasonNo: 'Season {index:number}',
   noOfEpisodes: '{noOfEpisodes:number} episode{{s}}',
   episodeNo: 'Episode {index:number}',
-  released: 'Released'
+  released: 'Released',
+  video: 'Video',
+  audio: 'Audio',
+  subtitles: 'Subtitles'
 } satisfies BaseTranslation;
 
 export default en;

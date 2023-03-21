@@ -19,7 +19,10 @@ const de = {
   seasonNo: 'Staffel {index}',
   noOfEpisodes: '{noOfEpisodes} Folge{{n}}',
   episodeNo: 'Folge {index}',
-  released: 'Veröffentlicht'
+  released: 'Veröffentlicht',
+  video: 'Video',
+  audio: 'Ton',
+  subtitles: 'Untertitel'
 } satisfies Translation;
 
 export default de;
