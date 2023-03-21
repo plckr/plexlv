@@ -27,3 +27,45 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+@define-mixin expand-chevron {
+  position: relative;
+  padding-right: 13px;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    right: 0;
+
+    transition: border 0.2s, transform 0.4s;
+    transform: translateY(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    border-color: currentColor;
+    border-top-width: 5px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom-width: 0;
+  }
+
+  &[aria-expanded='true']::after {
+    transform: translateY(-50%) rotateX(180deg);
+  }
+}
+
+/** In cases where it's not possible to target
+/*  the aria-expanded automatically due to :global()
+/*  you can apply it manually with the collapse-chevron
+/*  mixin
+**/
+@define-mixin collapse-chevron {
+  &::after {
+    transform: translateY(-50%) rotateX(180deg);
+  }
+}

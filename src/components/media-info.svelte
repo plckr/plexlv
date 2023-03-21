@@ -249,6 +249,7 @@
 
     & :global(button) {
       @mixin text-bold;
+      @mixin expand-chevron;
 
       color: hsla(0, 0%, 100%, 0.45);
       font-size: 13px;
@@ -260,6 +261,10 @@
           color: white;
         }
       }
+    }
+
+    & :global(button[aria-expanded='true']) {
+      @mixin collapse-chevron;
     }
   }
 
