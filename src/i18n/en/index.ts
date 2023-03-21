@@ -14,6 +14,7 @@ const en = {
   reviews: 'Reviews',
   learnMore: 'Learn more',
   readLess: 'Read less',
+  noOfSeasons: '{noOfSeasons:number} season{{s}}',
   seasons: 'Seasons',
   noOfEpisodes: '{noOfEpisodes:number} episode{{s}}',
   episodeNo: 'Episode {index:number}'

@@ -68,6 +68,11 @@ type RootTranslation = {
 	 */
 	readLess: string
 	/**
+	 * {​n​o​O​f​S​e​a​s​o​n​s​}​ ​s​e​a​s​o​n​{​{​s​}​}
+	 * @param {number} noOfSeasons
+	 */
+	noOfSeasons: RequiredParams<'noOfSeasons'>
+	/**
 	 * S​e​a​s​o​n​s
 	 */
 	seasons: string
@@ -136,6 +141,10 @@ export type TranslationFunctions = {
 	 * Read less
 	 */
 	readLess: () => LocalizedString
+	/**
+	 * {noOfSeasons} season{{s}}
+	 */
+	noOfSeasons: (arg: { noOfSeasons: number }) => LocalizedString
 	/**
 	 * Seasons
 	 */

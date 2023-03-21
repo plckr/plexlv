@@ -14,6 +14,7 @@ const de = {
   reviews: 'Rezensionen',
   learnMore: 'Weiterlesen',
   readLess: 'Weniger anzeigen',
+  noOfSeasons: '{noOfSeasons} Staffel{{n}}',
   seasons: 'Staffeln',
   noOfEpisodes: '{noOfEpisodes} Folge{{n}}',
   episodeNo: 'Folge {index}'

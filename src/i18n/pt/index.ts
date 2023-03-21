@@ -14,6 +14,7 @@ const pt = {
   reviews: 'Análises',
   learnMore: 'Sabe mais',
   readLess: 'Ler menos',
+  noOfSeasons: '{noOfSeasons} temporada{{s}}',
   seasons: 'Temporadas',
   noOfEpisodes: '{noOfEpisodes} episódio{{s}}',
   episodeNo: 'Episódio {index}'

@@ -24,7 +24,7 @@
 {#if media.type === 'show'}
   <MediaCard
     title={media.title}
-    subtitle={media.year?.toString() || ''}
+    subtitle={$LL.noOfSeasons({ noOfSeasons: media.childCount })}
     badge={media.leafCount}
     href={getInternalUrl('media', { key: media.ratingKey })}
     image={media.thumb
