@@ -16,8 +16,10 @@ const en = {
   readLess: 'Read less',
   noOfSeasons: '{noOfSeasons:number} season{{s}}',
   seasons: 'Seasons',
+  seasonNo: 'Season {index:number}',
   noOfEpisodes: '{noOfEpisodes:number} episode{{s}}',
-  episodeNo: 'Episode {index:number}'
+  episodeNo: 'Episode {index:number}',
+  released: 'Released'
 } satisfies BaseTranslation;
 
 export default en;

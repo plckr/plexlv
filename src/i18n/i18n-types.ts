@@ -77,6 +77,11 @@ type RootTranslation = {
 	 */
 	seasons: string
 	/**
+	 * S​e​a​s​o​n​ ​{​i​n​d​e​x​}
+	 * @param {number} index
+	 */
+	seasonNo: RequiredParams<'index'>
+	/**
 	 * {​n​o​O​f​E​p​i​s​o​d​e​s​}​ ​e​p​i​s​o​d​e​{​{​s​}​}
 	 * @param {number} noOfEpisodes
 	 */
@@ -86,6 +91,10 @@ type RootTranslation = {
 	 * @param {number} index
 	 */
 	episodeNo: RequiredParams<'index'>
+	/**
+	 * R​e​l​e​a​s​e​d
+	 */
+	released: string
 }
 
 export type TranslationFunctions = {
@@ -150,6 +159,10 @@ export type TranslationFunctions = {
 	 */
 	seasons: () => LocalizedString
 	/**
+	 * Season {index}
+	 */
+	seasonNo: (arg: { index: number }) => LocalizedString
+	/**
 	 * {noOfEpisodes} episode{{s}}
 	 */
 	noOfEpisodes: (arg: { noOfEpisodes: number }) => LocalizedString
@@ -157,6 +170,10 @@ export type TranslationFunctions = {
 	 * Episode {index}
 	 */
 	episodeNo: (arg: { index: number }) => LocalizedString
+	/**
+	 * Released
+	 */
+	released: () => LocalizedString
 }
 
 export type Formatters = {}

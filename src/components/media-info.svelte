@@ -10,6 +10,7 @@
   } from '$lib/data';
   import LL from '$i18n/i18n-svelte';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
+  import { formatDate } from '$lib/utils/date';
 
   export let media: MediaEntity;
 </script>
@@ -17,6 +18,7 @@
 <main>
   {#if media.thumb}
     <img
+      class:wide={media.type === 'episode'}
       class="poster"
       src="/empty.gif"
       alt=""
@@ -28,25 +30,51 @@
   {/if}
 
   <div class="info">
-    {#if media.type !== 'season'}
+    {#if media.type === 'movie' || media.type === 'show'}
       <h1>{media.title}</h1>
-    {:else}
-      <h1>{media.parentTitle}</h1>
+    {:else if media.type === 'season'}
+      <h1>
+        <a href={getInternalUrl('media', { key: media.parentRatingKey })}>
+          {media.parentTitle}
+        </a>
+      </h1>
+    {:else if media.type === 'episode'}
+      <h1>
+        <a href={getInternalUrl('media', { key: media.grandparentRatingKey })}>
+          {media.grandparentTitle}
+        </a>
+      </h1>
     {/if}
 
     <div class="subtitle">
-      {#if media.type !== 'season'}
+      {#if media.type === 'movie' || media.type === 'show'}
         <span>{media.year}</span>
-      {:else}
-        <span>{media.title}</span>
+      {:else if media.type === 'season'}
+        <h2>{media.title}</h2>
+      {:else if media.type === 'episode'}
+        <h2>
+          <a href={getInternalUrl('media', { key: media.parentRatingKey })}>
+            {$LL.seasonNo({ index: media.parentIndex })}
+          </a>
+        </h2>
       {/if}
 
       {#if media.type === 'movie'}
-        <span>{getFormattedDuration(media.duration)}</span>
+        <span class="duration">{getFormattedDuration(media.duration)}</span>
       {/if}
     </div>
 
+    {#if media.type === 'episode'}
+      <div class="episode-title">
+        {$LL.episodeNo({ index: media.index })} · {media.title}
+      </div>
+    {/if}
+
     <div class="rating">
+      {#if media.type === 'episode'}
+        <span class="duration">{getFormattedDuration(media.duration)}</span>
+      {/if}
+
       {#if 'contentRating' in media && media.contentRating}
         <Badge variant="secondary">
           {getContentRating(media.contentRating)}
@@ -76,7 +104,7 @@
       </p>
     </div>
 
-    <div class="details">
+    <section class="details">
       <div>
         {#if 'Director' in media && !!media.Director?.length}
           <h4>{$LL.directedBy()}</h4>
@@ -94,8 +122,12 @@
           <h4>{$LL.genre()}</h4>
           <p>{media.Genre.map((genre) => genre.tag).join(', ')}</p>
         {/if}
+        {#if media.type === 'episode'}
+          <h4>{$LL.released()}</h4>
+          <p>{formatDate(new Date(media.originallyAvailableAt))}</p>
+        {/if}
       </div>
-    </div>
+    </section>
   </div>
 </main>
 
@@ -121,6 +153,11 @@
 
     transition: opacity 0.2s;
 
+    &.wide {
+      width: 300px;
+      height: 168px;
+    }
+
     @media --lg {
       display: block;
     }
@@ -137,6 +174,15 @@
     overflow: hidden;
   }
 
+  h1,
+  h2 {
+    @media --hover {
+      & a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   h1 {
     @mixin text-bold;
     @mixin text-nowrap;
@@ -146,7 +192,23 @@
     line-height: clamp(2rem, 1.333vw + 1.499rem, 2.5rem);
   }
 
+  h2 {
+    @mixin text-bold;
+    @mixin text-nowrap;
+
+    font-size: clamp(1.125rem, 0.501vw + 0.937rem, 1.313rem);
+  }
+
+  .episode-title {
+    @mixin text-regular;
+
+    font-size: 1rem;
+    color: white;
+  }
+
   .subtitle {
+    @mixin text-semi;
+
     display: flex;
     gap: 0.5rem;
 
@@ -160,12 +222,21 @@
     gap: 0.5rem;
   }
 
+  .duration {
+    @mixin text-semi;
+
+    font-size: 1rem;
+    color: white;
+  }
+
   .summary {
     max-width: 750px;
     margin-block: 40px;
     line-height: 1.7;
 
     & p {
+      @mixin text-semi;
+
       color: #fafafa;
       font-size: 15px;
 
@@ -204,6 +275,13 @@
       color: #fafafa;
 
       font-size: 0.875rem;
+
+      & h4,
+      & p {
+        @mixin text-semi;
+
+        line-height: 1.58;
+      }
 
       & h4 {
         color: #ffffff99;

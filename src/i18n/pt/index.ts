@@ -16,8 +16,10 @@ const pt = {
   readLess: 'Ler menos',
   noOfSeasons: '{noOfSeasons} temporada{{s}}',
   seasons: 'Temporadas',
+  seasonNo: 'Temporada {index}',
   noOfEpisodes: '{noOfEpisodes} episódio{{s}}',
-  episodeNo: 'Episódio {index}'
+  episodeNo: 'Episódio {index}',
+  released: 'Lançado'
 } satisfies Translation;
 
 export default pt;

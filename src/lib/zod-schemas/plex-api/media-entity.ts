@@ -104,7 +104,12 @@ export const EpisodeSchema = BaseEpisodeSchema.merge(CommonLibrarySectionKeys).e
 
   originallyAvailableAt: z.string(),
   addedAt: z.string(),
-  updatedAt: z.string()
+  updatedAt: z.string(),
+
+  Media: z.array(MediaSchema),
+  Director: z.array(DirectorSchema).optional(),
+  Writer: z.array(WriterSchema).optional(),
+  Guid: z.array(GuidSchema).optional()
 });
 
 // Directory
