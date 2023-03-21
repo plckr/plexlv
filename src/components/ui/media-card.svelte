@@ -46,13 +46,21 @@
   article {
     display: block;
 
-    @mixin scale-multiplier 130px, 200px, width;
+    width: 130px;
+
+    @media --md {
+      @mixin scale-multiplier 130px, 200px, width;
+    }
 
     &.wide {
-      @mixin scale-multiplier 290px, 430px, width;
+      width: 290px;
 
       & .card {
         aspect-ratio: 1.8 / 1;
+      }
+
+      @media --md {
+        @mixin scale-multiplier 290px, 430px, width;
       }
     }
   }

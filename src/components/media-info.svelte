@@ -202,6 +202,12 @@
 
   h1,
   h2 {
+    @mixin text-bold;
+
+    @media --md {
+      @mixin text-nowrap;
+    }
+
     @media --hover {
       & a:hover {
         text-decoration: underline;
@@ -210,18 +216,12 @@
   }
 
   h1 {
-    @mixin text-bold;
-    @mixin text-nowrap;
-
     color: white;
     font-size: clamp(1.75rem, 0.667vw + 1.5rem, 2rem);
     line-height: clamp(2rem, 1.333vw + 1.499rem, 2.5rem);
   }
 
   h2 {
-    @mixin text-bold;
-    @mixin text-nowrap;
-
     font-size: clamp(1.125rem, 0.501vw + 0.937rem, 1.313rem);
   }
 

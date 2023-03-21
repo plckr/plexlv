@@ -65,8 +65,17 @@
 </BaseSection>
 
 <style lang="postcss">
+  h2 {
+    white-space: normal;
+
+    @media --md {
+      @mixin text-nowrap;
+    }
+  }
+
   .navigate-arrows {
-    display: flex;
+    display: none;
+
     gap: 15px;
 
     & button {
@@ -85,6 +94,10 @@
           color: white;
         }
       }
+    }
+
+    @media --md {
+      display: flex;
     }
   }
 
@@ -106,6 +119,6 @@
     height: 100%;
 
     display: flex;
-    gap: 40px;
+    gap: var(--gap);
   }
 </style>

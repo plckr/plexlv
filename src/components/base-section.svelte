@@ -23,6 +23,8 @@
     justify-content: space-between;
     margin-bottom: 20px;
     min-height: 25px;
+    max-width: 100%;
+    overflow: hidden;
 
     & :global(h2) {
       @mixin text-bold;

@@ -47,7 +47,11 @@
 
 <style lang="postcss">
   article {
-    @mixin scale-multiplier 130px, 200px, --size;
+    --size: 130px;
+
+    @media --md {
+      @mixin scale-multiplier 130px, 200px, --size;
+    }
 
     padding: 2px;
 
