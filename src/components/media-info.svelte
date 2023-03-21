@@ -162,7 +162,11 @@
     display: flex;
     gap: 50px;
 
-    padding-block: 40px;
+    padding-block: 20px;
+
+    @media --md {
+      padding-block: 40px;
+    }
   }
 
   .poster {
@@ -257,8 +261,12 @@
 
   .summary {
     max-width: 750px;
-    margin-block: 40px;
+    margin-block: 20px;
     line-height: 1.7;
+
+    @media --md {
+      margin-block: 40px;
+    }
 
     & p {
       @mixin text-semi;
@@ -301,8 +309,12 @@
 
     & > div {
       display: grid;
-      grid-template-columns: minmax(110px, auto) 1fr;
-      column-gap: 24px;
+      grid-template-rows: 1fr 1fr;
+
+      @media --md {
+        grid-template-columns: minmax(110px, auto) 1fr;
+        column-gap: 24px;
+      }
       color: #fafafa;
 
       font-size: 0.875rem;
@@ -316,6 +328,13 @@
 
       & h4 {
         color: #ffffff99;
+
+        &:not(:first-child) {
+          margin-top: 12px;
+          @media --md {
+            margin-top: 0;
+          }
+        }
       }
     }
   }

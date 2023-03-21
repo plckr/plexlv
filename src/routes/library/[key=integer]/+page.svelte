@@ -30,6 +30,10 @@
     flex-wrap: wrap;
     gap: 8px;
 
+    @media --xs {
+      gap: 16px;
+    }
+
     @media --sm {
       gap: 24px;
     }
