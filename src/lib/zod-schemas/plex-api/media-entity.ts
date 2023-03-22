@@ -129,7 +129,7 @@ export const ShowSchema = BaseShowSchema.merge(CommonLibrarySectionKeys).extend(
   summary: z.string(),
   audienceRating: z.string().optional(),
   audienceRatingImage: z.string().optional(),
-  duration: z.coerce.number(),
+  duration: z.coerce.number().optional(),
   viewedLeafCount: z.coerce.number(),
   originallyAvailableAt: z.string(),
   addedAt: z.string(),
