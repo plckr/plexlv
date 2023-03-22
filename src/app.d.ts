@@ -17,6 +17,7 @@ declare global {
       library?: Library;
       media?: MediaEntity;
       lazy?: {
+        parentChildren?: BaseMediaEntity[];
         children?: BaseMediaEntity[];
         recentlyAdded?: Hub[];
         related?: Related;

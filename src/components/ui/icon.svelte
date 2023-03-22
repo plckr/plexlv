@@ -76,7 +76,7 @@
   export let icon: IconOptions;
 
   export let width = 'auto';
-  export let height = 'auto';
+  export let height = '24px';
 </script>
 
 <i

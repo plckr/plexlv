@@ -128,7 +128,8 @@ class Plex {
 
   public async getChildren(ratingKey: number, lang: Locales) {
     const data = await this.get(`library/metadata/${ratingKey}/children`, {
-      'X-Plex-Language': lang
+      'X-Plex-Language': lang,
+      excludeAllLeaves: '1'
     });
 
     return BaseMediaEntitySchema.array().parse(data.MediaEntity);

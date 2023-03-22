@@ -26,8 +26,26 @@
 
 <style lang="postcss">
   select {
-    @mixin text-regular;
+    @mixin text-semi;
 
-    /* TODO: Styling */
+    padding: 8px 12px;
+    font-size: 15px;
+    color: inherit;
+    background: transparent;
+    border: none;
+    appearance: none;
+
+    cursor: pointer;
+    transition: color 0.2s;
+
+    @media --hover {
+      &:hover {
+        color: white;
+      }
+    }
+
+    & :global(option) {
+      color: initial;
+    }
   }
 </style>

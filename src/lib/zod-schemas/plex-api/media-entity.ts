@@ -144,7 +144,8 @@ export type Show = z.infer<typeof ShowSchema>;
 
 export const BaseSeasonSchema = CommonBaseMediaSchema.extend({
   type: z.literal('season'),
-  leafCount: z.coerce.number()
+  leafCount: z.coerce.number(),
+  index: z.coerce.number()
 });
 
 export const SeasonSchema = BaseSeasonSchema.merge(CommonLibrarySectionKeys).extend({
@@ -157,7 +158,6 @@ export const SeasonSchema = BaseSeasonSchema.merge(CommonLibrarySectionKeys).ext
   titleSort: z.string().optional(),
   originalTitle: z.string().optional(),
   summary: z.string(),
-  index: z.coerce.number(),
   parentIndex: z.coerce.number(),
   parentThumb: z.string().optional(),
   parentTheme: z.string().optional(),
