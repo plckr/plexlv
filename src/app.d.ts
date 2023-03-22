@@ -14,12 +14,12 @@ declare global {
     interface PageData {
       lang: Locales;
       libraries: import('../.svelte-kit/types/src/routes/$types').LayoutData['libraries'];
+      recentlyAdded?: Hub[];
       library?: Library;
       media?: MediaEntity;
       lazy?: {
         parentChildren?: BaseMediaEntity[];
         children?: BaseMediaEntity[];
-        recentlyAdded?: Hub[];
         related?: Related;
       };
     }

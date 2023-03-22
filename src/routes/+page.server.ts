@@ -7,11 +7,9 @@ export const load: PageServerLoad = async ({ parent, url, locals }) => {
 
   try {
     return {
-      lazy: {
-        recentlyAdded: Promise.all(
-          libraries.map((lib) => Plex.getRecentlyAdded(lib.key, locals.lang))
-        )
-      }
+      recentlyAdded: await Promise.all(
+        libraries.map((lib) => Plex.getRecentlyAdded(lib.key, locals.lang))
+      )
     };
   } catch (err) {
     console.error(`Error 404 -> Pathname: ${url.pathname}`, err);
