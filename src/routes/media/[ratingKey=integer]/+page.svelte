@@ -10,6 +10,7 @@
   import LL from '$i18n/i18n-svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
   import EpisodesSection from '$components/episodes-section.svelte';
+  import PageTopHeader from '$components/page-top-header.svelte';
 
   $: media = $page.data.media;
   $: seoTitle = media ? getSeoTitle(media) : undefined;
@@ -28,11 +29,11 @@
 </svelte:head>
 
 {#if media}
-  <aside>
+  <PageTopHeader>
     <a href={getInternalUrl('library', { key: media.librarySectionID })}>
       {media.librarySectionTitle}
     </a>
-  </aside>
+  </PageTopHeader>
 
   <article>
     <MediaInfo {media} />
@@ -97,22 +98,3 @@
     {/await}
   </article>
 {/if}
-
-<style lang="postcss">
-  aside {
-    & a {
-      display: block;
-      color: hsla(0, 0%, 100%, 0.75);
-      font-size: 1rem;
-      line-height: 1.5rem;
-      transition: color 0.2s;
-      padding-block: 14px;
-
-      @media --hover {
-        &:hover {
-          color: white;
-        }
-      }
-    }
-  }
-</style>

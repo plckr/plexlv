@@ -2,7 +2,6 @@
   import LanguageSwitcher from '$components/language-switcher.svelte';
   import LL from '$i18n/i18n-svelte';
   import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
-  import { localState } from '$lib/stores';
   import Icon from './icon.svelte';
 </script>
 
@@ -18,20 +17,10 @@
   </label>
 
   <div style="display: flex; gap: 8px;">
-    <LanguageSwitcher />
     <Icon icon="plex" height="24px" />
   </div>
 
-  <div class="range">
-    <input
-      type="range"
-      min="1"
-      max="100"
-      bind:value={$localState.scaleMultiplier}
-      aria-hidden="true"
-    />
-    <Icon icon="grid" />
-  </div>
+  <LanguageSwitcher />
 </aside>
 
 <style lang="postcss">
@@ -71,19 +60,5 @@
         color: white;
       }
     }
-  }
-
-  .range {
-    display: flex;
-    gap: 16px;
-    justify-self: flex-end;
-
-    color: hsla(0, 0%, 100%, 0.7);
-    padding: 12px;
-  }
-
-  input[type='range'] {
-    width: 60px;
-    height: 24px;
   }
 </style>
