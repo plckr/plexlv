@@ -26,6 +26,7 @@
 
     font-size: 0.875rem;
     line-height: 40px;
+    user-select: none;
 
     max-width: 250px;
 
