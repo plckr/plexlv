@@ -1,4 +1,5 @@
 import { Plex } from '$lib/plex.server';
+import { getLibraryView } from '$params/libraryView';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -13,7 +14,17 @@ export const load: PageServerLoad = async ({ params, parent, locals }) => {
     throw error(404, "Library doesn't exist");
   }
 
-  const libraryData = await Plex.getLibraryData(key, locals.lang);
-
-  return { library: libraryData };
+  return {
+    library: {
+      ...library,
+      data:
+        params.view === getLibraryView('library')
+          ? await Plex.getLibraryData(key, locals.lang)
+          : undefined,
+      hubs:
+        params.view === getLibraryView('recommended')
+          ? await Plex.getLibraryHubs(key, locals.lang)
+          : undefined
+    }
+  };
 };

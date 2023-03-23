@@ -96,6 +96,25 @@ class Plex {
     return LibrarySchema.parse(data);
   }
 
+  public async getLibraryHubs(libraryKey: number, lang: Locales) {
+    const data = await this.get(`hubs/sections/${libraryKey}`, {
+      count: '12',
+      'X-Plex-Language': lang,
+      excludeContinueWatching: '1'
+    });
+    return HubSchema.array()
+      .parse(data.Hub)
+      .filter(
+        (hub) =>
+          !(
+            hub.context.includes('inprogress') ||
+            hub.context.includes('recentlyviewed') ||
+            hub.context.includes('rediscover') ||
+            hub.context.includes('topunwatched')
+          )
+      );
+  }
+
   public async getMedia(ratingKey: number, lang: Locales) {
     const data = await this.get(`library/metadata/${ratingKey}`, {
       includeReviews: '1',

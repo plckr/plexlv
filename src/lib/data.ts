@@ -2,7 +2,7 @@ import type { IconOptions } from '$components/ui/icon.svelte';
 import type { Locales } from '$i18n/i18n-types';
 import { baseLocale, locales } from '$i18n/i18n-util';
 import type { ImgType } from '$params/imgType';
-import type { LibraryView } from '$params/libraryView';
+import { getLibraryView, type LibraryViewKeys } from '$params/libraryView';
 import { SEO_TITLE_SEPARATOR, SEO_TITLE_SUFFIX } from './constants';
 import { isArray } from './utils/array';
 import { msToHourMinutes } from './utils/date';
@@ -52,7 +52,7 @@ export const getContentRating = (rating: string) => {
 };
 
 type UrlTypeParams = {
-  library: { key: string | number; view?: LibraryView };
+  library: { key: string | number; view?: LibraryViewKeys };
   media: { key: string | number };
   image: {
     type: ImgType;
@@ -71,9 +71,10 @@ type GetInternalUrl = (...args: { [K in UrlType]: [K, UrlTypeParams[K]] }[UrlTyp
 export const getInternalUrl: GetInternalUrl = (type, params) => {
   switch (type) {
     case 'library': {
-      const view = params.view ? `/${params.view}` : '';
+      const view = getLibraryView(params.view);
+      const routeSuffix = view ? `/${view}` : '';
 
-      return `/library/${params.key}${view}`;
+      return `/library/${params.key}${routeSuffix}`;
     }
     case 'media':
       return `/media/${params.key}`;

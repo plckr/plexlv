@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import CarouselSection from '$components/carousel-section.svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
+  import PageTopHeader from '$components/page-top-header.svelte';
   import LL from '$i18n/i18n-svelte';
   import { getOgUrl, getSeoTitle } from '$lib/data';
 
@@ -15,6 +16,8 @@
   <meta name="og:title" content={seoTitle} />
   <meta name="og:image" content={getOgUrl()} />
 </svelte:head>
+
+<PageTopHeader />
 
 {#each $page.data.recentlyAdded || [] as hub}
   {#if 'MediaEntity' in hub && hub.MediaEntity}

@@ -1,15 +1,18 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import CarouselSection from '$components/carousel-section.svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
   import PageTopHeader from '$components/page-top-header.svelte';
   import TabButton from '$components/ui/tab-button.svelte';
+  import LL from '$i18n/i18n-svelte';
   import { getInternalUrl, getOgUrl, getSeoTitle } from '$lib/data';
-  import { libraries } from '$lib/stores';
-  import type { LibraryView } from '$params/libraryView';
+  import { getLibraryView, type LibraryView } from '$params/libraryView';
 
-  $: library = $libraries.find((lib) => lib.key === +$page.params.key);
+  $: library = $page.data.library;
   $: libraryView = $page.params.view as LibraryView | undefined;
   $: seoTitle = library ? getSeoTitle(library) : undefined;
+
+  $: console.log($page.data.hubs);
 </script>
 
 <svelte:head>
@@ -24,41 +27,53 @@
 
 {#if library}
   <PageTopHeader>
-    <a href="/">
-      {library.title}
-    </a>
-
     <div class="tabs">
       <TabButton
-        href={getInternalUrl('library', { key: library.key })}
-        active={libraryView === undefined}
+        href={getInternalUrl('library', { key: library.key, view: 'recommended' })}
+        active={libraryView === getLibraryView('recommended')}
       >
-        Recomendado
+        {$LL.recommended()}
       </TabButton>
       <TabButton
-        href={getInternalUrl('library', { key: library.key, view: 'all' })}
-        active={libraryView === 'all'}
+        href={getInternalUrl('library', { key: library.key, view: 'library' })}
+        active={libraryView === getLibraryView('library')}
       >
-        Biblioteca
+        {$LL.library()}
       </TabButton>
       <TabButton
         href={getInternalUrl('library', { key: library.key, view: 'collections' })}
-        active={libraryView === 'collections'}
+        active={libraryView === getLibraryView('collections')}
       >
-        Coleções
+        {$LL.collections()}
       </TabButton>
     </div>
   </PageTopHeader>
 
   <main>
-    {#each $page.data.library?.MediaEntity || [] as media (media.ratingKey)}
-      <MediaEntityCard {media} />
-    {/each}
+    {#if !!library.hubs?.length}
+      {#each library.hubs as hub (hub.key)}
+        {#if !!hub.MediaEntity?.length}
+          <CarouselSection title={hub.title}>
+            {#each hub.MediaEntity as media (media.ratingKey)}
+              <MediaEntityCard {media} />
+            {/each}
+          </CarouselSection>
+        {/if}
+      {/each}
+    {/if}
   </main>
+
+  {#if library?.data && !!library?.data?.MediaEntity?.length}
+    <main class="library">
+      {#each library?.data?.MediaEntity as media (media.ratingKey)}
+        <MediaEntityCard {media} />
+      {/each}
+    </main>
+  {/if}
 {/if}
 
 <style lang="postcss">
-  main {
+  main.library {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;

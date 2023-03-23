@@ -29,11 +29,7 @@
 </svelte:head>
 
 {#if media}
-  <PageTopHeader>
-    <a href={getInternalUrl('library', { key: media.librarySectionID })}>
-      {media.librarySectionTitle}
-    </a>
-  </PageTopHeader>
+  <PageTopHeader />
 
   <article>
     <MediaInfo {media} />

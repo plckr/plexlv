@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
+  import LL from '$i18n/i18n-svelte';
   import { getInternalUrl } from '$lib/data';
   import { localState } from '$lib/stores';
   import Divider from './ui/divider.svelte';
@@ -16,6 +17,22 @@
 </script>
 
 <aside>
+  {#if $page.data.library}
+    {@const library = $page.data.library}
+    <a href={getInternalUrl('library', { key: library.key })}>
+      {library.title}
+    </a>
+  {:else if $page.data.media}
+    {@const media = $page.data.media}
+    <a href={getInternalUrl('library', { key: media.librarySectionID })}>
+      {media.librarySectionTitle}
+    </a>
+  {:else}
+    <a href="/">
+      {$LL.home()}
+    </a>
+  {/if}
+
   <slot />
 
   <div class="right">
