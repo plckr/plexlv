@@ -109,7 +109,8 @@ class Plex {
   public async getRelated(ratingKey: number, lang: Locales) {
     const data = await this.get(`library/metadata/${ratingKey}/related`, {
       'X-Plex-Container-Start': '0',
-      'X-Plex-Container-Size': '24',
+      'X-Plex-Container-Size': '16',
+      count: '16',
       'X-Plex-Language': lang
     });
 
@@ -120,6 +121,7 @@ class Plex {
     const data = await this.get('hubs/promoted', {
       contentDirectoryID: libraryKey.toString(),
       excludeContinueWatching: '1',
+      count: '16',
       'X-Plex-Language': lang
     });
 
