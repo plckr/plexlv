@@ -20,7 +20,9 @@
     <Icon icon="plex" height="24px" />
   </div>
 
-  <LanguageSwitcher />
+  <div class="lang">
+    <LanguageSwitcher />
+  </div>
 </aside>
 
 <style lang="postcss">
@@ -43,6 +45,11 @@
 
     & :global(svg) {
       height: 24px;
+    }
+
+    & .lang {
+      justify-self: flex-end;
+      padding-right: 12px;
     }
   }
 

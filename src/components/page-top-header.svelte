@@ -51,7 +51,7 @@
       {@const media = $page.data.media}
 
       <div class="siblings">
-        <Divider />
+        <Divider class="divider" />
 
         {#await $page.data.lazy.parentChildren}
           <div class="loading">
@@ -75,7 +75,12 @@
             {/if}
 
             {#if idx === 0}
-              <Select value={$page.data.media.ratingKey} required on:change={onSelectMediaChange}>
+              <Select
+                value={$page.data.media.ratingKey}
+                required
+                on:change={onSelectMediaChange}
+                size="lg"
+              >
                 {#each children as child}
                   <option value={child.ratingKey} selected={media.ratingKey === child.ratingKey}>
                     {child.title}
@@ -93,10 +98,14 @@
 <style lang="postcss">
   aside {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    flex-direction: column;
 
-    height: 50px;
+    @media --md {
+      align-items: center;
+      flex-direction: row;
+      height: 50px;
+    }
 
     & > :global(a:first-child) {
       @mixin text-semi;
@@ -144,11 +153,15 @@
   }
 
   .siblings {
-    display: flex;
+    display: none;
     align-items: center;
 
     height: 100%;
     color: #ffffffcc;
+
+    @media --md {
+      display: flex;
+    }
 
     & .loading {
       padding-inline: 24px;

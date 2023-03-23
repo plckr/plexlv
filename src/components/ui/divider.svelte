@@ -1,4 +1,4 @@
-<div aria-orientation="vertical" role="separator" />
+<div aria-orientation="vertical" role="separator" {...$$restProps} />
 
 <style lang="postcss">
   div {

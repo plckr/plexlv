@@ -9,6 +9,7 @@
   import hamburger from './icons/hamburger.svg?raw';
   import home from './icons/home.svg?raw';
   import imdb from './icons/imdb.svg?raw';
+  import language from './icons/language.svg?raw';
   import movie from './icons/movie.svg?raw';
   import music from './icons/music.svg?raw';
   import photo from './icons/photo.svg?raw';
@@ -40,6 +41,7 @@
     hamburger,
     home,
     imdb,
+    language,
     movie,
     music,
     photo,
