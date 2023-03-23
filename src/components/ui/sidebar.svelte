@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  export type SidebarItem = {
+  type SidebarItem = {
     title: string;
     icon: IconOptions;
     href: string;
@@ -31,7 +31,7 @@
   import { getInternalUrl } from '$lib/data';
   import LL from '$i18n/i18n-svelte';
 
-  $: currentKey = $page.params.key;
+  $: currentKey = $page.data.library?.key;
 
   $: items = <SidebarItem[]>[
     {
@@ -43,7 +43,7 @@
     ...$libraries.map((library) => ({
       title: library.title,
       icon: getLibraryIcon(library.type),
-      active: currentKey === library.key.toString(),
+      active: currentKey === library.key,
       href: getInternalUrl('library', { key: library.key })
     }))
   ];
