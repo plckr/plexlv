@@ -22,7 +22,10 @@ const en = {
   released: 'Released',
   video: 'Video',
   audio: 'Audio',
-  subtitles: 'Subtitles'
+  subtitles: 'Subtitles',
+  recommended: 'Recommended',
+  library: 'Library',
+  collections: 'Collections'
 } satisfies BaseTranslation;
 
 export default en;

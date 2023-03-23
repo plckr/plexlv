@@ -107,6 +107,18 @@ type RootTranslation = {
 	 * S​u​b​t​i​t​l​e​s
 	 */
 	subtitles: string
+	/**
+	 * R​e​c​o​m​m​e​n​d​e​d
+	 */
+	recommended: string
+	/**
+	 * L​i​b​r​a​r​y
+	 */
+	library: string
+	/**
+	 * C​o​l​l​e​c​t​i​o​n​s
+	 */
+	collections: string
 }
 
 export type TranslationFunctions = {
@@ -198,6 +210,18 @@ export type TranslationFunctions = {
 	 * Subtitles
 	 */
 	subtitles: () => LocalizedString
+	/**
+	 * Recommended
+	 */
+	recommended: () => LocalizedString
+	/**
+	 * Library
+	 */
+	library: () => LocalizedString
+	/**
+	 * Collections
+	 */
+	collections: () => LocalizedString
 }
 
 export type Formatters = {}

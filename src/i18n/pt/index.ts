@@ -22,7 +22,10 @@ const pt = {
   released: 'Lançado',
   video: 'Video',
   audio: 'Áudio',
-  subtitles: 'Legendas'
+  subtitles: 'Legendas',
+  recommended: 'Recomendado',
+  library: 'Biblioteca',
+  collections: 'Coleções'
 } satisfies Translation;
 
 export default pt;

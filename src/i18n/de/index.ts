@@ -22,7 +22,10 @@ const de = {
   released: 'Veröffentlicht',
   video: 'Video',
   audio: 'Ton',
-  subtitles: 'Untertitel'
+  subtitles: 'Untertitel',
+  recommended: 'Empfehlungen',
+  library: 'Mediathek',
+  collections: 'Sammlungen'
 } satisfies Translation;
 
 export default de;
