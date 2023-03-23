@@ -88,7 +88,7 @@
       width: var(--sidebar-width-open);
     }
 
-    @media --hover {
+    @media --hover and --md {
       &:not(:checked) + .sidebar-wrapper:hover {
         width: var(--sidebar-width-open);
         background-color: #1f2326;
