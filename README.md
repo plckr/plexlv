@@ -1,38 +1,54 @@
-# create-svelte
+# Plexlv - Plex Library Viewer
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Plexlv (Plex library viewer) is a read-only frontend web application designed to showcase the entire contents of your Plex media center in a user-friendly and visually appealing way. With Plexlv, you can easily share your media library without giving others the ability to play or modify the content.
 
-## Creating a project
+Built with modern technologies and optimized for performance and SEO, Plexlv offers a comprehensive view of your media library with enhanced features such as detailed information about each item.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Here's a [demo](https://plexlv.plckr.dev/)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+# Table of contents
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- [Plexlv - Plex Library Viewer](#plexlv---plex-library-viewer)
+- [Table of contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Vercel](#vercel)
+    - [Docker](#docker)
+  - [Environment variables](#environment-variables)
+  - [License](#license)
 
-## Developing
+## Features
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- Visually appealing and user-friendly interface
+- UI very similar to original Plex
+- Users not able to modify any content from your Plex
+- Detailed information about each item in your Plex library
+- Direct connection to your Plex instance for real-time updates
 
-```bash
-npm run dev
+## Installation
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### Vercel
 
-## Building
+Plexlv can be deployed on Vercel in just a few steps, just click the button below to deploy to Vercel:
 
-To create a production version of your app:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fplckr%2Fplexlv&env=PLEX_HOST,PLEX_TOKEN&envDescription=API%20keys%20needed%20for%20the%20application)
 
-```bash
-npm run build
-```
+During the deployment process, you'll be prompted to set environment variables for your Plex instance. See [Environment Variables](#environment-variables)
 
-You can preview the production build with `npm run preview`.
+Once your deployment is complete, you can access your Plexlv instance at the URL provided by Vercel.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Docker
+
+Coming soon
+
+## Environment variables
+
+| Variable                    | Description                                                                                                                                        | Example                    |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| PLEX_HOST                   | Required: Your plex host                                                                                                                           | http://192.168.1.200:32400 |
+| PLEX_TOKEN                  | Required: Your plex token, know how to get yours [here](https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/). |                            |
+| PLEX_EXCLUDING_LIBRARY_KEYS | Optional: Library keys separated by comma will exclude from appearing in the app                                                                   |                            |
+
+## License
+
+Plexlv is licensed under the [MIT License](LICENSE.md).
