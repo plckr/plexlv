@@ -7,14 +7,14 @@ import {
 } from './media-entity';
 
 const BaseHubSchema = z.object({
-  hubKey: z.string(),
+  hubKey: z.string().optional(),
   key: z.string(),
   title: z.string(),
   hubIdentifier: z.string(),
   context: z.string(),
   size: z.coerce.number(),
-  more: z.coerce.number(), // boolean
-  promoted: z.coerce.number().optional(), // boolean
+  more: z.coerce.number().transform(Boolean),
+  promoted: z.coerce.number().transform(Boolean).optional(),
   style: z.string().optional()
 });
 
