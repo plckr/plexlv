@@ -104,18 +104,23 @@
     @media --md {
       align-items: center;
       flex-direction: row;
+
       height: 50px;
     }
 
-    & > :global(a:first-child) {
+    & > a:first-child {
       @mixin text-semi;
 
       display: block;
-      color: hsla(0, 0%, 100%, 0.75);
+
+      padding-block: 14px;
+      width: fit-content;
+
       font-size: 1rem;
       line-height: 1.5rem;
+
+      color: hsla(0, 0%, 100%, 0.75);
       transition: color 0.2s;
-      padding-block: 14px;
 
       @media --hover {
         &:hover {
@@ -137,10 +142,10 @@
     gap: 16px;
     justify-self: flex-end;
 
+    padding: 12px;
     height: 100%;
 
     color: hsla(0, 0%, 100%, 0.7);
-    padding: 12px;
 
     @media --md {
       display: flex;
