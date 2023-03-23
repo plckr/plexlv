@@ -25,7 +25,7 @@ const flattenAttributes = (data: ElementCompact): object => {
   return data;
 };
 
-export const xmlParse = (xml: string) => {
+export const xmlParse = (xml: string): Record<any, any> => {
   const parsed: ElementCompact = xml2js(xml, {
     trim: true,
     ignoreDeclaration: true,
