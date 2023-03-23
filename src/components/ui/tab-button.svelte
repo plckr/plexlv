@@ -22,7 +22,7 @@
     position: relative;
 
     margin: 0 5px;
-    padding: 0 16px;
+    padding: 0 8px;
 
     font-size: 0.875rem;
     line-height: 40px;
@@ -52,6 +52,10 @@
         background-color: #e5a00d;
         border-radius: 1px;
       }
+    }
+
+    @media --md {
+      padding: 0 16px;
     }
 
     @media --hover {
