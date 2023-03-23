@@ -40,12 +40,6 @@
       >
         {$LL.library()}
       </TabButton>
-      <TabButton
-        href={getInternalUrl('library', { key: library.key, view: 'collections' })}
-        active={libraryView === getLibraryView('collections')}
-      >
-        {$LL.collections()}
-      </TabButton>
     </div>
   </PageTopHeader>
 

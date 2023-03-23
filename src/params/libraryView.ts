@@ -5,16 +5,13 @@ export type LibraryView = (typeof views)[LibraryViewKeys];
 
 const views = {
   recommended: undefined,
-  library: 'all',
-  collections: 'collections'
+  library: 'all'
 } as const;
 
 const defaultView: LibraryViewKeys = 'recommended';
 
-const types = ['all', 'collections'] as const;
-
 const isLibraryView = (param: string | undefined): param is LibraryView => {
-  return (Object.values(types) as ReadonlyArray<string | undefined>).includes(param);
+  return (Object.values(views) as ReadonlyArray<string | undefined>).includes(param);
 };
 
 export const match = ((param) => {
