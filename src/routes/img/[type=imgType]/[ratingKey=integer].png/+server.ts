@@ -74,3 +74,10 @@ export const GET: RequestHandler = async ({ params, request, url }) => {
     throw error(404);
   }
 };
+
+export const config = {
+  isr: {
+    // 4h (in seconds)
+    expiration: 60 * 60 * 4
+  }
+};
