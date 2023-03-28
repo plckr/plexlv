@@ -1,4 +1,8 @@
-<script lang="ts" context="module">
+<script lang="ts">
+  import { page } from '$app/stores';
+  import Icon from '$components/ui/icon.svelte';
+  import LL from '$i18n/i18n-svelte';
+
   const errorMessage: {
     [key in number | 'default']: {
       title: string;
@@ -7,20 +11,15 @@
     };
   } = {
     404: {
-      title: 'Não encontrado',
-      description: 'Não conseguimos encontrar a página que queres ver',
+      title: $LL.errorNotFoundTitle(),
+      description: $LL.errorNotFoundMessage(),
       showAnchor: true
     },
     default: {
-      title: 'Algo correu mal',
-      description: 'Ocorreu um erro inesperado'
+      title: $LL.errorDefaultTitle(),
+      description: $LL.errorDefaultMessage()
     }
   };
-</script>
-
-<script lang="ts">
-  import { page } from '$app/stores';
-  import Icon from '$components/ui/icon.svelte';
 
   $: code = $page.status;
   $: error = errorMessage[code] || errorMessage.default;
@@ -28,14 +27,14 @@
 
 <div class="root">
   <div class="icon">
-    <Icon icon="alert" />
+    <Icon icon="alert" width="40px" height="40px" />
   </div>
 
   <p class="error">{error.title}</p>
   <p class="description">{error.description}</p>
 
   {#if error.showAnchor}
-    <a href="/">Ir para a página principal</a>
+    <a href="/">{$LL.goHome()}</a>
   {/if}
 </div>
 

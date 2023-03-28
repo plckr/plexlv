@@ -2,7 +2,12 @@ import type { Translation } from '../i18n-types';
 
 const pt = {
   language: 'Português',
+  errorNotFoundTitle: 'Não encontrado',
+  errorNotFoundMessage: 'Não conseguimos encontrar a página que queres ver',
+  errorDefaultTitle: 'Algo correu mal',
+  errorDefaultMessage: 'Ocorreu um erro inesperado',
   home: 'Início',
+  goHome: 'Ir para a página inicial',
   mainMenu: 'Menu principal',
   expand: 'Expandir',
   collapse: 'Sucumbir',

@@ -20,9 +20,29 @@ type RootTranslation = {
 	 */
 	language: string
 	/**
+	 * N​o​t​ ​f​o​u​n​d
+	 */
+	errorNotFoundTitle: string
+	/**
+	 * W​e​ ​c​a​n​'​t​ ​f​i​n​d​ ​t​h​e​ ​p​a​g​e​ ​y​o​u​'​r​e​ ​l​o​o​k​i​n​g​ ​f​o​r
+	 */
+	errorNotFoundMessage: string
+	/**
+	 * S​o​m​e​t​h​i​n​g​ ​w​e​n​t​ ​w​r​o​n​g
+	 */
+	errorDefaultTitle: string
+	/**
+	 * A​n​ ​u​n​e​x​p​e​c​t​e​d​ ​e​r​r​o​r​ ​o​c​c​u​r​r​e​d​.
+	 */
+	errorDefaultMessage: string
+	/**
 	 * H​o​m​e
 	 */
 	home: string
+	/**
+	 * G​o​ ​h​o​m​e
+	 */
+	goHome: string
 	/**
 	 * M​a​i​n​ ​m​e​n​u
 	 */
@@ -127,9 +147,29 @@ export type TranslationFunctions = {
 	 */
 	language: () => LocalizedString
 	/**
+	 * Not found
+	 */
+	errorNotFoundTitle: () => LocalizedString
+	/**
+	 * We can't find the page you're looking for
+	 */
+	errorNotFoundMessage: () => LocalizedString
+	/**
+	 * Something went wrong
+	 */
+	errorDefaultTitle: () => LocalizedString
+	/**
+	 * An unexpected error occurred.
+	 */
+	errorDefaultMessage: () => LocalizedString
+	/**
 	 * Home
 	 */
 	home: () => LocalizedString
+	/**
+	 * Go home
+	 */
+	goHome: () => LocalizedString
 	/**
 	 * Main menu
 	 */

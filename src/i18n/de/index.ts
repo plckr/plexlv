@@ -2,7 +2,12 @@ import type { Translation } from '../i18n-types';
 
 const de = {
   language: 'Deutsch',
+  errorNotFoundTitle: 'Nicht gefunden',
+  errorNotFoundMessage: 'Wir können die gesuchte Seite nicht finden',
+  errorDefaultTitle: 'Etwas ist schief gelaufen',
+  errorDefaultMessage: 'Ein unerwarteter Fehler ist aufgetreten.',
   home: 'Startseite',
+  goHome: 'Zur Startseite',
   mainMenu: 'Hauptmenü',
   expand: 'Aufklappen',
   collapse: 'Einklappen',

@@ -2,7 +2,12 @@ import type { BaseTranslation } from '../i18n-types';
 
 const en = {
   language: 'English',
+  errorNotFoundTitle: 'Not found',
+  errorNotFoundMessage: "We can't find the page you're looking for",
+  errorDefaultTitle: 'Something went wrong',
+  errorDefaultMessage: 'An unexpected error occurred.',
   home: 'Home',
+  goHome: 'Go home',
   mainMenu: 'Main menu',
   expand: 'Expand',
   collapse: 'Collapse',
