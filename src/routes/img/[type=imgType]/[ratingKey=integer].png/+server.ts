@@ -3,6 +3,7 @@ import { Plex } from '$lib/plex.server';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { z } from 'zod';
+import type { Config } from '@sveltejs/adapter-vercel';
 
 const defaultParams = {
   minSize: '1',
@@ -75,7 +76,7 @@ export const GET: RequestHandler = async ({ params, request, url }) => {
   }
 };
 
-export const config = {
+export const config: Config = {
   isr: {
     // 4h (in seconds)
     expiration: 60 * 60 * 4
