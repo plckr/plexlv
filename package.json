@@ -58,6 +58,6 @@
   "dependencies": {
     "accept-language": "^3.0.18",
     "xml-js": "^1.6.11",
-    "zod": "^3.21.4"
+    "zod": "^3.22.3"
   }
 }
