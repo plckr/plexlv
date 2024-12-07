@@ -15,9 +15,7 @@ const config: StorybookConfig = {
     name: '@storybook/sveltekit',
     options: {}
   },
-  docs: {
-    autodocs: 'tag'
-  },
+  docs: {},
   async viteFinal(config) {
     return mergeConfig(config, {
       resolve: {
