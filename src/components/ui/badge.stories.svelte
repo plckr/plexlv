@@ -1,15 +1,14 @@
-<script lang="ts">
-  import { Story, Template } from '@storybook/addon-svelte-csf';
+<script lang="ts" module>
+  import { defineMeta } from '@storybook/addon-svelte-csf';
   import Badge from './badge.svelte';
-    import type { Meta } from '@storybook/svelte';
 
-  export const meta = {
-    title: "UI/Badge",
+  const { Story } = defineMeta({
+    title: 'UI/Badge',
     component: Badge,
     tags: ['autodocs'],
     args: {
       variant: 'primary',
-      slot: '50',
+      children: '50'
     },
     argTypes: {
       variant: {
@@ -19,14 +18,11 @@
         options: ['primary', 'secondary']
       }
     }
-  } satisfies Meta<Badge>;
+  });
 </script>
 
-
-<Template let:args>
-  <Badge {...args}>
-    {args.slot ?? 48}
-  </Badge>
-</Template>
-
-<Story name="Default" />
+<Story name="Default">
+  {#snippet children(args)}
+    <Badge {...args}>{args.children}</Badge>
+  {/snippet}
+</Story>
