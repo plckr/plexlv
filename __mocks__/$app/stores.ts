@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { readable } from 'svelte/store';
-import type * as stores from '$app/stores';
 import type { Navigation, Page } from '@sveltejs/kit';
+
+import type * as stores from '$app/stores';
 
 export const mockStores = (config: { page?: Partial<Page> } = {}) => {
   const getStores: typeof stores.getStores = () => {

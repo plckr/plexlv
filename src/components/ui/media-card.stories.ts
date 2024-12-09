@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
+
 import MediaCard from './media-card.svelte';
 
 const meta = {

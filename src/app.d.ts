@@ -1,8 +1,8 @@
-import { BaseMediaEntity } from './lib/zod-schemas/plex-api/media-entity';
 // See https://kit.svelte.dev/docs/types#app
 
 import type { Locales } from '$i18n/i18n-types';
 import type { BaseLibrary, Hub, Library, MediaEntity, Related } from '$lib/zod-schemas/plex-api';
+import { BaseMediaEntity } from './lib/zod-schemas/plex-api/media-entity';
 
 // for information about these interfaces
 declare global {

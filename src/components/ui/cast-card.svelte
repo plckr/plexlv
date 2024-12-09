@@ -80,7 +80,9 @@
 
       @media --hover {
         &:hover {
-          box-shadow: 0 0 0 1px #e5a00d, 0 0 4px rgb(0 0 0 / 30%);
+          box-shadow:
+            0 0 0 1px #e5a00d,
+            0 0 4px rgb(0 0 0 / 30%);
         }
       }
     }
@@ -98,8 +100,16 @@
       align-items: center;
       justify-content: center;
 
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu,
-        Cantarell, Helvetica Neue, sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        Helvetica Neue,
+        sans-serif;
 
       width: var(--size);
       height: var(--size);

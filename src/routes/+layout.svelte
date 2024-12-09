@@ -3,6 +3,7 @@
   import Background from '$components/Background.svelte';
   import Sidebar from '$components/ui/sidebar.svelte';
   import Topbar from '$components/ui/topbar.svelte';
+
   import '$styles/index.pcss';
 </script>
 

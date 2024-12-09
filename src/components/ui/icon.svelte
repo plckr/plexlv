@@ -22,8 +22,8 @@
   import rottenTomatoesFresh from './icons/rotten-tomatoes-fresh.svg?raw';
   import rottenTomatoesRotten from './icons/rotten-tomatoes-rotten.svg?raw';
   import search from './icons/search.svg?raw';
-  import shuffle from './icons/shuffle.svg?raw';
   import settings from './icons/settings.svg?raw';
+  import shuffle from './icons/shuffle.svg?raw';
   import tmdb from './icons/tmdb.svg?raw';
   import tv from './icons/tv.svg?raw';
   import tvdb from './icons/tvdb.svg?raw';

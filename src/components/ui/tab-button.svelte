@@ -34,7 +34,9 @@
 
     &,
     &::after {
-      transition: color 0.2s, background-color 0.2s;
+      transition:
+        color 0.2s,
+        background-color 0.2s;
     }
 
     &.active {

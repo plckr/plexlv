@@ -1,8 +1,9 @@
+import { error } from '@sveltejs/kit';
+import { z } from 'zod';
+
 import { dev } from '$app/environment';
 import { Plex } from '$lib/plex.server';
-import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { z } from 'zod';
 
 const defaultParams = {
   minSize: '1',

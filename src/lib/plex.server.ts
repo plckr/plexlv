@@ -1,3 +1,9 @@
+import { error } from '@sveltejs/kit';
+
+import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
+import type { Locales } from '$i18n/i18n-types';
+import { removeTrailingSlash } from './utils/string';
+import { xmlParse } from './utils/xml';
 import {
   BaseLibrariesSchema,
   BaseMediaEntitySchema,
@@ -6,11 +12,6 @@ import {
   MediaEntitySchema,
   RelatedSchema
 } from './zod-schemas/plex-api';
-import { removeTrailingSlash } from './utils/string';
-import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
-import { xmlParse } from './utils/xml';
-import { error } from '@sveltejs/kit';
-import type { Locales } from '$i18n/i18n-types';
 
 class Plex {
   private static _instance: Plex;

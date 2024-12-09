@@ -1,6 +1,7 @@
 <script lang="ts">
-  import BaseSection from '$components/base-section.svelte';
   import { onMount } from 'svelte';
+
+  import BaseSection from '$components/base-section.svelte';
   import Icon from './ui/icon.svelte';
 
   export let title: string;

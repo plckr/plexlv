@@ -1,8 +1,9 @@
+import { redirect, type Handle } from '@sveltejs/kit';
 import acceptLanguage from 'accept-language';
+
 import { baseLocale, locales } from '$i18n/i18n-util';
 import { LANG_COOKIE_KEY, LANG_SEARCH_PARAM_KEY } from '$lib/constants';
 import { getValidLocale, isValidLocale } from '$lib/data';
-import { redirect, type Handle } from '@sveltejs/kit';
 
 export const lang = (async ({ event, resolve }) => {
   const paramsLang = event.url.searchParams.get(LANG_SEARCH_PARAM_KEY);

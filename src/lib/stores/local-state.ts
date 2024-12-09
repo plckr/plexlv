@@ -1,7 +1,8 @@
+import { writable } from 'svelte/store';
+
 import { browser } from '$app/environment';
 import { LOCAL_STORAGE_STATE_KEY } from '$lib/constants';
 import { localSchema } from '$lib/zod-schemas/local-state';
-import { writable } from 'svelte/store';
 
 const getFromLocalStorage = () => {
   if (browser) {

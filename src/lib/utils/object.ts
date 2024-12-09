@@ -9,10 +9,13 @@ export const filterObjectKeys = <K extends PropertyKey>(
 ) => {
   const filtered = objectKeys(obj)
     .filter((key) => allowedKeys.includes(key))
-    .reduce((acc, key) => {
-      acc[key] = obj[key];
-      return acc;
-    }, {} as Record<K, (typeof obj)[K]>);
+    .reduce(
+      (acc, key) => {
+        acc[key] = obj[key];
+        return acc;
+      },
+      {} as Record<K, (typeof obj)[K]>
+    );
 
   return filtered;
 };

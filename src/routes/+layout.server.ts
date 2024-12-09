@@ -1,6 +1,7 @@
+import { error } from '@sveltejs/kit';
+
 import { env } from '$env/dynamic/private';
 import { Plex } from '$lib/plex.server';
-import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals }) => {

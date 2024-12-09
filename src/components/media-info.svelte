@@ -1,6 +1,7 @@
 <script lang="ts">
   import Badge from '$components/ui/badge.svelte';
   import Icon from '$components/ui/icon.svelte';
+  import LL from '$i18n/i18n-svelte';
   import { crossfade, truncate } from '$lib/actions';
   import {
     getAudienceRating,
@@ -9,9 +10,8 @@
     getInternalUrl,
     getStreamTitles
   } from '$lib/data';
-  import LL from '$i18n/i18n-svelte';
-  import type { MediaEntity } from '$lib/zod-schemas/plex-api';
   import { formatDate } from '$lib/utils/date';
+  import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
   export let media: MediaEntity;
 

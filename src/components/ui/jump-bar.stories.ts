@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
+
 import JumpBar from './jump-bar.svelte';
 
 const meta = {

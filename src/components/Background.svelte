@@ -40,7 +40,11 @@
         rgb(63, 63, 63) 0%,
         rgba(63, 63, 63, 0) 100%
       ),
-      radial-gradient(circle farthest-side at 100% 0%, rgb(76, 76, 76) 0%, rgba(76, 76, 76, 0) 100%),
+      radial-gradient(
+        circle farthest-side at 100% 0%,
+        rgb(76, 76, 76) 0%,
+        rgba(76, 76, 76, 0) 100%
+      ),
       radial-gradient(circle farthest-side at 0% 0%, rgb(58, 58, 58) 0%, rgba(58, 58, 58, 0) 100%),
       black;
 

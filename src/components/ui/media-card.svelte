@@ -101,7 +101,9 @@
     @media --hover {
       &:hover {
         border-radius: 4px;
-        box-shadow: 0 0 0 1px #e5a00d, 0 0 4px rgb(0 0 0 / 30%);
+        box-shadow:
+          0 0 0 1px #e5a00d,
+          0 0 4px rgb(0 0 0 / 30%);
 
         &::before {
           content: '';

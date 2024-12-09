@@ -109,7 +109,9 @@
 
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease-in;
+    transition:
+      width 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.2s ease-in;
 
     overflow: hidden;
     z-index: 100;

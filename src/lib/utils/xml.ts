@@ -1,4 +1,5 @@
 import { xml2js, type ElementCompact } from 'xml-js';
+
 import { isArray } from './array';
 import { isObject } from './object';
 
