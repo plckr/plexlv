@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
   import activity from './icons/activity.svg?raw';
   import adjust from './icons/adjust.svg?raw';
   import alert from './icons/alert.svg?raw';
@@ -72,20 +72,22 @@
 </script>
 
 <script lang="ts">
-  let className: string | undefined = undefined;
-  export { className as class };
+  type Props = {
+    class?: string;
+    icon: IconOptions;
+    width?: string;
+    height?: string;
+    [key: string]: any;
+  };
 
-  export let icon: IconOptions;
-
-  export let width = 'auto';
-  export let height = '24px';
+  let { class: className, icon, width = 'auto', height = '24px', ...rest }: Props = $props();
 </script>
 
 <i
   data-icon={icon}
   class={className}
   aria-hidden="true"
-  {...$$restProps}
+  {...rest}
   style:--width={width}
   style:--height={height}
 >

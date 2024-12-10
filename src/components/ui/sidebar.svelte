@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
   type SidebarItem = {
     title: string;
     icon: IconOptions;
@@ -23,17 +23,17 @@
 </script>
 
 <script lang="ts">
+  import { page } from '$app/stores';
+  import LL from '$i18n/i18n-svelte';
+  import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
+  import { getInternalUrl } from '$lib/data';
+  import { libraries } from '$lib/stores';
   import Icon from './icon.svelte';
   import type { IconOptions } from './icon.svelte';
-  import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
-  import { libraries } from '$lib/stores';
-  import { page } from '$app/stores';
-  import { getInternalUrl } from '$lib/data';
-  import LL from '$i18n/i18n-svelte';
 
-  $: currentKey = $page.data.library?.key;
+  let currentKey = $derived($page.data.library?.key);
 
-  $: items = <SidebarItem[]>[
+  let items = $derived<SidebarItem[]>([
     {
       title: $LL.home(),
       icon: 'home',
@@ -46,7 +46,7 @@
       active: currentKey === library.key,
       href: getInternalUrl('library', { key: library.key })
     }))
-  ];
+  ]);
 </script>
 
 <nav>

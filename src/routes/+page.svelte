@@ -6,7 +6,7 @@
   import LL from '$i18n/i18n-svelte';
   import { getOgUrl, getSeoTitle } from '$lib/data';
 
-  $: seoTitle = getSeoTitle($LL.home());
+  let seoTitle = $derived(getSeoTitle($LL.home()));
 </script>
 
 <svelte:head>

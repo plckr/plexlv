@@ -15,7 +15,7 @@
 
 <div class="language-switcher">
   <Icon icon="language" width="22px" height="22px" />
-  <Select value={$page.data.lang} on:change={onchange}>
+  <Select value={$page.data.lang} {onchange}>
     {#each locales as locale}
       <option value={locale}>{locale.toUpperCase()}</option>
     {/each}

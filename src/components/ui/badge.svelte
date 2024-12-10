@@ -1,8 +1,13 @@
 <script lang="ts">
-  let className = '';
-  export { className as class };
+  import type { Snippet } from 'svelte';
 
-  export let variant: 'primary' | 'secondary' = 'primary';
+  type Props = {
+    class?: string;
+    variant?: 'primary' | 'secondary';
+    children: Snippet;
+  };
+
+  let { class: className = '', variant = 'primary', children }: Props = $props();
 </script>
 
 <div
@@ -10,7 +15,7 @@
   class:badge-primary={variant === 'primary'}
   class:badge-secondary={variant === 'secondary'}
 >
-  <slot />
+  {@render children()}
 </div>
 
 <style lang="postcss">

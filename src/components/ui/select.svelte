@@ -1,30 +1,17 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import type { HTMLSelectAttributes } from 'svelte/elements';
 
-  export let name: HTMLSelectAttributes['name'] = undefined;
-  export let required: HTMLSelectAttributes['required'] = true;
-  export let disabled: HTMLSelectAttributes['disabled'] = undefined;
-  export let value: HTMLSelectAttributes['value'] = '';
-  export let size: 'md' | 'lg' = 'md';
+  type Props = Omit<HTMLSelectAttributes, 'size'> & {
+    size?: 'md' | 'lg';
+    children?: Snippet;
+  };
+
+  let { value = $bindable(''), size = 'md', children, ...rest }: Props = $props();
 </script>
 
-<select
-  class:size-md={size === 'md'}
-  class:size-lg={size === 'lg'}
-  {name}
-  {required}
-  {disabled}
-  on:change
-  on:click
-  on:mouseenter
-  on:mouseleave
-  on:select
-  on:selectionchange
-  on:selectstart
-  on:focus
-  bind:value
->
-  <slot />
+<select class:size-md={size === 'md'} class:size-lg={size === 'lg'} {...rest} bind:value>
+  {@render children?.()}
 </select>
 
 <style lang="postcss">

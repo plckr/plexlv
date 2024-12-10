@@ -1,15 +1,17 @@
 <script lang="ts">
   import { getNameInitials } from '$lib/utils/string';
 
-  export let title: string;
-  export let subtitle: string | undefined = undefined;
-  export let image:
-    | {
-        src: string;
-        alt: string;
-      }
-    | undefined = undefined;
-  export let href: string | undefined = undefined;
+  type Props = {
+    title: string;
+    subtitle?: string;
+    image?: {
+      src: string;
+      alt: string;
+    };
+    href?: string;
+  };
+
+  let { title, subtitle, image, href }: Props = $props();
 
   let id = crypto.randomUUID();
 </script>
@@ -24,11 +26,11 @@
 
     {#if href}
       <!--
-        svelte-ignore a11y-missing-content
+        svelte-ignore a11y_missing_content
 
         anchor's size occupies entire thumb but doesn't have any content
       -->
-      <a {href} {title} aria-labelledby={id} />
+      <a {href} {title} aria-labelledby={id}></a>
     {/if}
   </div>
   <div class="info">

@@ -21,8 +21,8 @@
     }
   };
 
-  $: code = $page.status;
-  $: error = errorMessage[code] || errorMessage.default;
+  let code = $derived($page.status);
+  let error = $derived(errorMessage[code] || errorMessage.default);
 </script>
 
 <div class="root">

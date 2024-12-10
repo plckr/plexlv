@@ -1,11 +1,15 @@
 <script lang="ts">
   import Icon, { type IconOptions } from './icon.svelte';
 
-  export let title: string;
-  export let subtitle: string | undefined = undefined;
-  export let text: string;
-  export let href: string | undefined = undefined;
-  export let icon: IconOptions | undefined = undefined;
+  type Props = {
+    title: string;
+    subtitle?: string;
+    text: string;
+    href?: string;
+    icon?: IconOptions;
+  };
+
+  let { title, subtitle, text, href, icon }: Props = $props();
 </script>
 
 <article>

@@ -1,17 +1,18 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-  interface $$Props extends HTMLAnchorAttributes {
+  type Props = HTMLAnchorAttributes & {
     active?: boolean;
     href: string;
-  }
+    children: Snippet;
+  };
 
-  export let active: $$Props['active'] = false;
-  export let href: $$Props['href'];
+  let { active = false, href, children, ...rest }: Props = $props();
 </script>
 
-<a class:active {href} {...$$restProps}>
-  <slot />
+<a class:active {href} {...rest}>
+  {@render children()}
 </a>
 
 <style lang="postcss">

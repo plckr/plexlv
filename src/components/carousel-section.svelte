@@ -1,15 +1,20 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
 
   import BaseSection from '$components/base-section.svelte';
   import Icon from './ui/icon.svelte';
 
-  export let title: string;
+  type Props = {
+    title: string;
+    children: Snippet;
+  };
 
-  let carouselEl: HTMLDivElement;
+  let { title, children }: Props = $props();
 
-  let scrollPosition = 0;
-  let scrollAtEnd = false;
+  let carouselEl: HTMLDivElement = $state(null!);
+
+  let scrollPosition = $state(0);
+  let scrollAtEnd = $state(false);
 
   const onScroll = () => {
     scrollPosition = carouselEl.scrollLeft;
@@ -33,7 +38,7 @@
 </script>
 
 <BaseSection>
-  <svelte:fragment slot="header">
+  {#snippet header()}
     <h2 {title}>{title}</h2>
 
     {#if !(scrollPosition <= 0 && scrollAtEnd)}
@@ -42,7 +47,7 @@
           aria-label="Página Anterior"
           title="Página Anterior"
           disabled={scrollPosition <= 0}
-          on:click={backward}
+          onclick={backward}
         >
           <Icon icon="chevron-left" height="18px" width="18px" />
         </button>
@@ -50,17 +55,17 @@
           aria-label="Página Seguinte"
           title="Página Seguinte"
           disabled={scrollAtEnd}
-          on:click={forward}
+          onclick={forward}
         >
           <Icon icon="chevron-right" height="18px" width="18px" />
         </button>
       </div>
     {/if}
-  </svelte:fragment>
+  {/snippet}
 
-  <div class="carousel" bind:this={carouselEl} on:scroll={onScroll}>
+  <div class="carousel" bind:this={carouselEl} onscroll={onScroll}>
     <div class="carousel-inner">
-      <slot />
+      {@render children()}
     </div>
   </div>
 </BaseSection>

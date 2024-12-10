@@ -6,13 +6,7 @@
 </script>
 
 <aside>
-  <label
-    class="hamburger-menu"
-    role="button"
-    aria-label={$LL.mainMenu()}
-    for={SIDEBAR_CHECKBOX_ID}
-    tabindex="0"
-  >
+  <label class="hamburger-menu" aria-label={$LL.mainMenu()} for={SIDEBAR_CHECKBOX_ID}>
     <Icon icon="hamburger" height="24px" width="24px" />
   </label>
 

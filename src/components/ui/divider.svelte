@@ -1,4 +1,12 @@
-<div aria-orientation="vertical" role="separator" {...$$restProps} />
+<script lang="ts">
+  type Props = {
+    [key: string]: any;
+  };
+
+  let { ...rest }: Props = $props();
+</script>
+
+<div aria-orientation="vertical" role="separator" {...rest}></div>
 
 <style lang="postcss">
   div {

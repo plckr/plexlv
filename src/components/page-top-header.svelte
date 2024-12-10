@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import LL from '$i18n/i18n-svelte';
@@ -8,6 +10,12 @@
   import Icon from './ui/icon.svelte';
   import Loading from './ui/loading.svelte';
   import Select from './ui/select.svelte';
+
+  type Props = {
+    children?: Snippet;
+  };
+
+  let { children }: Props = $props();
 
   const onSelectMediaChange = (evt: Event) => {
     if (evt.target instanceof HTMLSelectElement) {
@@ -33,7 +41,7 @@
     </a>
   {/if}
 
-  <slot />
+  {@render children?.()}
 
   <div class="right">
     <div class="range">
@@ -78,7 +86,7 @@
               <Select
                 value={$page.data.media.ratingKey}
                 required
-                on:change={onSelectMediaChange}
+                onchange={onSelectMediaChange}
                 size="lg"
               >
                 {#each children as child}

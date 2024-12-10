@@ -8,11 +8,9 @@
   import { getInternalUrl, getOgUrl, getSeoTitle } from '$lib/data';
   import { getLibraryView, type LibraryView } from '$params/libraryView';
 
-  $: library = $page.data.library;
-  $: libraryView = $page.params.view as LibraryView | undefined;
-  $: seoTitle = library ? getSeoTitle(library) : undefined;
-
-  $: console.log($page.data.hubs);
+  let library = $derived($page.data.library);
+  let libraryView = $derived($page.params.view as LibraryView | undefined);
+  let seoTitle = $derived(library ? getSeoTitle(library) : undefined);
 </script>
 
 <svelte:head>

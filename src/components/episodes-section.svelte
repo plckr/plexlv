@@ -4,18 +4,24 @@
   import BaseSection from './base-section.svelte';
   import EpisodeWideCard from './episode-wide-card.svelte';
 
-  export let media: BaseMediaEntity[];
+  type Props = {
+    media: BaseMediaEntity[];
+  };
 
-  $: episodes = media.filter((media) => media.type === 'episode') as BaseEpisode[];
+  let { media }: Props = $props();
+
+  let episodes = $derived(media.filter((media) => media.type === 'episode'));
 </script>
 
 {#if !!episodes.length}
   <BaseSection>
-    <h2 slot="header">
-      {$LL.noOfEpisodes({
-        noOfEpisodes: episodes.length
-      })}
-    </h2>
+    {#snippet header()}
+      <h2>
+        {$LL.noOfEpisodes({
+          noOfEpisodes: episodes.length
+        })}
+      </h2>
+    {/snippet}
 
     <div class="inner">
       {#each episodes as episode}

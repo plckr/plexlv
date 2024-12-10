@@ -2,18 +2,32 @@
   import { crossfade } from '$lib/actions';
   import Badge from './badge.svelte';
 
-  let className = '';
-  export { className as class };
-  export let title: string;
-  export let subtitle: string;
-  export let href: string;
-  export let description: string | undefined = undefined;
-  export let badge: string | number | undefined = undefined;
-  export let image: { src: string; alt: string } | undefined = undefined;
-  export let wide = false;
+  type Props = {
+    class?: string;
+    title: string;
+    subtitle: string;
+    href: string;
+    description?: string;
+    badge?: string | number;
+    image?: { src: string; alt: string };
+    wide?: boolean;
+    [key: string]: any;
+  };
+
+  let {
+    class: className,
+    title,
+    subtitle,
+    href,
+    description,
+    badge,
+    image,
+    wide = false,
+    ...rest
+  }: Props = $props();
 </script>
 
-<article class:wide class={className} {...$$restProps}>
+<article class:wide class={className} {...rest}>
   <div class="card">
     <a {href} {title}>
       {#if image}

@@ -13,9 +13,13 @@
   import { formatDate } from '$lib/utils/date';
   import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
-  export let media: MediaEntity;
+  type Props = {
+    media: MediaEntity;
+  };
 
-  $: streams = getStreamTitles(media);
+  let { media }: Props = $props();
+
+  let streams = $derived(getStreamTitles(media));
 </script>
 
 <main>

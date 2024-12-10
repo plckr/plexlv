@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { crossfade } from '$lib/actions';
 
-  $: art = $page.data.art;
+  let art = $derived($page.data.art);
 </script>
 
 <div class="bg">

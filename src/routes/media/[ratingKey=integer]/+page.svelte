@@ -9,11 +9,11 @@
   import CastCard from '$components/ui/cast-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
   import LL from '$i18n/i18n-svelte';
-  import { getInternalUrl, getOgUrl, getRatingIcon, getSeoTitle } from '$lib/data';
+  import { getOgUrl, getRatingIcon, getSeoTitle } from '$lib/data';
   import { truncate } from '$lib/utils/string';
 
-  $: media = $page.data.media;
-  $: seoTitle = media ? getSeoTitle(media) : undefined;
+  let media = $derived($page.data.media);
+  let seoTitle = $derived(media ? getSeoTitle(media) : undefined);
 </script>
 
 <svelte:head>
