@@ -1,6 +1,5 @@
 <script lang="ts">
   import Badge from '$components/ui/badge.svelte';
-  import Icon from '$components/ui/icon.svelte';
   import LL from '$i18n/i18n-svelte';
   import { crossfade, truncate } from '$lib/actions';
   import {
@@ -96,7 +95,7 @@
         {@const audienceRating = getAudienceRating(media.audienceRating, media.audienceRatingImage)}
         {#if audienceRating}
           <Badge variant="secondary">
-            <Icon icon={audienceRating.icon} height="16px" />
+            <audienceRating.icon height={16} />
             {audienceRating.rating}
           </Badge>
         {/if}

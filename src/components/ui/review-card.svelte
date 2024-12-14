@@ -1,22 +1,22 @@
 <script lang="ts">
-  import Icon, { type IconOptions } from './icon.svelte';
+  import type { IconType } from './icons';
 
   type Props = {
     title: string;
     subtitle?: string;
     text: string;
     href?: string;
-    icon?: IconOptions;
+    icon?: IconType;
   };
 
-  let { title, subtitle, text, href, icon }: Props = $props();
+  let { title, subtitle, text, href, icon: Icon }: Props = $props();
 </script>
 
 <article>
   <div class="top-info">
-    {#if icon}
+    {#if Icon}
       <div class="logo">
-        <Icon {icon} width="40px" height="40px" />
+        <Icon width={40} height={40} />
       </div>
     {/if}
     <div class="info">

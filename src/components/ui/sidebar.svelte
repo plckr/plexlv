@@ -1,23 +1,23 @@
 <script lang="ts" module>
   type SidebarItem = {
     title: string;
-    icon: IconOptions;
+    Icon: IconType;
     href: string;
     active: boolean | undefined;
   };
 
-  const getLibraryIcon = (type: string): IconOptions => {
+  const getLibraryIcon = (type: string): IconType => {
     switch (type) {
       case 'movie':
-        return 'movie';
+        return Icons.Movie;
       case 'show':
-        return 'tvshow';
+        return Icons.Tvshow;
       case 'artist':
-        return 'music';
+        return Icons.Music;
       case 'photo':
-        return 'photo';
+        return Icons.Photo;
       default:
-        return 'movie';
+        return Icons.Movie;
     }
   };
 </script>
@@ -28,21 +28,20 @@
   import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
   import { getInternalUrl } from '$lib/data';
   import { libraries } from '$lib/stores';
-  import Icon from './icon.svelte';
-  import type { IconOptions } from './icon.svelte';
+  import { Icons, type IconType } from './icons';
 
   let currentKey = $derived($page.data.library?.key);
 
   let items = $derived<SidebarItem[]>([
     {
       title: $LL.home(),
-      icon: 'home',
+      Icon: Icons.Home,
       href: '/',
       active: $page.url.pathname === '/'
     },
     ...$libraries.map((library) => ({
       title: library.title,
-      icon: getLibraryIcon(library.type),
+      Icon: getLibraryIcon(library.type),
       active: currentKey === library.key,
       href: getInternalUrl('library', { key: library.key })
     }))
@@ -54,11 +53,11 @@
 
   <div class="sidebar-wrapper">
     <ul>
-      {#each items as { title, icon, href, active }}
+      {#each items as { title, Icon, href, active }}
         <li data-active={active ? '' : undefined}>
           <a {href} {title}>
             <div class="icon">
-              <Icon {icon} />
+              <Icon />
             </div>
             <span>
               {title}

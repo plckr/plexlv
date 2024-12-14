@@ -2,7 +2,7 @@
   import { onMount, type Snippet } from 'svelte';
 
   import BaseSection from '$components/base-section.svelte';
-  import Icon from './ui/icon.svelte';
+  import { Icons } from './ui/icons';
 
   type Props = {
     title: string;
@@ -49,7 +49,7 @@
           disabled={scrollPosition <= 0}
           onclick={backward}
         >
-          <Icon icon="chevron-left" height="18px" width="18px" />
+          <Icons.ChevronLeft width={18} height={18} />
         </button>
         <button
           aria-label="Página Seguinte"
@@ -57,7 +57,7 @@
           disabled={scrollAtEnd}
           onclick={forward}
         >
-          <Icon icon="chevron-right" height="18px" width="18px" />
+          <Icons.ChevronRight width={18} height={18} />
         </button>
       </div>
     {/if}

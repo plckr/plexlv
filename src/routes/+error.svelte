@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import Icon from '$components/ui/icon.svelte';
+  import { Icons } from '$components/ui/icons';
   import LL from '$i18n/i18n-svelte';
 
   const errorMessage: {
@@ -27,7 +27,7 @@
 
 <div class="root">
   <div class="icon">
-    <Icon icon="alert" width="40px" height="40px" />
+    <Icons.Alert width={40} height={40} />
   </div>
 
   <p class="error">{error.title}</p>
