@@ -25,11 +25,6 @@
     {/if}
 
     {#if href}
-      <!--
-        svelte-ignore a11y_missing_content
-
-        anchor's size occupies entire thumb but doesn't have any content
-      -->
       <a {href} {title} aria-labelledby={id}></a>
     {/if}
   </div>

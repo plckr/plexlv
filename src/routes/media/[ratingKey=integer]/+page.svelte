@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import CarouselSection from '$components/carousel-section.svelte';
   import EpisodesSection from '$components/episodes-section.svelte';

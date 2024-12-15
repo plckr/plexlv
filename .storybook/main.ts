@@ -1,7 +1,6 @@
+import path from 'path';
 import type { StorybookConfig } from '@storybook/sveltekit';
 import { mergeConfig } from 'vite';
-
-const path = require('path');
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx|svelte)'],

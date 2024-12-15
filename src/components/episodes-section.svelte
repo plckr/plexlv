@@ -1,6 +1,6 @@
 <script lang="ts">
   import LL from '$i18n/i18n-svelte';
-  import type { BaseEpisode, BaseMediaEntity } from '$lib/zod-schemas/plex-api';
+  import type { BaseMediaEntity } from '$lib/zod-schemas/plex-api';
   import BaseSection from './base-section.svelte';
   import EpisodeWideCard from './episode-wide-card.svelte';
 

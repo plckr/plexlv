@@ -1,4 +1,3 @@
-import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 import { lang, title } from '$lib/hooks';

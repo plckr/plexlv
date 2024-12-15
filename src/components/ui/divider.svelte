@@ -1,7 +1,7 @@
 <script lang="ts">
-  type Props = {
-    [key: string]: any;
-  };
+  import type { HTMLAttributes } from 'svelte/elements';
+
+  type Props = Omit<HTMLAttributes<HTMLDivElement>, 'role' | 'aria-orientation'>;
 
   let { ...rest }: Props = $props();
 </script>

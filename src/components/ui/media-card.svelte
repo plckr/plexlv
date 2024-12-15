@@ -11,7 +11,6 @@
     badge?: string | number;
     image?: { src: string; alt: string };
     wide?: boolean;
-    [key: string]: any;
   };
 
   let {
@@ -22,12 +21,11 @@
     description,
     badge,
     image,
-    wide = false,
-    ...rest
+    wide = false
   }: Props = $props();
 </script>
 
-<article class:wide class={className} {...rest}>
+<article class:wide class={className}>
   <div class="card">
     <a {href} {title}>
       {#if image}

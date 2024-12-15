@@ -22,7 +22,11 @@ export default tseslint.config(
       '!.env.example',
       'pnpm-lock.yaml',
       'package-lock.json',
-      'yarn.lock'
+      'yarn.lock',
+      'src/i18n/i18n-svelte.ts',
+      'src/i18n/i18n-util.async.ts',
+      'src/i18n/i18n-util.sync.ts',
+      'src/i18n/i18n-util.ts'
     ]
   },
   eslint.configs.recommended,
