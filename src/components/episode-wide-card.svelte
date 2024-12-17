@@ -4,7 +4,11 @@
   import type { BaseEpisode } from '$lib/zod-schemas/plex-api';
   import MediaCard from './ui/media-card.svelte';
 
-  export let media: BaseEpisode;
+  type Props = {
+    media: BaseEpisode;
+  };
+
+  let { media }: Props = $props();
 </script>
 
 <MediaCard

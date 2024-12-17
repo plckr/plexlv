@@ -1,13 +1,21 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import LL from '$i18n/i18n-svelte';
   import { getInternalUrl } from '$lib/data';
   import { localState } from '$lib/stores';
   import Divider from './ui/divider.svelte';
-  import Icon from './ui/icon.svelte';
+  import { Icons } from './ui/icons';
   import Loading from './ui/loading.svelte';
   import Select from './ui/select.svelte';
+
+  type Props = {
+    children?: Snippet;
+  };
+
+  let { children }: Props = $props();
 
   const onSelectMediaChange = (evt: Event) => {
     if (evt.target instanceof HTMLSelectElement) {
@@ -33,7 +41,7 @@
     </a>
   {/if}
 
-  <slot />
+  {@render children?.()}
 
   <div class="right">
     <div class="range">
@@ -44,7 +52,7 @@
         bind:value={$localState.scaleMultiplier}
         aria-hidden="true"
       />
-      <Icon icon="grid" width="24px" height="24px" />
+      <Icons.Grid width={24} height={24} />
     </div>
 
     {#if ($page.data.media?.type === 'season' || $page.data.media?.type === 'episode') && $page.data.lazy?.parentChildren}
@@ -60,6 +68,13 @@
         {:then children}
           {@const currIndex = children.findIndex((c) => c.ratingKey === media.ratingKey)}
           {@const siblings = [children[currIndex - 1], children[currIndex + 1]]}
+          {#snippet chevronIcon({ idx, class: className }: { idx: number; class?: string })}
+            {#if idx === 0}
+              <Icons.ChevronLeft class={className} />
+            {:else}
+              <Icons.ChevronRight class={className} />
+            {/if}
+          {/snippet}
 
           {#each siblings as sibling, idx}
             {#if !!sibling}
@@ -68,17 +83,17 @@
                 href={getInternalUrl('media', { key: sibling.ratingKey })}
                 title={sibling.title}
               >
-                <Icon icon={idx === 0 ? 'chevron-left' : 'chevron-right'} />
+                {@render chevronIcon({ idx })}
               </a>
             {:else}
-              <Icon class="icon disabled" icon={idx === 0 ? 'chevron-left' : 'chevron-right'} />
+              {@render chevronIcon({ idx, class: 'icon disabled' })}
             {/if}
 
             {#if idx === 0}
               <Select
                 value={$page.data.media.ratingKey}
                 required
-                on:change={onSelectMediaChange}
+                onchange={onSelectMediaChange}
                 size="lg"
               >
                 {#each children as child}

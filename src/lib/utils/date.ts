@@ -1,5 +1,6 @@
-import { page } from '$app/stores';
 import { get } from 'svelte/store';
+
+import { page } from '$app/stores';
 
 export const msToHourMinutes = (ms: string | number) => {
   const minutes = Math.floor(+ms / 1000 / 60);

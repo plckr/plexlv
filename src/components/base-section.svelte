@@ -1,9 +1,20 @@
+<script lang="ts">
+  import type { Snippet } from 'svelte';
+
+  type Props = {
+    header: Snippet;
+    children: Snippet;
+  };
+
+  let { header, children }: Props = $props();
+</script>
+
 <section>
   <div class="title-row">
-    <slot name="header" />
+    {@render header?.()}
   </div>
 
-  <slot />
+  {@render children?.()}
 </section>
 
 <style lang="postcss">

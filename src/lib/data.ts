@@ -1,4 +1,4 @@
-import type { IconOptions } from '$components/ui/icon.svelte';
+import { Icons, type IconType } from '$components/ui/icons';
 import type { Locales } from '$i18n/i18n-types';
 import { baseLocale, locales } from '$i18n/i18n-util';
 import type { ImgType } from '$params/imgType';
@@ -8,18 +8,18 @@ import { isArray } from './utils/array';
 import { msToHourMinutes } from './utils/date';
 import type { BaseLibrary, MediaEntity, Stream } from './zod-schemas/plex-api';
 
-export const getRatingIcon = (str: string): IconOptions | undefined => {
-  if (str.startsWith('imdb://')) return 'imdb';
-  if (str.startsWith('themoviedb://')) return 'tmdb';
-  if (str.startsWith('thetvdb://')) return 'tvdb';
+export const getRatingIcon = (str: string): IconType | undefined => {
+  if (str.startsWith('imdb://')) return Icons.Imdb;
+  if (str.startsWith('themoviedb://')) return Icons.Tmdb;
+  if (str.startsWith('thetvdb://')) return Icons.Tvdb;
 
   switch (str) {
     case 'rottentomatoes://image.review.fresh':
-      return 'rotten-tomatoes-fresh';
+      return Icons.RottenTomatoesFresh;
     case 'rottentomatoes://image.review.rotten':
-      return 'rotten-tomatoes-rotten';
+      return Icons.RottenTomatoesRotten;
     case 'imdb://image.rating':
-      return 'imdb';
+      return Icons.Imdb;
     default:
       return;
   }
@@ -28,12 +28,12 @@ export const getRatingIcon = (str: string): IconOptions | undefined => {
 export const getAudienceRating = (
   rating: string,
   image: string
-): { icon: IconOptions; rating: string } | undefined => {
+): { icon: IconType; rating: string } | undefined => {
   const icon = getRatingIcon(image);
   if (!icon) return;
 
   // TODO: maybe could be more polished the number check
-  if ((icon === 'tmdb' || icon === 'tvdb') && !isNaN(+rating)) {
+  if ((icon === Icons.Tmdb || icon === Icons.Tvdb) && !isNaN(+rating)) {
     return {
       icon,
       rating: `${+rating * 10}%`
@@ -42,7 +42,7 @@ export const getAudienceRating = (
 
   return {
     icon,
-    rating: rating.toString()
+    rating
   };
 };
 
@@ -56,14 +56,7 @@ type UrlTypeParams = {
   media: { key: string | number };
   image: {
     type: ImgType;
-  } & (
-    | {
-        key: string | number;
-      }
-    | {
-        thumb: string;
-      }
-  );
+  } & ({ key: string | number } | { thumb: string });
 };
 type UrlType = keyof UrlTypeParams;
 type GetInternalUrl = (...args: { [K in UrlType]: [K, UrlTypeParams[K]] }[UrlType]) => string;

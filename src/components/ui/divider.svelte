@@ -1,4 +1,12 @@
-<div aria-orientation="vertical" role="separator" {...$$restProps} />
+<script lang="ts">
+  import type { HTMLAttributes } from 'svelte/elements';
+
+  type Props = Omit<HTMLAttributes<HTMLDivElement>, 'role' | 'aria-orientation'>;
+
+  let { ...rest }: Props = $props();
+</script>
+
+<div aria-orientation="vertical" role="separator" {...rest}></div>
 
 <style lang="postcss">
   div {

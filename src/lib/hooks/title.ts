@@ -1,5 +1,6 @@
-import { SEO_TITLE_SUFFIX } from './../constants';
 import type { Handle } from '@sveltejs/kit';
+
+import { SEO_TITLE_SUFFIX } from './../constants';
 
 export const title = (async ({ event, resolve }) => {
   return await resolve(event, {

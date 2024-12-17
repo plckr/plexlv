@@ -2,22 +2,16 @@
   import LanguageSwitcher from '$components/language-switcher.svelte';
   import LL from '$i18n/i18n-svelte';
   import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
-  import Icon from './icon.svelte';
+  import { Icons } from './icons';
 </script>
 
 <aside>
-  <label
-    class="hamburger-menu"
-    role="button"
-    aria-label={$LL.mainMenu()}
-    for={SIDEBAR_CHECKBOX_ID}
-    tabindex="0"
-  >
-    <Icon icon="hamburger" height="24px" width="24px" />
+  <label class="hamburger-menu" aria-label={$LL.mainMenu()} for={SIDEBAR_CHECKBOX_ID}>
+    <Icons.Hamburger height={24} width={24} />
   </label>
 
   <div style="display: flex; gap: 8px;">
-    <Icon icon="plex" height="24px" />
+    <Icons.Plex height={24} />
   </div>
 
   <div class="lang">

@@ -4,12 +4,18 @@
   import BaseSection from './base-section.svelte';
   import MediaEntityCard from './media-entity-card.svelte';
 
-  export let children: Children;
+  type Props = {
+    children: Children;
+  };
+
+  let { children }: Props = $props();
 </script>
 
 {#if !!children?.MediaEntity}
   <BaseSection>
-    <h2 slot="header">{$LL.seasons()}</h2>
+    {#snippet header()}
+      <h2>{$LL.seasons()}</h2>
+    {/snippet}
 
     <div class="inner">
       {#each children?.MediaEntity as season}

@@ -1,18 +1,22 @@
 <script lang="ts">
-  import Icon, { type IconOptions } from './icon.svelte';
+  import type { IconType } from './icons';
 
-  export let title: string;
-  export let subtitle: string | undefined = undefined;
-  export let text: string;
-  export let href: string | undefined = undefined;
-  export let icon: IconOptions | undefined = undefined;
+  type Props = {
+    title: string;
+    subtitle?: string;
+    text: string;
+    href?: string;
+    icon?: IconType;
+  };
+
+  let { title, subtitle, text, href, icon: Icon }: Props = $props();
 </script>
 
 <article>
   <div class="top-info">
-    {#if icon}
+    {#if Icon}
       <div class="logo">
-        <Icon {icon} width="40px" height="40px" />
+        <Icon width={40} height={40} />
       </div>
     {/if}
     <div class="info">
@@ -39,8 +43,16 @@
       width: 350px;
     }
 
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell,
-      Helvetica Neue, sans-serif;
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      Segoe UI,
+      Roboto,
+      Oxygen-Sans,
+      Ubuntu,
+      Cantarell,
+      Helvetica Neue,
+      sans-serif;
     font-size: 13px;
 
     color: white;

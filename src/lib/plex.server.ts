@@ -1,3 +1,10 @@
+import { error } from '@sveltejs/kit';
+import { z } from 'zod';
+
+import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
+import type { Locales } from '$i18n/i18n-types';
+import { removeTrailingSlash } from './utils/string';
+import { xmlParse } from './utils/xml';
 import {
   BaseLibrariesSchema,
   BaseMediaEntitySchema,
@@ -6,11 +13,6 @@ import {
   MediaEntitySchema,
   RelatedSchema
 } from './zod-schemas/plex-api';
-import { removeTrailingSlash } from './utils/string';
-import { PLEX_HOST, PLEX_TOKEN } from '$env/static/private';
-import { xmlParse } from './utils/xml';
-import { error } from '@sveltejs/kit';
-import type { Locales } from '$i18n/i18n-types';
 
 class Plex {
   private static _instance: Plex;
@@ -73,13 +75,17 @@ class Plex {
     const data = await request.text();
 
     const parsed = xmlParse(data);
-    const container = parsed?.MediaContainer?.[0];
 
-    if (!container) {
+    const schema = z.object({
+      MediaContainer: z.array(z.any())
+    });
+
+    const container = schema.safeParse(parsed);
+    if (!container.success) {
       throw error(500);
     }
 
-    return container;
+    return container.data.MediaContainer[0];
   }
 
   public async getLibraries(lang: Locales) {

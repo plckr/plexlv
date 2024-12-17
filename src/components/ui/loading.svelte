@@ -1,7 +1,4 @@
-<script lang="ts">
-</script>
-
-<div class="loading" />
+<div class="loading"></div>
 
 <style lang="postcss">
   @keyframes loading {

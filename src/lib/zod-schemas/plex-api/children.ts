@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { BaseSeasonSchema } from './media-entity';
 
 export const ChildrenSchema = z.object({

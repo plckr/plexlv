@@ -1,55 +1,24 @@
-<script lang="ts">
-  // import type { Meta, StoryObj } from '@storybook/svelte';
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script lang="ts" module>
+  import { defineMeta } from '@storybook/addon-svelte-csf';
+
   import Badge from './badge.svelte';
 
-  // const meta = {
-  //   title: 'UI/Badge',
-  //   component: Badge,
-  //   tags: ['autodocs'],
-  //   args: {
-  //     variant: 'primary'
-  //   },
-  //   argTypes: {
-  //     variant: {
-  //       control: {
-  //         type: 'select',
-  //         options: ['primary', 'secondary']
-  //       }
-  //     }
-  //   }
-  // } satisfies Meta<Badge>;
-
-  // // export default meta;
-  // type Story = StoryObj<typeof meta>;
-
-  // export const Movie: Story = {
-  //   args: {}
-  // };
+  const { Story } = defineMeta({
+    title: 'UI/Badge',
+    component: Badge,
+    tags: ['autodocs'],
+    args: { variant: 'primary' },
+    argTypes: {
+      variant: {
+        control: { type: 'select' },
+        options: ['primary', 'secondary']
+      }
+    }
+  });
 </script>
 
-<Meta
-  title="UI/Badge"
-  component={Badge}
-  tags={['autodocs']}
-  args={{
-    variant: 'primary',
-    slot: '50'
-  }}
-  argTypes={{
-    variant: {
-      control: {
-        type: 'select'
-      },
-      options: ['primary', 'secondary']
-    }
-  }}
-/>
-
-<Template let:args>
-  <Badge {...args}>
-    {args.slot ?? 48}
-  </Badge>
-</Template>
-
-<Story name="Default" />
+<Story name="Default">
+  {#snippet children(args)}
+    <Badge {...args}>50</Badge>
+  {/snippet}
+</Story>

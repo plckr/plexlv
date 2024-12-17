@@ -1,19 +1,19 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
-  import MediaInfo from '$components/media-info.svelte';
-  import SeasonsSection from '$components/seasons-section.svelte';
   import CarouselSection from '$components/carousel-section.svelte';
+  import EpisodesSection from '$components/episodes-section.svelte';
+  import MediaEntityCard from '$components/media-entity-card.svelte';
+  import MediaInfo from '$components/media-info.svelte';
+  import PageTopHeader from '$components/page-top-header.svelte';
+  import SeasonsSection from '$components/seasons-section.svelte';
   import CastCard from '$components/ui/cast-card.svelte';
   import ReviewCard from '$components/ui/review-card.svelte';
-  import { getInternalUrl, getOgUrl, getRatingIcon, getSeoTitle } from '$lib/data';
-  import { truncate } from '$lib/utils/string';
   import LL from '$i18n/i18n-svelte';
-  import MediaEntityCard from '$components/media-entity-card.svelte';
-  import EpisodesSection from '$components/episodes-section.svelte';
-  import PageTopHeader from '$components/page-top-header.svelte';
+  import { getOgUrl, getRatingIcon, getSeoTitle } from '$lib/data';
+  import { truncate } from '$lib/utils/string';
 
-  $: media = $page.data.media;
-  $: seoTitle = media ? getSeoTitle(media) : undefined;
+  let media = $derived($page.data.media);
+  let seoTitle = $derived(media ? getSeoTitle(media) : undefined);
 </script>
 
 <svelte:head>

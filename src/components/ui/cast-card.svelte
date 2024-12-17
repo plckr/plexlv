@@ -1,15 +1,17 @@
 <script lang="ts">
   import { getNameInitials } from '$lib/utils/string';
 
-  export let title: string;
-  export let subtitle: string | undefined = undefined;
-  export let image:
-    | {
-        src: string;
-        alt: string;
-      }
-    | undefined = undefined;
-  export let href: string | undefined = undefined;
+  type Props = {
+    title: string;
+    subtitle?: string;
+    image?: {
+      src: string;
+      alt: string;
+    };
+    href?: string;
+  };
+
+  let { title, subtitle, image, href }: Props = $props();
 
   let id = crypto.randomUUID();
 </script>
@@ -23,12 +25,7 @@
     {/if}
 
     {#if href}
-      <!--
-        svelte-ignore a11y-missing-content
-
-        anchor's size occupies entire thumb but doesn't have any content
-      -->
-      <a {href} {title} aria-labelledby={id} />
+      <a {href} {title} aria-labelledby={id}></a>
     {/if}
   </div>
   <div class="info">
@@ -80,7 +77,9 @@
 
       @media --hover {
         &:hover {
-          box-shadow: 0 0 0 1px #e5a00d, 0 0 4px rgb(0 0 0 / 30%);
+          box-shadow:
+            0 0 0 1px #e5a00d,
+            0 0 4px rgb(0 0 0 / 30%);
         }
       }
     }
@@ -98,8 +97,16 @@
       align-items: center;
       justify-content: center;
 
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu,
-        Cantarell, Helvetica Neue, sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        Helvetica Neue,
+        sans-serif;
 
       width: var(--size);
       height: var(--size);

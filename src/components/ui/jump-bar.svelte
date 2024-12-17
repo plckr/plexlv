@@ -1,15 +1,22 @@
 <script lang="ts">
-  const asc = ('#ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const).split('');
+  import type { MouseEventHandler } from 'svelte/elements';
+
+  const asc = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const desc = asc.slice().reverse();
 
-  export let order: 'asc' | 'desc' = 'asc';
+  type Props = {
+    order?: 'asc' | 'desc';
+    onclick?: MouseEventHandler<HTMLButtonElement>;
+  };
+
+  let { order = 'asc', onclick }: Props = $props();
 
   let options = order === 'asc' ? asc : desc;
 </script>
 
 <div class="jump-bar">
   {#each options as option}
-    <button type="button" on:click>
+    <button type="button" {onclick}>
       {option}
     </button>
   {/each}

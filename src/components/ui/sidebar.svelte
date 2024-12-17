@@ -1,52 +1,51 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
   type SidebarItem = {
     title: string;
-    icon: IconOptions;
+    Icon: IconType;
     href: string;
     active: boolean | undefined;
   };
 
-  const getLibraryIcon = (type: string): IconOptions => {
+  const getLibraryIcon = (type: string): IconType => {
     switch (type) {
       case 'movie':
-        return 'movie';
+        return Icons.Movie;
       case 'show':
-        return 'tvshow';
+        return Icons.Tvshow;
       case 'artist':
-        return 'music';
+        return Icons.Music;
       case 'photo':
-        return 'photo';
+        return Icons.Photo;
       default:
-        return 'movie';
+        return Icons.Movie;
     }
   };
 </script>
 
 <script lang="ts">
-  import Icon from './icon.svelte';
-  import type { IconOptions } from './icon.svelte';
-  import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
-  import { libraries } from '$lib/stores';
   import { page } from '$app/stores';
-  import { getInternalUrl } from '$lib/data';
   import LL from '$i18n/i18n-svelte';
+  import { SIDEBAR_CHECKBOX_ID } from '$lib/constants';
+  import { getInternalUrl } from '$lib/data';
+  import { libraries } from '$lib/stores';
+  import { Icons, type IconType } from './icons';
 
-  $: currentKey = $page.data.library?.key;
+  let currentKey = $derived($page.data.library?.key);
 
-  $: items = <SidebarItem[]>[
+  let items = $derived<SidebarItem[]>([
     {
       title: $LL.home(),
-      icon: 'home',
+      Icon: Icons.Home,
       href: '/',
       active: $page.url.pathname === '/'
     },
     ...$libraries.map((library) => ({
       title: library.title,
-      icon: getLibraryIcon(library.type),
+      Icon: getLibraryIcon(library.type),
       active: currentKey === library.key,
       href: getInternalUrl('library', { key: library.key })
     }))
-  ];
+  ]);
 </script>
 
 <nav>
@@ -54,11 +53,11 @@
 
   <div class="sidebar-wrapper">
     <ul>
-      {#each items as { title, icon, href, active }}
+      {#each items as { title, Icon, href, active }}
         <li data-active={active ? '' : undefined}>
           <a {href} {title}>
             <div class="icon">
-              <Icon {icon} />
+              <Icon />
             </div>
             <span>
               {title}
@@ -109,7 +108,9 @@
 
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease-in;
+    transition:
+      width 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.2s ease-in;
 
     overflow: hidden;
     z-index: 100;

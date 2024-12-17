@@ -1,6 +1,6 @@
 <script lang="ts">
   import Badge from '$components/ui/badge.svelte';
-  import Icon from '$components/ui/icon.svelte';
+  import LL from '$i18n/i18n-svelte';
   import { crossfade, truncate } from '$lib/actions';
   import {
     getAudienceRating,
@@ -9,13 +9,16 @@
     getInternalUrl,
     getStreamTitles
   } from '$lib/data';
-  import LL from '$i18n/i18n-svelte';
-  import type { MediaEntity } from '$lib/zod-schemas/plex-api';
   import { formatDate } from '$lib/utils/date';
+  import type { MediaEntity } from '$lib/zod-schemas/plex-api';
 
-  export let media: MediaEntity;
+  type Props = {
+    media: MediaEntity;
+  };
 
-  $: streams = getStreamTitles(media);
+  let { media }: Props = $props();
+
+  let streams = $derived(getStreamTitles(media));
 </script>
 
 <main>
@@ -92,7 +95,7 @@
         {@const audienceRating = getAudienceRating(media.audienceRating, media.audienceRatingImage)}
         {#if audienceRating}
           <Badge variant="secondary">
-            <Icon icon={audienceRating.icon} height="16px" />
+            <audienceRating.icon height={16} />
             {audienceRating.rating}
           </Badge>
         {/if}

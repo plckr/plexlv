@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { locales } from '$i18n/i18n-util';
-  import Icon from './ui/icon.svelte';
+  import { Icons } from './ui/icons';
   import Select from './ui/select.svelte';
 
   const onchange = (evt: Event) => {
@@ -14,8 +14,8 @@
 </script>
 
 <div class="language-switcher">
-  <Icon icon="language" width="22px" height="22px" />
-  <Select value={$page.data.lang} on:change={onchange}>
+  <Icons.Language width={22} height={22} />
+  <Select value={$page.data.lang} {onchange}>
     {#each locales as locale}
       <option value={locale}>{locale.toUpperCase()}</option>
     {/each}

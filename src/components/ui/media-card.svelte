@@ -2,18 +2,30 @@
   import { crossfade } from '$lib/actions';
   import Badge from './badge.svelte';
 
-  let className = '';
-  export { className as class };
-  export let title: string;
-  export let subtitle: string;
-  export let href: string;
-  export let description: string | undefined = undefined;
-  export let badge: string | number | undefined = undefined;
-  export let image: { src: string; alt: string } | undefined = undefined;
-  export let wide = false;
+  type Props = {
+    class?: string;
+    title: string;
+    subtitle: string;
+    href: string;
+    description?: string;
+    badge?: string | number;
+    image?: { src: string; alt: string };
+    wide?: boolean;
+  };
+
+  let {
+    class: className,
+    title,
+    subtitle,
+    href,
+    description,
+    badge,
+    image,
+    wide = false
+  }: Props = $props();
 </script>
 
-<article class:wide class={className} {...$$restProps}>
+<article class:wide class={className}>
   <div class="card">
     <a {href} {title}>
       {#if image}
@@ -101,7 +113,9 @@
     @media --hover {
       &:hover {
         border-radius: 4px;
-        box-shadow: 0 0 0 1px #e5a00d, 0 0 4px rgb(0 0 0 / 30%);
+        box-shadow:
+          0 0 0 1px #e5a00d,
+          0 0 4px rgb(0 0 0 / 30%);
 
         &::before {
           content: '';

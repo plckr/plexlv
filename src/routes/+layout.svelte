@@ -3,7 +3,10 @@
   import Background from '$components/Background.svelte';
   import Sidebar from '$components/ui/sidebar.svelte';
   import Topbar from '$components/ui/topbar.svelte';
+
   import '$styles/index.pcss';
+
+  let { children } = $props();
 </script>
 
 <Background />
@@ -13,7 +16,7 @@
   <Sidebar />
   {#key $page}
     <main>
-      <slot />
+      {@render children()}
     </main>
   {/key}
 </div>

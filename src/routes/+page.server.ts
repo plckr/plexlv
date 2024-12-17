@@ -1,5 +1,6 @@
-import { Plex } from '$lib/plex.server';
 import { error } from '@sveltejs/kit';
+
+import { Plex } from '$lib/plex.server';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ parent, url, locals }) => {

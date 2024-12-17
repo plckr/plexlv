@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { HubSchema } from './hub';
 
 export const RelatedSchema = z.object({

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import CarouselSection from '$components/carousel-section.svelte';
   import MediaEntityCard from '$components/media-entity-card.svelte';
@@ -6,7 +6,7 @@
   import LL from '$i18n/i18n-svelte';
   import { getOgUrl, getSeoTitle } from '$lib/data';
 
-  $: seoTitle = getSeoTitle($LL.home());
+  let seoTitle = $derived(getSeoTitle($LL.home()));
 </script>
 
 <svelte:head>

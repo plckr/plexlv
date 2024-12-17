@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { BaseShowSchema, BaseMovieSchema } from './media-entity';
+
+import { BaseMovieSchema, BaseShowSchema } from './media-entity';
 
 export const BaseLibrarySchema = z.object({
   key: z.coerce.number(),
